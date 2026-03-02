@@ -1,0 +1,732 @@
+{% doc %}
+  @prompt
+    Layout Options:
+    
+    Toggle text position: left or right of images
+    Choose 1 or 2 images to display
+    When 2 images: display side by side (no scrolling)
+    Individual aspect ratio control per image (e.g., Image 1: square, Image 2: 4:3)
+    
+    Desktop Controls (all as number inputs, not sliders):
+    
+    Page edge spacing (left/right margin value)
+    Top padding value
+    Bottom padding value
+    Border width value (all 4 sides: top, bottom, left, right)
+    
+    Mobile Controls:
+    
+    Mobile-specific spacing values
+    Image stack option: vertical (stacked) OR horizontal (side by side)
+    Image position relative to text: above OR below
+    Independent mobile padding controls
+    
+    Styling Controls:
+    
+    Section background theme/color scheme
+    Container background theme/color scheme
+    Full border control (pixel values for each side)
+    
+    Effects:
+    
+    Parallax effect toggle with intensity slider, I also want to be able to choose the backround color of the entire cell, something i wrong and i am not able to adjust the backroud of the entire cell. it changes the baclrod color ofthe container but there is still white behind it which i have no way of changing the color of, remove the maximum width function, I want to be able to edit the edge distance of the image container to the end of the page only moving the text and image without changing the backround color, make the paralax effect smoother, the parallax effect should maintain the frame andthe iamge should not move it should look like th eiside of the image is moving, Content horizontal padding. I dont want a slider for this one but a vlaue input, reverse the paralax direction, put a slight lag effect on the paralax effect, add a slider for which direction the paralax effect goes
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-text-layout-{{ ai_gen_id }} {
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-image-text-container-{{ ai_gen_id }} {
+    margin-left: {{ block.settings.page_edge_spacing }}px;
+    margin-right: {{ block.settings.page_edge_spacing }}px;
+    background-color: {{ block.settings.container_background_color }};
+    border-top: {{ block.settings.border_top }}px solid rgb(var(--color-border));
+    border-bottom: {{ block.settings.border_bottom }}px solid rgb(var(--color-border));
+    border-left: {{ block.settings.border_left }}px solid rgb(var(--color-border));
+    border-right: {{ block.settings.border_right }}px solid rgb(var(--color-border));
+    padding-left: {{ block.settings.content_padding_horizontal }}px;
+    padding-right: {{ block.settings.content_padding_horizontal }}px;
+    padding-top: {{ block.settings.content_padding_vertical }}px;
+    padding-bottom: {{ block.settings.content_padding_vertical }}px;
+  }
+
+  .ai-image-text-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    {% if block.settings.text_position == 'right' %}
+      flex-direction: row;
+    {% else %}
+      flex-direction: row-reverse;
+    {% endif %}
+  }
+
+  .ai-image-text-content-{{ ai_gen_id }} {
+    flex: 1;
+    color: rgb(var(--color-foreground));
+  }
+
+  .ai-image-text-images-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }} {
+    {% if block.settings.image_count == '1' %}
+      width: 100%;
+    {% else %}
+      flex: 1;
+    {% endif %}
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-image-text-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }}.parallax-enabled .ai-image-text-image-{{ ai_gen_id }} {
+    height: 120%;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  .ai-image-text-image-1-{{ ai_gen_id }} {
+    aspect-ratio: {{ block.settings.image_1_ratio }};
+  }
+
+  .ai-image-text-image-2-{{ ai_gen_id }} {
+    aspect-ratio: {{ block.settings.image_2_ratio }};
+  }
+
+  .ai-image-text-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-image-text-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-image-text-heading-{{ ai_gen_id }} {
+    margin: 0 0 20px;
+    color: rgb(var(--color-foreground));
+  }
+
+  .ai-image-text-text-{{ ai_gen_id }} {
+    margin: 0 0 20px;
+    color: rgb(var(--color-foreground));
+  }
+
+  .ai-image-text-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .ai-image-text-button-{{ ai_gen_id }}:hover {
+    background-color: rgb(var(--color-button-hover));
+    color: rgb(var(--color-button-text-hover));
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-text-layout-{{ ai_gen_id }} {
+      padding-top: {{ block.settings.padding_top_mobile }}px;
+      padding-bottom: {{ block.settings.padding_bottom_mobile }}px;
+    }
+
+    .ai-image-text-container-{{ ai_gen_id }} {
+      margin-left: {{ block.settings.page_edge_spacing_mobile }}px;
+      margin-right: {{ block.settings.page_edge_spacing_mobile }}px;
+      padding-left: {{ block.settings.content_padding_horizontal_mobile }}px;
+      padding-right: {{ block.settings.content_padding_horizontal_mobile }}px;
+      padding-top: {{ block.settings.content_padding_vertical_mobile }}px;
+      padding-bottom: {{ block.settings.content_padding_vertical_mobile }}px;
+    }
+
+    .ai-image-text-wrapper-{{ ai_gen_id }} {
+      {% if block.settings.mobile_image_position == 'above' %}
+        flex-direction: column-reverse;
+      {% else %}
+        flex-direction: column;
+      {% endif %}
+      gap: 20px;
+    }
+
+    .ai-image-text-images-{{ ai_gen_id }} {
+      {% if block.settings.mobile_image_stack == 'vertical' %}
+        flex-direction: column;
+      {% else %}
+        flex-direction: row;
+      {% endif %}
+      gap: 10px;
+    }
+
+    .ai-image-text-image-wrapper-{{ ai_gen_id }}.parallax-enabled .ai-image-text-image-{{ ai_gen_id }} {
+      height: 100%;
+    }
+  }
+{% endstyle %}
+
+<image-text-parallax-{{ ai_gen_id }}
+  class="ai-image-text-layout-{{ ai_gen_id }} color-{{ block.settings.section_color_scheme }}"
+  {{ block.shopify_attributes }}
+  data-parallax-enabled="{{ block.settings.enable_parallax }}"
+  data-parallax-intensity="{{ block.settings.parallax_intensity }}"
+  data-parallax-direction="{{ block.settings.parallax_direction }}"
+>
+  <div class="ai-image-text-container-{{ ai_gen_id }}">
+    <div class="ai-image-text-wrapper-{{ ai_gen_id }}">
+      <div class="ai-image-text-content-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-image-text-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+
+        {% if block.settings.text != blank %}
+          <div class="ai-image-text-text-{{ ai_gen_id }}">{{ block.settings.text }}</div>
+        {% endif %}
+
+        {% if block.settings.button_label != blank %}
+          <a
+            href="{{ block.settings.button_link }}"
+            class="ai-image-text-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="ai-image-text-images-{{ ai_gen_id }}">
+        <div
+          class="ai-image-text-image-wrapper-{{ ai_gen_id }} {% if block.settings.enable_parallax %}parallax-enabled{% endif %}"
+          data-parallax-image="1"
+        >
+          {% if block.settings.image_1 %}
+            <img
+              src="{{ block.settings.image_1 | image_url: width: 1000 }}"
+              alt="{{ block.settings.image_1.alt | escape }}"
+              class="ai-image-text-image-{{ ai_gen_id }} ai-image-text-image-1-{{ ai_gen_id }}"
+              loading="lazy"
+              width="{{ block.settings.image_1.width }}"
+              height="{{ block.settings.image_1.height }}"
+            >
+          {% else %}
+            <div class="ai-image-text-placeholder-{{ ai_gen_id }} ai-image-text-image-1-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if block.settings.image_count == '2' %}
+          <div
+            class="ai-image-text-image-wrapper-{{ ai_gen_id }} {% if block.settings.enable_parallax %}parallax-enabled{% endif %}"
+            data-parallax-image="2"
+          >
+            {% if block.settings.image_2 %}
+              <img
+                src="{{ block.settings.image_2 | image_url: width: 1000 }}"
+                alt="{{ block.settings.image_2.alt | escape }}"
+                class="ai-image-text-image-{{ ai_gen_id }} ai-image-text-image-2-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.image_2.width }}"
+                height="{{ block.settings.image_2.height }}"
+              >
+            {% else %}
+              <div class="ai-image-text-placeholder-{{ ai_gen_id }} ai-image-text-image-2-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</image-text-parallax-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ImageTextParallax{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.parallaxEnabled = this.dataset.parallaxEnabled === 'true';
+        this.parallaxIntensity = parseFloat(this.dataset.parallaxIntensity) || 0.5;
+        this.parallaxDirection = parseInt(this.dataset.parallaxDirection) || 1;
+        this.ticking = false;
+        this.currentOffsets = new Map();
+        this.targetOffsets = new Map();
+      }
+
+      connectedCallback() {
+        if (this.parallaxEnabled && window.innerWidth > 749) {
+          this.setupParallax();
+        }
+      }
+
+      setupParallax() {
+        this.imageWrappers = this.querySelectorAll('[data-parallax-image]');
+        
+        this.imageWrappers.forEach((wrapper) => {
+          this.currentOffsets.set(wrapper, 0);
+          this.targetOffsets.set(wrapper, 0);
+        });
+        
+        this.handleScroll = this.handleScroll.bind(this);
+        this.updateParallax = this.updateParallax.bind(this);
+        this.animate = this.animate.bind(this);
+        
+        window.addEventListener('scroll', this.handleScroll, { passive: true });
+        this.handleScroll();
+        this.animate();
+      }
+
+      handleScroll() {
+        if (!this.ticking) {
+          window.requestAnimationFrame(this.updateParallax);
+          this.ticking = true;
+        }
+      }
+
+      updateParallax() {
+        this.imageWrappers.forEach((wrapper) => {
+          const rect = wrapper.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          
+          if (rect.top < windowHeight && rect.bottom > 0) {
+            const wrapperCenter = rect.top + rect.height / 2;
+            const windowCenter = windowHeight / 2;
+            const distanceFromCenter = wrapperCenter - windowCenter;
+            const maxDistance = windowHeight / 2 + rect.height / 2;
+            const scrollProgress = distanceFromCenter / maxDistance;
+            const offset = -scrollProgress * 10 * this.parallaxIntensity * this.parallaxDirection;
+            
+            this.targetOffsets.set(wrapper, offset);
+          }
+        });
+        
+        this.ticking = false;
+      }
+
+      animate() {
+        this.imageWrappers.forEach((wrapper) => {
+          const current = this.currentOffsets.get(wrapper);
+          const target = this.targetOffsets.get(wrapper);
+          const diff = target - current;
+          const newOffset = current + diff * 0.1;
+          
+          this.currentOffsets.set(wrapper, newOffset);
+          
+          const img = wrapper.querySelector('img');
+          if (img) {
+            img.style.transform = `translateY(${newOffset}%)`;
+          }
+        });
+        
+        requestAnimationFrame(this.animate);
+      }
+
+      disconnectedCallback() {
+        if (this.parallaxEnabled) {
+          window.removeEventListener('scroll', this.handleScroll);
+        }
+      }
+    }
+
+    customElements.define('image-text-parallax-{{ ai_gen_id }}', ImageTextParallax{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Image text layout",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "image_count",
+      "label": "Number of images",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Image with text</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pair large text with an image to tell a story, explain a detail about your product, or describe a new promotion.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_1_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "3/4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "16/9",
+          "label": "Widescreen (16:9)"
+        },
+        {
+          "value": "2/3",
+          "label": "Tall (2:3)"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "header",
+      "content": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_2_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "3/4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "16/9",
+          "label": "Widescreen (16:9)"
+        },
+        {
+          "value": "2/3",
+          "label": "Tall (2:3)"
+        }
+      ],
+      "default": "4/3"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "page_edge_spacing",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Background edge spacing",
+      "default": 20,
+      "info": "Distance from page edge to background color"
+    },
+    {
+      "type": "text",
+      "id": "content_padding_horizontal",
+      "label": "Content horizontal padding (px)",
+      "default": "40",
+      "info": "Inner padding for text and images"
+    },
+    {
+      "type": "text",
+      "id": "content_padding_vertical",
+      "label": "Content vertical padding (px)",
+      "default": "40",
+      "info": "Inner padding for text and images"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section top padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section bottom padding",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "page_edge_spacing_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Background edge spacing",
+      "default": 15,
+      "info": "Distance from page edge to background color"
+    },
+    {
+      "type": "text",
+      "id": "content_padding_horizontal_mobile",
+      "label": "Content horizontal padding (px)",
+      "default": "20",
+      "info": "Inner padding for text and images"
+    },
+    {
+      "type": "text",
+      "id": "content_padding_vertical_mobile",
+      "label": "Content vertical padding (px)",
+      "default": "20",
+      "info": "Inner padding for text and images"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Section top padding",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Section bottom padding",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_stack",
+      "label": "Image stack",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "Vertical (stacked)"
+        },
+        {
+          "value": "horizontal",
+          "label": "Horizontal (side by side)"
+        }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "above",
+          "label": "Above text"
+        },
+        {
+          "value": "below",
+          "label": "Below text"
+        }
+      ],
+      "default": "above"
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_top",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Top border",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "border_bottom",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom border",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "border_left",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Left border",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "border_right",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Right border",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_color_scheme",
+      "label": "Section background",
+      "default": "scheme-1",
+      "info": "Controls the outer background color of the entire section"
+    },
+    {
+      "type": "color",
+      "id": "container_background_color",
+      "label": "Container background",
+      "default": "#ffffff",
+      "info": "Controls the inner container background color"
+    },
+    {
+      "type": "header",
+      "content": "Parallax effect"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "Enable parallax",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "parallax_intensity",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "label": "Intensity",
+      "default": 0.5
+    },
+    {
+      "type": "select",
+      "id": "parallax_direction",
+      "label": "Direction",
+      "options": [
+        {
+          "value": "1",
+          "label": "Up"
+        },
+        {
+          "value": "-1",
+          "label": "Down"
+        }
+      ],
+      "default": "1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image text layout"
+    }
+  ]
+}
+{% endschema %}

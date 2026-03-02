@@ -1,0 +1,446 @@
+{% doc %}
+  @prompt
+    Image with Text with the option to switch which side the text is on and th image is on and option to put two images next to eachother, I want the images to be side by side to one another with the option to change each individual images aspect ratio, It should be two image right next to eachother no scrolling jsut two images next to eachother, I also want the option to choose if i want one or two photos to show. Also the aspect ratio changes both images when it should only change a specific one. so if i want one with square and another with 4:3 it will do it correctdly, go back to the previous iteration. I want to be able to adjust the border width witha  value and not a slider, I want to be able to control how much spacing is from teh edges of the page with a value and no a slider, I also want to be able to adjust top and bottom padding with a value, I also want to be able to adjust the theme. I want to be able to adjust the container theme too. i also want to be able to adjust the modile spacing adnon mobile the pictures should be stacked on the text. I wan tot be able to control spacing on moobile. enable paralax effect slider, on mobile i also want to the option to put the images side by sde instead of one on top, on mobile I want the images side by side instead of one on top of the other
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-text-{{ ai_gen_id }} {
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-image-text-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.page_width }}px;
+    margin: 0 auto;
+    padding-left: {{ block.settings.spacing_edges }}px;
+    padding-right: {{ block.settings.spacing_edges }}px;
+  }
+
+  .ai-image-text-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .ai-image-text-wrapper-{{ ai_gen_id }}.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .ai-image-text-content-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .ai-image-text-images-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }} {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }}.aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }}.aspect-portrait {
+    aspect-ratio: 3 / 4;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }}.aspect-landscape {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }}.aspect-wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  .ai-image-text-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }}.parallax-enabled .ai-image-text-image-{{ ai_gen_id }} {
+    transform: scale(1.2);
+    transition: transform 0.5s ease-out;
+  }
+
+  .ai-image-text-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-image-text-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-image-text-heading-{{ ai_gen_id }} {
+    margin: 0 0 16px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-image-text-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-text-{{ ai_gen_id }} {
+      padding-top: {{ block.settings.padding_top_mobile }}px;
+      padding-bottom: {{ block.settings.padding_bottom_mobile }}px;
+    }
+
+    .ai-image-text-container-{{ ai_gen_id }} {
+      padding-left: {{ block.settings.spacing_edges_mobile }}px;
+      padding-right: {{ block.settings.spacing_edges_mobile }}px;
+    }
+
+    .ai-image-text-wrapper-{{ ai_gen_id }},
+    .ai-image-text-wrapper-{{ ai_gen_id }}.reverse {
+      flex-direction: column;
+    }
+
+    .ai-image-text-images-{{ ai_gen_id }} {
+      width: 100%;
+      flex-direction: row;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-image-text-{{ ai_gen_id }} color-{{ block.settings.color_scheme }}" {{ block.shopify_attributes }}>
+  <div class="ai-image-text-container-{{ ai_gen_id }} color-{{ block.settings.container_color_scheme }}">
+    <div class="ai-image-text-wrapper-{{ ai_gen_id }} {% if block.settings.layout == 'image_first' %}{% else %}reverse{% endif %}">
+      <div class="ai-image-text-content-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-image-text-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.text != blank %}
+          <div class="ai-image-text-text-{{ ai_gen_id }}">{{ block.settings.text }}</div>
+        {% endif %}
+      </div>
+
+      <div class="ai-image-text-images-{{ ai_gen_id }}">
+        <ai-parallax-image-{{ ai_gen_id }}
+          class="ai-image-text-image-wrapper-{{ ai_gen_id }} aspect-{{ block.settings.image_1_aspect_ratio }} {% if block.settings.enable_parallax %}parallax-enabled{% endif %}"
+          data-parallax="{{ block.settings.enable_parallax }}"
+        >
+          {% if block.settings.image_1 %}
+            <img
+              src="{{ block.settings.image_1 | image_url: width: 1000 }}"
+              alt="{{ block.settings.image_1.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_1.width }}"
+              height="{{ block.settings.image_1.height }}"
+              class="ai-image-text-image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="ai-image-text-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </ai-parallax-image-{{ ai_gen_id }}>
+
+        {% if block.settings.show_second_image %}
+          <ai-parallax-image-{{ ai_gen_id }}
+            class="ai-image-text-image-wrapper-{{ ai_gen_id }} aspect-{{ block.settings.image_2_aspect_ratio }} {% if block.settings.enable_parallax %}parallax-enabled{% endif %}"
+            data-parallax="{{ block.settings.enable_parallax }}"
+          >
+            {% if block.settings.image_2 %}
+              <img
+                src="{{ block.settings.image_2 | image_url: width: 1000 }}"
+                alt="{{ block.settings.image_2.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.image_2.width }}"
+                height="{{ block.settings.image_2.height }}"
+                class="ai-image-text-image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-image-text-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </ai-parallax-image-{{ ai_gen_id }}>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    class AiParallaxImage{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.parallaxEnabled = this.dataset.parallax === 'true';
+      }
+
+      connectedCallback() {
+        if (this.parallaxEnabled) {
+          this.setupParallax();
+        }
+      }
+
+      setupParallax() {
+        this.image = this.querySelector('.ai-image-text-image-{{ ai_gen_id }}');
+        if (!this.image) return;
+
+        this.handleScroll = this.handleScroll.bind(this);
+        window.addEventListener('scroll', this.handleScroll);
+        this.handleScroll();
+      }
+
+      handleScroll() {
+        const rect = this.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
+          const translateY = (scrollProgress - 0.5) * 20;
+          this.image.style.transform = `scale(1.2) translateY(${translateY}%)`;
+        }
+      }
+
+      disconnectedCallback() {
+        if (this.parallaxEnabled) {
+          window.removeEventListener('scroll', this.handleScroll);
+        }
+      }
+    }
+
+    customElements.define('ai-parallax-image-{{ ai_gen_id }}', AiParallaxImage{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image first"
+        },
+        {
+          "value": "text_first",
+          "label": "Text first"
+        }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_second_image",
+      "label": "Show second image",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Image with text"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_1_aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "header",
+      "content": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_2_aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        }
+      ],
+      "default": "landscape"
+    },
+    {
+      "type": "header",
+      "content": "Image effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "Enable parallax effect",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Image border"
+    },
+    {
+      "type": "text",
+      "id": "border_width",
+      "label": "Border width (px)",
+      "default": "0"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "text",
+      "id": "page_width",
+      "label": "Container width (px)",
+      "default": "1410"
+    },
+    {
+      "type": "text",
+      "id": "spacing_edges",
+      "label": "Edge spacing (px)",
+      "default": "40"
+    },
+    {
+      "type": "text",
+      "id": "padding_top",
+      "label": "Top padding (px)",
+      "default": "60"
+    },
+    {
+      "type": "text",
+      "id": "padding_bottom",
+      "label": "Bottom padding (px)",
+      "default": "60"
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "text",
+      "id": "spacing_edges_mobile",
+      "label": "Edge spacing (px)",
+      "default": "20"
+    },
+    {
+      "type": "text",
+      "id": "padding_top_mobile",
+      "label": "Top padding (px)",
+      "default": "40"
+    },
+    {
+      "type": "text",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (px)",
+      "default": "40"
+    },
+    {
+      "type": "header",
+      "content": "Color scheme"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "container_color_scheme",
+      "label": "Container color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text"
+    }
+  ]
+}
+{% endschema %}

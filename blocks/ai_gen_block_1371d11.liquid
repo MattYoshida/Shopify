@@ -1,0 +1,623 @@
+{% doc %}
+  @prompt
+    Desktop Layout:
+    
+    Two images displayed side by side, centered on page
+    Individual aspect ratio control per image
+    
+    Mobile Layout:
+    
+    Swipeable carousel showing ONE full image at a time
+    No partial/half images visible (hide overflow)
+    Pagination dots below images:
+    
+    Inactive: light gray circle
+    Active: dark/opaque circle
+    Dot position updates on swipe
+    
+    
+    
+    Styling Controls:
+    
+    Section background theme/color scheme selector
+    Container background theme/color scheme selector, I should have control over the container width, On desktop iinstead of the slider fo r container wideth i t should be a direct value inputdesktop mobile images should adapt to the image size , give me the ability to add borders on all sides with values and give me the ability to make the images smaller, i want ability to adjust the gap inbetween the images. I want control over how big and small the images are too as they are too big on desktop right now
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-dual-image-{{ ai_gen_id }} {
+    background-color: rgb(var(--color-background));
+  }
+
+  .ai-dual-image-{{ ai_gen_id }}.color-scheme-1 {
+    background-color: {{ settings.color_schemes.scheme-1.settings.background }};
+  }
+
+  .ai-dual-image-{{ ai_gen_id }}.color-scheme-2 {
+    background-color: {{ settings.color_schemes.scheme-2.settings.background }};
+  }
+
+  .ai-dual-image-{{ ai_gen_id }}.color-scheme-3 {
+    background-color: {{ settings.color_schemes.scheme-3.settings.background }};
+  }
+
+  .ai-dual-image-{{ ai_gen_id }}.color-scheme-4 {
+    background-color: {{ settings.color_schemes.scheme-4.settings.background }};
+  }
+
+  .ai-dual-image-{{ ai_gen_id }}.color-scheme-inverse {
+    background-color: {{ settings.color_schemes.scheme-inverse.settings.background }};
+  }
+
+  .ai-dual-image-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: rgb(var(--color-background));
+  }
+
+  .ai-dual-image-container-{{ ai_gen_id }}.container-scheme-1 {
+    background-color: {{ settings.color_schemes.scheme-1.settings.background }};
+  }
+
+  .ai-dual-image-container-{{ ai_gen_id }}.container-scheme-2 {
+    background-color: {{ settings.color_schemes.scheme-2.settings.background }};
+  }
+
+  .ai-dual-image-container-{{ ai_gen_id }}.container-scheme-3 {
+    background-color: {{ settings.color_schemes.scheme-3.settings.background }};
+  }
+
+  .ai-dual-image-container-{{ ai_gen_id }}.container-scheme-4 {
+    background-color: {{ settings.color_schemes.scheme-4.settings.background }};
+  }
+
+  .ai-dual-image-container-{{ ai_gen_id }}.container-scheme-inverse {
+    background-color: {{ settings.color_schemes.scheme-inverse.settings.background }};
+  }
+
+  .ai-dual-image-desktop-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: {{ block.settings.gap_desktop }}px;
+  }
+
+  .ai-dual-image-item-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    max-width: {{ block.settings.image_max_width }}%;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+  }
+
+  .ai-dual-image-item-{{ ai_gen_id }} img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ai-dual-image-item-{{ ai_gen_id }}.ratio-1-1 img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-item-{{ ai_gen_id }}.ratio-3-4 img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-item-{{ ai_gen_id }}.ratio-4-3 img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-item-{{ ai_gen_id }}.ratio-16-9 img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-item-{{ ai_gen_id }}.ratio-adapt img {
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .ai-dual-image-mobile-{{ ai_gen_id }} {
+    display: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-dual-image-carousel-{{ ai_gen_id }} {
+    display: flex;
+    transition: transform 0.3s ease;
+    gap: {{ block.settings.gap_mobile }}px;
+  }
+
+  .ai-dual-image-carousel-item-{{ ai_gen_id }} {
+    flex: 0 0 100%;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+  }
+
+  .ai-dual-image-carousel-item-{{ ai_gen_id }} img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ai-dual-image-carousel-item-{{ ai_gen_id }}.ratio-1-1 img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-carousel-item-{{ ai_gen_id }}.ratio-3-4 img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-carousel-item-{{ ai_gen_id }}.ratio-4-3 img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-carousel-item-{{ ai_gen_id }}.ratio-16-9 img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-carousel-item-{{ ai_gen_id }}.ratio-adapt img {
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .ai-dual-image-dots-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .ai-dual-image-dot-{{ ai_gen_id }} {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-dual-image-dot-{{ ai_gen_id }}.active {
+    background-color: #000000;
+  }
+
+  .ai-dual-image-placeholder-{{ ai_gen_id }} {
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-dual-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-dual-image-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-dual-image-desktop-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-dual-image-mobile-{{ ai_gen_id }} {
+      display: block;
+    }
+  }
+{% endstyle %}
+
+<dual-image-carousel-{{ ai_gen_id }}
+  class="ai-dual-image-{{ ai_gen_id }} color-{{ block.settings.section_color_scheme }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-dual-image-container-{{ ai_gen_id }} container-{{ block.settings.container_color_scheme }}">
+    <div class="ai-dual-image-desktop-{{ ai_gen_id }}">
+      <div class="ai-dual-image-item-{{ ai_gen_id }} ratio-{{ block.settings.image_1_ratio }}">
+        {% if block.settings.image_1 %}
+          <img
+            src="{{ block.settings.image_1 | image_url: width: 1200 }}"
+            alt="{{ block.settings.image_1.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image_1.width }}"
+            height="{{ block.settings.image_1.height }}"
+          >
+        {% else %}
+          <div class="ai-dual-image-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+            <div class="ai-dual-image-empty-state-{{ ai_gen_id }}">
+              Add image 1
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ai-dual-image-item-{{ ai_gen_id }} ratio-{{ block.settings.image_2_ratio }}">
+        {% if block.settings.image_2 %}
+          <img
+            src="{{ block.settings.image_2 | image_url: width: 1200 }}"
+            alt="{{ block.settings.image_2.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image_2.width }}"
+            height="{{ block.settings.image_2.height }}"
+          >
+        {% else %}
+          <div class="ai-dual-image-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+            <div class="ai-dual-image-empty-state-{{ ai_gen_id }}">
+              Add image 2
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="ai-dual-image-mobile-{{ ai_gen_id }}">
+      <div class="ai-dual-image-carousel-{{ ai_gen_id }}">
+        <div class="ai-dual-image-carousel-item-{{ ai_gen_id }} ratio-{{ block.settings.image_1_ratio }}">
+          {% if block.settings.image_1 %}
+            <img
+              src="{{ block.settings.image_1 | image_url: width: 800 }}"
+              alt="{{ block.settings.image_1.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_1.width }}"
+              height="{{ block.settings.image_1.height }}"
+            >
+          {% else %}
+            <div class="ai-dual-image-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+              <div class="ai-dual-image-empty-state-{{ ai_gen_id }}">
+                Add image 1
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="ai-dual-image-carousel-item-{{ ai_gen_id }} ratio-{{ block.settings.image_2_ratio }}">
+          {% if block.settings.image_2 %}
+            <img
+              src="{{ block.settings.image_2 | image_url: width: 800 }}"
+              alt="{{ block.settings.image_2.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_2.width }}"
+              height="{{ block.settings.image_2.height }}"
+            >
+          {% else %}
+            <div class="ai-dual-image-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+              <div class="ai-dual-image-empty-state-{{ ai_gen_id }}">
+                Add image 2
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="ai-dual-image-dots-{{ ai_gen_id }}">
+        <button
+          class="ai-dual-image-dot-{{ ai_gen_id }} active"
+          data-index="0"
+          aria-label="View image 1"
+        ></button>
+        <button
+          class="ai-dual-image-dot-{{ ai_gen_id }}"
+          data-index="1"
+          aria-label="View image 2"
+        ></button>
+      </div>
+    </div>
+  </div>
+</dual-image-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class DualImageCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.startX = 0;
+        this.isDragging = false;
+      }
+
+      connectedCallback() {
+        this.carousel = this.querySelector('.ai-dual-image-carousel-{{ ai_gen_id }}');
+        this.dots = this.querySelectorAll('.ai-dual-image-dot-{{ ai_gen_id }}');
+        this.items = this.querySelectorAll('.ai-dual-image-carousel-item-{{ ai_gen_id }}');
+
+        if (!this.carousel || this.items.length === 0) return;
+
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.dots.forEach((dot) => {
+          dot.addEventListener('click', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            this.goToSlide(index);
+          });
+        });
+
+        this.carousel.addEventListener('touchstart', (e) => {
+          this.startX = e.touches[0].clientX;
+          this.isDragging = true;
+        });
+
+        this.carousel.addEventListener('touchmove', (e) => {
+          if (!this.isDragging) return;
+          e.preventDefault();
+        });
+
+        this.carousel.addEventListener('touchend', (e) => {
+          if (!this.isDragging) return;
+          this.isDragging = false;
+
+          const endX = e.changedTouches[0].clientX;
+          const diff = this.startX - endX;
+
+          if (Math.abs(diff) > 50) {
+            if (diff > 0 && this.currentIndex < this.items.length - 1) {
+              this.goToSlide(this.currentIndex + 1);
+            } else if (diff < 0 && this.currentIndex > 0) {
+              this.goToSlide(this.currentIndex - 1);
+            }
+          }
+        });
+      }
+
+      goToSlide(index) {
+        this.currentIndex = index;
+        const itemWidth = this.items[0].offsetWidth;
+        const gap = {{ block.settings.gap_mobile }};
+        const offset = -(itemWidth + gap) * index;
+        this.carousel.style.transform = `translateX(${offset}px)`;
+
+        this.dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+    }
+
+    customElements.define('dual-image-carousel-{{ ai_gen_id }}', DualImageCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Dual image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section background"
+    },
+    {
+      "type": "select",
+      "id": "section_color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "Scheme 1"
+        },
+        {
+          "value": "scheme-2",
+          "label": "Scheme 2"
+        },
+        {
+          "value": "scheme-3",
+          "label": "Scheme 3"
+        },
+        {
+          "value": "scheme-4",
+          "label": "Scheme 4"
+        },
+        {
+          "value": "scheme-inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "select",
+      "id": "container_color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "Scheme 1"
+        },
+        {
+          "value": "scheme-2",
+          "label": "Scheme 2"
+        },
+        {
+          "value": "scheme-3",
+          "label": "Scheme 3"
+        },
+        {
+          "value": "scheme-4",
+          "label": "Scheme 4"
+        },
+        {
+          "value": "scheme-inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "1200"
+    },
+    {
+      "type": "header",
+      "content": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_1_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "1-1",
+          "label": "1:1"
+        },
+        {
+          "value": "3-4",
+          "label": "3:4"
+        },
+        {
+          "value": "4-3",
+          "label": "4:3"
+        },
+        {
+          "value": "16-9",
+          "label": "16:9"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "header",
+      "content": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_2_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "1-1",
+          "label": "1:1"
+        },
+        {
+          "value": "3-4",
+          "label": "3:4"
+        },
+        {
+          "value": "4-3",
+          "label": "4:3"
+        },
+        {
+          "value": "16-9",
+          "label": "16:9"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "header",
+      "content": "Image sizing"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Maximum width",
+      "default": 45
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between images (desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between images (mobile)",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dual image"
+    }
+  ]
+}
+{% endschema %}

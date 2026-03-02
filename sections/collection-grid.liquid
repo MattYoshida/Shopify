@@ -1,0 +1,1064 @@
+{% comment %}
+  ============================================================================
+  Collection Grid Section
+  Flexible collection card layout with featured cards and overlay text
+  
+  INSTALLATION:
+  1. Copy this file to your theme's sections/ folder
+  2. Add via Theme Customizer or include in a template
+  ============================================================================
+{% endcomment %}
+
+{%- liquid
+  assign section_id = section.id
+  assign heading = section.settings.heading
+  assign view_all_text = section.settings.view_all_text
+  assign view_all_url = section.settings.view_all_url
+-%}
+
+<style>
+  .cg-{{ section_id }} {
+    --cg-font-heading: {{ section.settings.heading_font }}, sans-serif;
+    --cg-font-body: {{ section.settings.body_font }}, sans-serif;
+    --cg-bg: {{ section.settings.background_color }};
+    --cg-heading-color: {{ section.settings.heading_color }};
+    --cg-link-color: {{ section.settings.link_color }};
+    --cg-overlay-color: {{ section.settings.overlay_text_color }};
+    --cg-overlay-bg: {{ section.settings.overlay_background }};
+    --cg-gap: {{ section.settings.card_gap }}px;
+    --cg-row-gap: {{ section.settings.row_gap }}px;
+    --cg-radius: {{ section.settings.card_radius }}px;
+    --cg-padding-top: {{ section.settings.padding_top }}px;
+    --cg-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --cg-container: {{ section.settings.container_width }}px;
+    --cg-title-size: {{ section.settings.card_title_size }}px;
+    --cg-subtitle-size: {{ section.settings.card_subtitle_size }}px;
+    --cg-overlay-padding: {{ section.settings.overlay_padding }}px;
+  }
+
+  /* Base */
+  .cg-{{ section_id }} {
+    padding: var(--cg-padding-top) 0 var(--cg-padding-bottom);
+    background: var(--cg-bg);
+  }
+
+  .cg-{{ section_id }} .cg-container {
+    max-width: var(--cg-container);
+    margin: 0 auto;
+    padding: 0 clamp(16px, 4vw, 48px);
+  }
+
+  /* Header */
+  .cg-{{ section_id }} .cg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: clamp(20px, 3vw, 32px);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .cg-{{ section_id }} .cg-heading {
+    font-family: var(--cg-font-heading);
+    font-size: clamp(20px, 3vw, {{ section.settings.section_heading_size }}px);
+    font-weight: {{ section.settings.heading_weight }};
+    color: var(--cg-heading-color);
+    margin: 0;
+    line-height: 1.2;
+    {% if section.settings.heading_uppercase %}text-transform: uppercase;{% endif %}
+    {% if section.settings.heading_letter_spacing %}letter-spacing: 0.05em;{% endif %}
+  }
+
+  .cg-{{ section_id }} .cg-view-all {
+    font-family: var(--cg-font-body);
+    font-size: {{ section.settings.view_all_size }}px;
+    font-weight: 400;
+    color: var(--cg-link-color);
+    text-decoration: {% if section.settings.view_all_underline %}underline{% else %}none{% endif %};
+    text-underline-offset: 4px;
+    transition: opacity 0.3s ease;
+  }
+
+  .cg-{{ section_id }} .cg-view-all:hover {
+    opacity: 0.7;
+  }
+
+  /* Grid */
+  .cg-{{ section_id }} .cg-grid {
+    display: grid;
+    gap: var(--cg-row-gap) var(--cg-gap);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+  }
+
+  /* Card */
+  .cg-{{ section_id }} .cg-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--cg-radius);
+    background: #f5f5f5;
+  }
+
+  .cg-{{ section_id }} .cg-card__link {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Card Sizes */
+  .cg-{{ section_id }} .cg-card--large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .cg-{{ section_id }} .cg-card--wide {
+    grid-column: span 2;
+  }
+
+  .cg-{{ section_id }} .cg-card--tall {
+    grid-row: span 2;
+  }
+
+  /* Image */
+  .cg-{{ section_id }} .cg-card__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .cg-{{ section_id }} .cg-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position }};
+    transition: transform {{ section.settings.hover_speed }}s ease;
+  }
+
+  {% if section.settings.enable_hover_zoom %}
+  .cg-{{ section_id }} .cg-card:hover .cg-card__image {
+    transform: scale({{ section.settings.hover_zoom_amount }});
+  }
+  {% endif %}
+
+  /* Overlay */
+  .cg-{{ section_id }} .cg-card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ section.settings.text_vertical_position }};
+    align-items: {{ section.settings.text_horizontal_position }};
+    padding: var(--cg-overlay-padding);
+    text-align: {{ section.settings.text_align }};
+    {% if section.settings.overlay_gradient %}
+    background: linear-gradient(
+      to top,
+      {{ section.settings.overlay_background }} 0%,
+      {{ section.settings.overlay_background | color_modify: 'alpha', 0.4 }} 40%,
+      transparent 100%
+    );
+    {% endif %}
+  }
+
+  .cg-{{ section_id }} .cg-card__content {
+    {% if section.settings.enable_text_animation %}
+    transform: translateY(8px);
+    opacity: 0.9;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    {% endif %}
+  }
+
+  {% if section.settings.enable_text_animation %}
+  .cg-{{ section_id }} .cg-card:hover .cg-card__content {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  {% endif %}
+
+  .cg-{{ section_id }} .cg-card__subtitle {
+    font-family: var(--cg-font-body);
+    font-size: var(--cg-subtitle-size);
+    font-weight: 400;
+    color: var(--cg-overlay-color);
+    margin: 0 0 4px;
+    opacity: 0.85;
+    {% if section.settings.subtitle_uppercase %}text-transform: uppercase;{% endif %}
+    {% if section.settings.subtitle_letter_spacing %}letter-spacing: 0.08em;{% endif %}
+  }
+
+  .cg-{{ section_id }} .cg-card__title {
+    font-family: var(--cg-font-heading);
+    font-size: var(--cg-title-size);
+    font-weight: {{ section.settings.card_title_weight }};
+    color: var(--cg-overlay-color);
+    margin: 0;
+    line-height: 1.25;
+    {% if section.settings.title_text_shadow %}text-shadow: 0 1px 8px rgba(0,0,0,0.3);{% endif %}
+  }
+
+  /* Aspect Ratios for Standard Cards */
+  .cg-{{ section_id }} .cg-card:not(.cg-card--large):not(.cg-card--tall) .cg-card__link {
+    aspect-ratio: {{ section.settings.card_aspect_ratio }};
+  }
+
+  .cg-{{ section_id }} .cg-card--large .cg-card__link {
+    aspect-ratio: {{ section.settings.large_card_aspect_ratio }};
+  }
+
+  .cg-{{ section_id }} .cg-card--tall .cg-card__link {
+    aspect-ratio: {{ section.settings.tall_card_aspect_ratio }};
+  }
+
+  .cg-{{ section_id }} .cg-card--wide .cg-card__link {
+    aspect-ratio: {{ section.settings.wide_card_aspect_ratio }};
+  }
+
+  /* Placeholder */
+  .cg-{{ section_id }} .cg-card__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #f0f0f0 0%, #e0e0e0 100%);
+  }
+
+  .cg-{{ section_id }} .cg-card__placeholder svg {
+    width: 48px;
+    height: 48px;
+    opacity: 0.3;
+  }
+
+  /* Bottom Row - Equal Cards */
+  .cg-{{ section_id }} .cg-bottom-row {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.bottom_row_columns }}, 1fr);
+    gap: var(--cg-gap);
+    margin-top: var(--cg-row-gap);
+  }
+
+  .cg-{{ section_id }} .cg-bottom-row .cg-card__link {
+    aspect-ratio: {{ section.settings.bottom_row_aspect_ratio }};
+  }
+
+  /* Responsive */
+  @media (max-width: 1199px) {
+    .cg-{{ section_id }} .cg-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cg-{{ section_id }} .cg-card--large {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .cg-{{ section_id }} .cg-card--wide {
+      grid-column: span 2;
+    }
+
+    .cg-{{ section_id }} .cg-bottom-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 749px) {
+    .cg-{{ section_id }} .cg-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .cg-{{ section_id }} .cg-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cg-{{ section_id }} .cg-card--large,
+    .cg-{{ section_id }} .cg-card--wide,
+    .cg-{{ section_id }} .cg-card--tall {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .cg-{{ section_id }} .cg-card--large .cg-card__link,
+    .cg-{{ section_id }} .cg-card--tall .cg-card__link,
+    .cg-{{ section_id }} .cg-card--wide .cg-card__link {
+      aspect-ratio: {{ section.settings.mobile_aspect_ratio }};
+    }
+
+    .cg-{{ section_id }} .cg-bottom-row {
+      grid-template-columns: repeat({{ section.settings.mobile_bottom_columns }}, 1fr);
+    }
+
+    .cg-{{ section_id }} .cg-bottom-row .cg-card__link {
+      aspect-ratio: {{ section.settings.mobile_aspect_ratio }};
+    }
+
+    :root {
+      --cg-title-size: {{ section.settings.mobile_title_size }}px;
+    }
+  }
+
+  /* Focus States */
+  .cg-{{ section_id }} .cg-card__link:focus-visible {
+    outline: 2px solid var(--cg-heading-color);
+    outline-offset: 4px;
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .cg-{{ section_id }} .cg-card__image,
+    .cg-{{ section_id }} .cg-card__content {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="cg-section cg-{{ section_id }}">
+  <div class="cg-container">
+    
+    {%- if heading != blank or view_all_text != blank -%}
+      <header class="cg-header">
+        {%- if heading != blank -%}
+          <h2 class="cg-heading">{{ heading }}</h2>
+        {%- endif -%}
+        
+        {%- if view_all_text != blank and view_all_url != blank -%}
+          <a href="{{ view_all_url }}" class="cg-view-all">{{ view_all_text }}</a>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- comment %} Main Grid {% endcomment -%}
+    <div class="cg-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'collection_card' and block.settings.grid_position == 'main' -%}
+          {%- liquid
+            assign collection = collections[block.settings.collection]
+            assign card_image = block.settings.image | default: collection.featured_image
+            assign card_title = block.settings.title | default: collection.title | default: 'Collection'
+            assign card_subtitle = block.settings.subtitle
+            assign card_url = block.settings.custom_url | default: collection.url | default: '#'
+            assign card_size = block.settings.card_size
+          -%}
+
+          <article class="cg-card cg-card--{{ card_size }}" {{ block.shopify_attributes }}>
+            <a href="{{ card_url }}" class="cg-card__link" aria-label="Shop {{ card_title }}">
+              <div class="cg-card__media">
+                {%- if card_image != blank -%}
+                  <img
+                    src="{{ card_image | image_url: width: 1200 }}"
+                    srcset="{{ card_image | image_url: width: 400 }} 400w,
+                            {{ card_image | image_url: width: 600 }} 600w,
+                            {{ card_image | image_url: width: 800 }} 800w,
+                            {{ card_image | image_url: width: 1200 }} 1200w"
+                    sizes="(max-width: 749px) 100vw, (max-width: 1199px) 50vw, 33vw"
+                    alt="{{ card_image.alt | default: card_title | escape }}"
+                    loading="lazy"
+                    class="cg-card__image"
+                    {% if block.settings.image_focal_point != blank %}
+                    style="object-position: {{ block.settings.image_focal_point }};"
+                    {% endif %}
+                  >
+                {%- else -%}
+                  <div class="cg-card__placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <path d="M21 15l-5-5L5 21"/>
+                    </svg>
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <div class="cg-card__overlay">
+                <div class="cg-card__content">
+                  {%- if card_subtitle != blank -%}
+                    <p class="cg-card__subtitle">{{ card_subtitle }}</p>
+                  {%- endif -%}
+                  <h3 class="cg-card__title">{{ card_title }}</h3>
+                </div>
+              </div>
+            </a>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- comment %} Bottom Row {% endcomment -%}
+    {%- assign has_bottom_cards = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'collection_card' and block.settings.grid_position == 'bottom' -%}
+        {%- assign has_bottom_cards = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if has_bottom_cards -%}
+      <div class="cg-bottom-row">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'collection_card' and block.settings.grid_position == 'bottom' -%}
+            {%- liquid
+              assign collection = collections[block.settings.collection]
+              assign card_image = block.settings.image | default: collection.featured_image
+              assign card_title = block.settings.title | default: collection.title | default: 'Collection'
+              assign card_subtitle = block.settings.subtitle
+              assign card_url = block.settings.custom_url | default: collection.url | default: '#'
+            -%}
+
+            <article class="cg-card" {{ block.shopify_attributes }}>
+              <a href="{{ card_url }}" class="cg-card__link" aria-label="Shop {{ card_title }}">
+                <div class="cg-card__media">
+                  {%- if card_image != blank -%}
+                    <img
+                      src="{{ card_image | image_url: width: 800 }}"
+                      srcset="{{ card_image | image_url: width: 300 }} 300w,
+                              {{ card_image | image_url: width: 500 }} 500w,
+                              {{ card_image | image_url: width: 800 }} 800w"
+                      sizes="(max-width: 749px) 50vw, 25vw"
+                      alt="{{ card_image.alt | default: card_title | escape }}"
+                      loading="lazy"
+                      class="cg-card__image"
+                      {% if block.settings.image_focal_point != blank %}
+                      style="object-position: {{ block.settings.image_focal_point }};"
+                      {% endif %}
+                    >
+                  {%- else -%}
+                    <div class="cg-card__placeholder">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <path d="M21 15l-5-5L5 21"/>
+                      </svg>
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                <div class="cg-card__overlay">
+                  <div class="cg-card__content">
+                    {%- if card_subtitle != blank -%}
+                      <p class="cg-card__subtitle">{{ card_subtitle }}</p>
+                    {%- endif -%}
+                    <h3 class="cg-card__title">{{ card_title }}</h3>
+                  </div>
+                </div>
+              </a>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "tag": "section",
+  "class": "collection-grid-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Light Fixtures"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Text",
+      "default": "View All Lighting"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All Link"
+    },
+    {
+      "type": "range",
+      "id": "section_heading_size",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase Heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_letter_spacing",
+      "label": "Add Letter Spacing",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "view_all_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "View All Text Size",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all_underline",
+      "label": "Underline View All Link",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 4,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Between Cards",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "min": 4,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Between Rows",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "bottom_row_columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Bottom Row Columns",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "mobile_bottom_columns",
+      "label": "Mobile Bottom Row Columns",
+      "options": [
+        { "value": "1", "label": "1 Column" },
+        { "value": "2", "label": "2 Columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Card Aspect Ratios"
+    },
+    {
+      "type": "select",
+      "id": "card_aspect_ratio",
+      "label": "Standard Card Ratio",
+      "options": [
+        { "value": "1/1", "label": "Square (1:1)" },
+        { "value": "4/3", "label": "Landscape (4:3)" },
+        { "value": "3/4", "label": "Portrait (3:4)" },
+        { "value": "16/9", "label": "Wide (16:9)" }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "select",
+      "id": "large_card_aspect_ratio",
+      "label": "Large Card Ratio",
+      "options": [
+        { "value": "1/1", "label": "Square (1:1)" },
+        { "value": "4/3", "label": "Landscape (4:3)" },
+        { "value": "3/4", "label": "Portrait (3:4)" },
+        { "value": "auto", "label": "Auto (fill grid)" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "tall_card_aspect_ratio",
+      "label": "Tall Card Ratio",
+      "options": [
+        { "value": "3/4", "label": "Portrait (3:4)" },
+        { "value": "2/3", "label": "Portrait (2:3)" },
+        { "value": "9/16", "label": "Tall (9:16)" },
+        { "value": "auto", "label": "Auto (fill grid)" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "wide_card_aspect_ratio",
+      "label": "Wide Card Ratio",
+      "options": [
+        { "value": "2/1", "label": "Wide (2:1)" },
+        { "value": "16/9", "label": "Wide (16:9)" },
+        { "value": "3/2", "label": "Landscape (3:2)" }
+      ],
+      "default": "2/1"
+    },
+    {
+      "type": "select",
+      "id": "bottom_row_aspect_ratio",
+      "label": "Bottom Row Card Ratio",
+      "options": [
+        { "value": "1/1", "label": "Square (1:1)" },
+        { "value": "4/3", "label": "Landscape (4:3)" },
+        { "value": "3/4", "label": "Portrait (3:4)" },
+        { "value": "4/5", "label": "Portrait (4:5)" }
+      ],
+      "default": "4/5"
+    },
+    {
+      "type": "select",
+      "id": "mobile_aspect_ratio",
+      "label": "Mobile Card Ratio",
+      "options": [
+        { "value": "1/1", "label": "Square (1:1)" },
+        { "value": "4/3", "label": "Landscape (4:3)" },
+        { "value": "3/4", "label": "Portrait (3:4)" },
+        { "value": "16/9", "label": "Wide (16:9)" }
+      ],
+      "default": "4/3"
+    },
+    {
+      "type": "header",
+      "content": "Card Styling"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Corner Radius",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Default Image Position",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Text Overlay"
+    },
+    {
+      "type": "select",
+      "id": "text_vertical_position",
+      "label": "Text Vertical Position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "text_horizontal_position",
+      "label": "Text Horizontal Position",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "overlay_padding",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Overlay Padding",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_gradient",
+      "label": "Show Gradient Behind Text",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Card Title Size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_title_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Title Size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "card_title_weight",
+      "label": "Card Title Weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "checkbox",
+      "id": "title_text_shadow",
+      "label": "Add Text Shadow",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "card_subtitle_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle Size",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "subtitle_uppercase",
+      "label": "Uppercase Subtitle",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "subtitle_letter_spacing",
+      "label": "Subtitle Letter Spacing",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Hover Effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover_zoom",
+      "label": "Enable Image Zoom on Hover",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "hover_zoom_amount",
+      "min": 1,
+      "max": 1.2,
+      "step": 0.1,
+      "label": "Zoom Amount",
+      "default": 1.1
+    },
+    {
+      "type": "range",
+      "id": "hover_speed",
+      "min": 0.2,
+      "max": 1.2,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Hover Animation Speed",
+      "default": 0.6
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_text_animation",
+      "label": "Enable Text Animation on Hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading Font",
+      "options": [
+        { "value": "inherit", "label": "Theme Default" },
+        { "value": "'Cormorant Garamond', serif", "label": "Cormorant Garamond" },
+        { "value": "'Playfair Display', serif", "label": "Playfair Display" },
+        { "value": "'Montserrat'", "label": "Montserrat" },
+        { "value": "'Lato'", "label": "Lato" },
+        { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "system-ui", "label": "System UI" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "Body Font",
+      "options": [
+        { "value": "inherit", "label": "Theme Default" },
+        { "value": "'Montserrat'", "label": "Montserrat" },
+        { "value": "'Lato'", "label": "Lato" },
+        { "value": "'Open Sans'", "label": "Open Sans" },
+        { "value": "system-ui", "label": "System UI" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Card Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_background",
+      "label": "Overlay Gradient Color",
+      "default": "rgba(0,0,0,0.4)"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 40,
+      "unit": "px",
+      "label": "Container Width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Image",
+          "info": "Overrides collection image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title",
+          "info": "Leave blank to use collection title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "info": "Small text above title (e.g. 'Outdoor')"
+        },
+        {
+          "type": "url",
+          "id": "custom_url",
+          "label": "Custom Link"
+        },
+        {
+          "type": "header",
+          "content": "Card Size & Position"
+        },
+        {
+          "type": "select",
+          "id": "grid_position",
+          "label": "Grid Position",
+          "options": [
+            { "value": "main", "label": "Main Grid (Top)" },
+            { "value": "bottom", "label": "Bottom Row" }
+          ],
+          "default": "main"
+        },
+        {
+          "type": "select",
+          "id": "card_size",
+          "label": "Card Size (Main Grid Only)",
+          "options": [
+            { "value": "standard", "label": "Standard (1x1)" },
+            { "value": "large", "label": "Large (2x2)" },
+            { "value": "wide", "label": "Wide (2x1)" },
+            { "value": "tall", "label": "Tall (1x2)" }
+          ],
+          "default": "standard"
+        },
+        {
+          "type": "text",
+          "id": "image_focal_point",
+          "label": "Image Focal Point",
+          "info": "e.g. 'center top', '50% 30%', 'left center'",
+          "placeholder": "center"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Grid",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Chandeliers",
+            "card_size": "large",
+            "grid_position": "main"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Wall Sconces",
+            "card_size": "standard",
+            "grid_position": "main"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Table Lamps",
+            "card_size": "standard",
+            "grid_position": "main"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Pendant Lights",
+            "card_size": "wide",
+            "grid_position": "main"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Wall Lights",
+            "subtitle": "Outdoor",
+            "grid_position": "bottom"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Floor Lamps",
+            "grid_position": "bottom"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Track Lights",
+            "grid_position": "bottom"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Ceiling Downlights",
+            "grid_position": "bottom"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

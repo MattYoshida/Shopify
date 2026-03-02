@@ -1,0 +1,440 @@
+{% doc %}
+  @prompt
+    I want a customizable imgae witht ext overlay. with heading and subheading options. I want enable on dektop and mobile option slider. I also want to be able to edit the opacity of the backround image. I also want to be able the placement of the text in the image. I also want to be able to edit the aspect ratio of the backroundimage, I want to be able to control the placement of the heading and the subheading. Also I want to be able to adjust the brightnness of the image as well. 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-overlay-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ai-image-overlay-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ block.settings.aspect_ratio }};
+  }
+
+  .ai-image-overlay-bg-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: {{ block.settings.image_opacity }};
+    filter: brightness({{ block.settings.image_brightness }});
+  }
+
+  .ai-image-overlay-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-image-overlay-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 2;
+    padding: 40px;
+  }
+
+  .ai-image-overlay-text-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="top-left"] {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="top-center"] {
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="top-right"] {
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="center-left"] {
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="center-center"] {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="center-right"] {
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="bottom-left"] {
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="bottom-center"] {
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .ai-image-overlay-content-{{ ai_gen_id }}[data-position="bottom-right"] {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .ai-image-overlay-heading-{{ ai_gen_id }} {
+    margin: 0;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    line-height: 1.2;
+  }
+
+  .ai-image-overlay-subheading-{{ ai_gen_id }} {
+    margin: 0;
+    color: {{ block.settings.subheading_color }};
+    font-size: {{ block.settings.subheading_size }}px;
+    line-height: 1.4;
+  }
+
+  .ai-image-overlay-text-wrapper-{{ ai_gen_id }}[data-heading-align="left"] .ai-image-overlay-heading-{{ ai_gen_id }} {
+    text-align: left;
+  }
+
+  .ai-image-overlay-text-wrapper-{{ ai_gen_id }}[data-heading-align="center"] .ai-image-overlay-heading-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-image-overlay-text-wrapper-{{ ai_gen_id }}[data-heading-align="right"] .ai-image-overlay-heading-{{ ai_gen_id }} {
+    text-align: right;
+  }
+
+  .ai-image-overlay-text-wrapper-{{ ai_gen_id }}[data-subheading-align="left"] .ai-image-overlay-subheading-{{ ai_gen_id }} {
+    text-align: left;
+  }
+
+  .ai-image-overlay-text-wrapper-{{ ai_gen_id }}[data-subheading-align="center"] .ai-image-overlay-subheading-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-image-overlay-text-wrapper-{{ ai_gen_id }}[data-subheading-align="right"] .ai-image-overlay-subheading-{{ ai_gen_id }} {
+    text-align: right;
+  }
+
+  @media screen and (max-width: 749px) {
+    {% if block.settings.hide_on_mobile %}
+      .ai-image-overlay-{{ ai_gen_id }} {
+        display: none;
+      }
+    {% endif %}
+
+    .ai-image-overlay-content-{{ ai_gen_id }} {
+      padding: 20px;
+    }
+
+    .ai-image-overlay-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-image-overlay-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size | times: 0.8 }}px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    {% if block.settings.hide_on_desktop %}
+      .ai-image-overlay-{{ ai_gen_id }} {
+        display: none;
+      }
+    {% endif %}
+  }
+{% endstyle %}
+
+<div class="ai-image-overlay-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-image-overlay-container-{{ ai_gen_id }}">
+    {% if block.settings.background_image %}
+      <img
+        src="{{ block.settings.background_image | image_url: width: 2000 }}"
+        alt="{{ block.settings.background_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.background_image.width }}"
+        height="{{ block.settings.background_image.height }}"
+        class="ai-image-overlay-bg-{{ ai_gen_id }}"
+      >
+    {% else %}
+      <div class="ai-image-overlay-placeholder-{{ ai_gen_id }}">
+        {{ 'hero-apparel-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+
+    <div class="ai-image-overlay-content-{{ ai_gen_id }}" data-position="{{ block.settings.text_position }}">
+      <div 
+        class="ai-image-overlay-text-wrapper-{{ ai_gen_id }}"
+        data-heading-align="{{ block.settings.heading_alignment }}"
+        data-subheading-align="{{ block.settings.subheading_alignment }}"
+      >
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-image-overlay-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.subheading != blank %}
+          <p class="ai-image-overlay-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image with text overlay",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "16/9",
+          "label": "16:9"
+        },
+        {
+          "value": "4/3",
+          "label": "4:3"
+        },
+        {
+          "value": "3/2",
+          "label": "3:2"
+        },
+        {
+          "value": "1/1",
+          "label": "1:1 (Square)"
+        },
+        {
+          "value": "3/4",
+          "label": "3:4"
+        },
+        {
+          "value": "2/3",
+          "label": "2:3"
+        }
+      ],
+      "default": "16/9"
+    },
+    {
+      "type": "range",
+      "id": "image_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Opacity",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "image_brightness",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "label": "Brightness",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Text position"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Container position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "center-left",
+          "label": "Center left"
+        },
+        {
+          "value": "center-center",
+          "label": "Center center"
+        },
+        {
+          "value": "center-right",
+          "label": "Center right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center-center"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Text",
+      "default": "Image with text overlay"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Size",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Text",
+      "default": "Add a compelling description to complement your image"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "subheading_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Hide on desktop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on mobile",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text overlay"
+    }
+  ]
+}
+{% endschema %}

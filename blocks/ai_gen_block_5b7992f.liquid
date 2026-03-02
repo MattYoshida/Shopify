@@ -1,0 +1,450 @@
+{% doc %}
+  @prompt
+    Image with Text with the option to switch which side the text is on and th image is on and option to put two images next to eachother, I want the images to be side by side to one another with the option to change each individual images aspect ratio, It should be two image right next to eachother no scrolling jsut two images next to eachother, I also want the option to choose if i want one or two photos to show. Also the aspect ratio changes both images when it should only change a specific one. so if i want one with square and another with 4:3 it will do it correctdly, go back to the previous iteration. I want to be able to adjust the border width witha  value and not a slider, I want to be able to control how much spacing is from teh edges of the page with a value and no a slider, I also want to be able to adjust top and bottom padding with a value, I also want to be able to adjust the theme. I want to be able to adjust the container theme too. i also want to be able to adjust the modile spacing adnon mobile the pictures should be stacked on the text. I wan tot be able to control spacing on moobile
+    
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-text-{{ ai_gen_id }} {
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-image-text-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.page_width }}px;
+    margin: 0 auto;
+    padding-left: {{ block.settings.spacing_edges }}px;
+    padding-right: {{ block.settings.spacing_edges }}px;
+  }
+
+  .ai-image-text-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .ai-image-text-wrapper-{{ ai_gen_id }}.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .ai-image-text-content-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .ai-image-text-images-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }} {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  .ai-image-text-image-wrapper-{{ ai_gen_id }}.full-width {
+    flex: 1 1 100%;
+  }
+
+  .ai-image-text-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+  }
+
+  .ai-image-text-image-{{ ai_gen_id }}.ratio-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .ai-image-text-image-{{ ai_gen_id }}.ratio-portrait {
+    aspect-ratio: 3 / 4;
+  }
+
+  .ai-image-text-image-{{ ai_gen_id }}.ratio-landscape {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ai-image-text-heading-{{ ai_gen_id }} {
+    margin: 0 0 16px;
+    color: rgb(var(--color-foreground));
+  }
+
+  .ai-image-text-text-{{ ai_gen_id }} {
+    margin: 0 0 24px;
+    color: rgb(var(--color-foreground));
+  }
+
+  .ai-image-text-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    transition: all 0.3s ease;
+  }
+
+  .ai-image-text-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  .ai-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+  }
+
+  .ai-image-placeholder-{{ ai_gen_id }}.ratio-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .ai-image-placeholder-{{ ai_gen_id }}.ratio-portrait {
+    aspect-ratio: 3 / 4;
+  }
+
+  .ai-image-placeholder-{{ ai_gen_id }}.ratio-landscape {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ai-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-text-{{ ai_gen_id }} {
+      padding-top: {{ block.settings.mobile_padding_top }}px;
+      padding-bottom: {{ block.settings.mobile_padding_bottom }}px;
+    }
+
+    .ai-image-text-container-{{ ai_gen_id }} {
+      padding-left: {{ block.settings.mobile_spacing_edges }}px;
+      padding-right: {{ block.settings.mobile_spacing_edges }}px;
+    }
+
+    .ai-image-text-wrapper-{{ ai_gen_id }},
+    .ai-image-text-wrapper-{{ ai_gen_id }}.reverse {
+      flex-direction: column;
+    }
+
+    .ai-image-text-images-{{ ai_gen_id }} {
+      width: 100%;
+      order: 2;
+    }
+
+    .ai-image-text-content-{{ ai_gen_id }} {
+      width: 100%;
+      order: 1;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-image-text-{{ ai_gen_id }} color-{{ block.settings.color_scheme }}" {{ block.shopify_attributes }}>
+  <div class="ai-image-text-container-{{ ai_gen_id }} color-{{ block.settings.container_color_scheme }}">
+    <div class="ai-image-text-wrapper-{{ ai_gen_id }} {% if block.settings.layout == 'text_first' %}reverse{% endif %}">
+      <div class="ai-image-text-content-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-image-text-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+
+        {% if block.settings.text != blank %}
+          <div class="ai-image-text-text-{{ ai_gen_id }}">{{ block.settings.text }}</div>
+        {% endif %}
+
+        {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+          <a href="{{ block.settings.button_link }}" class="ai-image-text-button-{{ ai_gen_id }}">
+            {{ block.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="ai-image-text-images-{{ ai_gen_id }}">
+        <div class="ai-image-text-image-wrapper-{{ ai_gen_id }} {% if block.settings.image_count == 'one' %}full-width{% endif %}">
+          {% if block.settings.image_1 %}
+            <img
+              src="{{ block.settings.image_1 | image_url: width: 1000 }}"
+              alt="{{ block.settings.image_1.alt | escape }}"
+              class="ai-image-text-image-{{ ai_gen_id }} ratio-{{ block.settings.image_1_ratio }}"
+              loading="lazy"
+              width="{{ block.settings.image_1.width }}"
+              height="{{ block.settings.image_1.height }}"
+            >
+          {% else %}
+            <div class="ai-image-placeholder-{{ ai_gen_id }} ratio-{{ block.settings.image_1_ratio }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="ai-image-text-image-wrapper-{{ ai_gen_id }} {% if block.settings.image_count == 'one' %}hidden{% endif %}">
+          {% if block.settings.image_2 %}
+            <img
+              src="{{ block.settings.image_2 | image_url: width: 1000 }}"
+              alt="{{ block.settings.image_2.alt | escape }}"
+              class="ai-image-text-image-{{ ai_gen_id }} ratio-{{ block.settings.image_2_ratio }}"
+              loading="lazy"
+              width="{{ block.settings.image_2.width }}"
+              height="{{ block.settings.image_2.height }}"
+            >
+          {% else %}
+            <div class="ai-image-placeholder-{{ ai_gen_id }} ratio-{{ block.settings.image_2_ratio }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image first"
+        },
+        {
+          "value": "text_first",
+          "label": "Text first"
+        }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "select",
+      "id": "image_count",
+      "label": "Number of images",
+      "options": [
+        {
+          "value": "one",
+          "label": "One image"
+        },
+        {
+          "value": "two",
+          "label": "Two images"
+        }
+      ],
+      "default": "two"
+    },
+    {
+      "type": "text",
+      "id": "page_width",
+      "label": "Container width",
+      "default": "1410"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Image with text</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "select",
+      "id": "image_1_ratio",
+      "label": "Image 1 aspect ratio",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "header",
+      "content": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "select",
+      "id": "image_2_ratio",
+      "label": "Image 2 aspect ratio",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "container_color_scheme",
+      "label": "Container color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "text",
+      "id": "padding_top",
+      "label": "Top padding",
+      "default": "60"
+    },
+    {
+      "type": "text",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "default": "60"
+    },
+    {
+      "type": "text",
+      "id": "spacing_edges",
+      "label": "Edge spacing",
+      "default": "20"
+    },
+    {
+      "type": "text",
+      "id": "border_width",
+      "label": "Border width",
+      "default": "0"
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "text",
+      "id": "mobile_padding_top",
+      "label": "Mobile top padding",
+      "default": "40"
+    },
+    {
+      "type": "text",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom padding",
+      "default": "40"
+    },
+    {
+      "type": "text",
+      "id": "mobile_spacing_edges",
+      "label": "Mobile edge spacing",
+      "default": "16"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text"
+    }
+  ]
+}
+{% endschema %}
