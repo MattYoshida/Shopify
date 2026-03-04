@@ -167,7 +167,7 @@
           "type": "text",
           "settings": {
             "text": "<p>We deconstructed the 5-star experience—the weight of the cotton, the crispness of the weave, the stillness of white—and brought it home.</p>",
-            "text_size": "text-base"
+            "text_size": "text-lg"
           }
         }
       },
@@ -240,13 +240,14 @@
         "card_9RqYtT",
         "card_XniPxk"
       ],
-      "disabled": true,
       "name": "Collection Accordion",
       "settings": {
         "subheading": "",
         "heading": "",
         "heading_alignment": "left",
         "text_color": "#000000",
+        "heading_size": 30,
+        "subheading_size": 11,
         "max_height": 560,
         "mobile_card_height": 300,
         "image_opacity": 100,
@@ -313,12 +314,12 @@
       "settings": {
         "color_scheme": "",
         "header_layout": "vertical",
-        "heading": "",
+        "heading": "Bath Sets",
         "heading_size": "h2",
         "heading_highlight_style": "none",
         "subheading": "",
         "description": "",
-        "text_size": "text-base",
+        "text_size": "text-lg",
         "show_collection_description": false,
         "collection": "towel-sets",
         "limit": 8,
@@ -334,7 +335,7 @@
         "show_all_button_on_top": false,
         "button_label": "",
         "button_style": "btn--primary",
-        "padding_top": 0,
+        "padding_top": 100,
         "padding_bottom": 100,
         "show_section_divider": false,
         "divider_width": "fixed",
@@ -396,14 +397,14 @@
           "type": "text",
           "settings": {
             "text": "<p>Step into a world of exquisite comfort and superior quality. MIORA towels combine exceptional absorbency with a luxurious feel, making every moment of your routine a five-star experience.<br/><br/></p>",
-            "text_size": "text-base"
+            "text_size": "text-inherit"
           }
         },
         "button_bGthFy": {
           "type": "button",
           "settings": {
-            "button_label": "Our Story",
-            "button_link": "shopify://pages/our-story",
+            "button_label": "The Essential Pair",
+            "button_link": "shopify://products/the-essential-pair",
             "button_style": "btn--primary"
           }
         }
@@ -417,7 +418,7 @@
       "settings": {
         "section_color_scheme": "scheme-3",
         "color_scheme": "",
-        "image": "shopify://shop_images/Home_Page_row33_2025-10-13T07-08-14_1.png",
+        "image": "shopify://shop_images/Woman_adjusting_bath_towels_22180636bb.jpg",
         "image_height": "adapt",
         "layout": "image_first",
         "desktop_content_position": "center",
@@ -425,134 +426,8 @@
         "enable_parallax": false,
         "parallax_direction": "vertical",
         "mobile_content_alignment": "left",
-        "padding_top": 50,
-        "padding_bottom": 50,
-        "show_section_divider": false,
-        "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
-    "image_with_text_rUWNME": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_eCccJ7": {
-          "type": "heading",
-          "settings": {
-            "heading": "Redefining luxury, one thread at a time.",
-            "heading_size": "h2",
-            "heading_highlight_style": "none"
-          }
-        },
-        "text_NMpggB": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We believe quality is in the details. From the finest cotton to an exquisite finish, our towels offer a weight and softness that redefines what comfort can be, without ever leaving home.</p>",
-            "text_size": "text-base"
-          }
-        },
-        "button_rjhbwa": {
-          "type": "button",
-          "settings": {
-            "button_label": "The Essential Pair",
-            "button_link": "shopify://products/the-essential-pair",
-            "button_style": "btn--underline"
-          }
-        }
-      },
-      "block_order": [
-        "heading_eCccJ7",
-        "text_NMpggB",
-        "button_rjhbwa"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "section_color_scheme": "scheme-3",
-        "color_scheme": "scheme-3",
-        "image": "shopify://shop_images/custom_nano-banana-pro_1765575314501.png",
-        "image_height": "adapt",
-        "layout": "text_first",
-        "desktop_content_position": "center",
-        "desktop_content_alignment": "left",
-        "enable_parallax": false,
-        "parallax_direction": "zoom",
-        "mobile_content_alignment": "left",
-        "padding_top": 50,
+        "padding_top": 100,
         "padding_bottom": 100,
-        "show_section_divider": false,
-        "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
-    "image_width_text_columns_LU3FNW": {
-      "type": "image-width-text-columns",
-      "blocks": {
-        "column_c6PNUm": {
-          "type": "column",
-          "settings": {
-            "image_width": "medium",
-            "title": "Conscious Cotton",
-            "heading_size": "h4",
-            "text": "<p>Our cotton is ethically harvested through responsible supply chains that respect both people and planet.</p>",
-            "text_size": "text-base"
-          }
-        },
-        "column_P3FARU": {
-          "type": "column",
-          "settings": {
-            "image_width": "medium",
-            "title": "Simply Safe",
-            "heading_size": "h4",
-            "text": "<p>Every MIORA towel meets the OEKO-TEX® Standard 100 for chemical safety and environmental responsibility.</p>",
-            "text_size": "text-base"
-          }
-        },
-        "column_yR76yp": {
-          "type": "column",
-          "settings": {
-            "image_width": "medium",
-            "title": "Spa-Grade Density",
-            "heading_size": "h4",
-            "text": "<p>Premium 700+ GSM for exceptional absorbency, softness, and durability wash after wash.</p>",
-            "text_size": "text-base"
-          }
-        },
-        "column_tU66bc": {
-          "type": "column",
-          "settings": {
-            "image_width": "medium",
-            "title": "Reduced Impact",
-            "heading_size": "h4",
-            "text": "<p>Our sustainable packaging uses responsibly sourced, recyclable materials to reduce waste wherever possible.</p>",
-            "text_size": "text-base"
-          }
-        }
-      },
-      "block_order": [
-        "column_c6PNUm",
-        "column_P3FARU",
-        "column_yR76yp",
-        "column_tU66bc"
-      ],
-      "name": "t:sections.image-with-text-columns.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "layout_gap": "medium",
-        "content_alignment": "center",
-        "image": "shopify://shop_images/Product_Images_Copy_row6_2025-10-10T16-38-38_1_6e4e53b1-6f03-486b-b3a3-3bacb1324a56.png",
-        "image_position": "image_first",
-        "heading": "Crafted with Intention",
-        "heading_size": "h2",
-        "heading_highlight_style": "none",
-        "subheading": "THE FINER DETAILS",
-        "description": "",
-        "text_size": "text-base",
-        "column_alignment": "left",
-        "columns_desktop": 2,
-        "column_gap": "large",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 80,
-        "padding_bottom": 80,
         "show_section_divider": false,
         "divider_width": "fixed",
         "custom_class": ""
@@ -604,7 +479,7 @@
           "type": "text",
           "settings": {
             "text": "<p>From our studio to your home, each piece is designed to honor a simple belief: the smallest details create the ultimate comfort. </p>",
-            "text_size": "text-base"
+            "text_size": "text-lg"
           }
         }
       },
@@ -615,9 +490,9 @@
       "name": "t:sections.image-with-text-overlay.name",
       "settings": {
         "container": "full",
-        "image": "shopify://shop_images/Product_Images_Copy_16_9_row17_2025-10-13T05-59-07_1.png",
+        "image": "shopify://shop_images/Woman_wrapping_towel_ocean_view_3c0029e097_1.jpg",
         "desktop_height": "adapt",
-        "overlay_opacity": 50,
+        "overlay_opacity": 10,
         "enable_parallax": true,
         "parallax_direction": "zoom",
         "color_scheme": "",
@@ -625,7 +500,7 @@
         "content_alignment": "left",
         "image_mobile": "shopify://shop_images/Screenshot_2025-11-14_145247.png",
         "mobile_height": "adapt",
-        "padding_top": 60,
+        "padding_top": 0,
         "padding_bottom": 0,
         "custom_class": ""
       }
@@ -717,7 +592,7 @@
         "column_gap": "extra-large",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 96,
+        "padding_top": 66,
         "padding_bottom": 96,
         "show_section_divider": false,
         "divider_width": "fixed",
@@ -735,8 +610,6 @@
     "featured_collection_nTAnFG",
     "17597827292dff5f99",
     "image_with_text_PGrqhp",
-    "image_with_text_rUWNME",
-    "image_width_text_columns_LU3FNW",
     "1763157662d9ad1a3e",
     "image_with_text_overlay_74yawg",
     "multicolumn_z9eVXp"

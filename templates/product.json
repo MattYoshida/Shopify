@@ -18,6 +18,14 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "badges": {
+          "type": "badges",
+          "settings": {
+            "show_soldout_badge": false,
+            "show_sale_badge": false,
+            "sale_badge_type": "percentage"
+          }
+        },
         "title": {
           "type": "title",
           "settings": {
@@ -43,14 +51,6 @@
             "showAllReviews": false,
             "looxOpenFloatingWidget": false,
             "emptyRatingWidget": false
-          }
-        },
-        "badges": {
-          "type": "badges",
-          "settings": {
-            "show_soldout_badge": false,
-            "show_sale_badge": true,
-            "sale_badge_type": "percentage"
           }
         },
         "price": {
@@ -106,6 +106,17 @@
           "disabled": true,
           "settings": {
             "custom_liquid": "<style>\n  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');\n\n  .cart-counter-widget {\n    display: flex;\n    align-items: center;\n    justify-content: center; /* Centers the text */\n    padding: 10px;\n    margin-bottom: 15px;\n    background-color: #f4f4f4; /* Light grey background */\n    border-radius: 4px;\n    font-size: 14px;\n    color: #000000; /* Standard black text */\n    font-family: 'Lato', sans-serif; /* Sets font to Lato */\n    width: 100%; /* Spans full width of container */\n  }\n\n  .cart-counter-count {\n    font-weight: 700; /* Bold the number */\n    color: inherit; /* Matches the text color (not red) */\n  }\n</style>\n\n<div class=\"cart-counter-widget\" id=\"cartCounterWidget\" style=\"display:none;\">\n  <span>\n    <span class=\"cart-counter-count\" id=\"cartCounterNumber\">120</span> \n    people have this in their cart right now.\n  </span>\n</div>\n\n<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    // CONFIGURATION\n    var minPeople = 100; // Minimum number of people\n    var maxPeople = 140; // Maximum number of people\n    var updateInterval = 120000; // 2 minutes in milliseconds (120,000ms)\n    \n    var widget = document.getElementById('cartCounterWidget');\n    var countSpan = document.getElementById('cartCounterNumber');\n    \n    // Function to generate random integer between min and max\n    function getRandomInt(min, max) {\n      return Math.floor(Math.random() * (max - min + 1)) + min;\n    }\n\n    // Initialize logic\n    var currentCount = localStorage.getItem('cartCount_simulation');\n    \n    // If no stored count, generate a starting number\n    if (!currentCount) {\n      currentCount = getRandomInt(minPeople, maxPeople);\n    } else {\n      currentCount = parseInt(currentCount);\n    }\n\n    // Display the initial number and show widget\n    countSpan.innerText = currentCount;\n    widget.style.display = \"flex\";\n\n    // Update the count periodically\n    setInterval(function() {\n      // Decide whether to go up or down (50/50 chance)\n      var change = Math.random() < 0.5 ? -1 : 1;\n      var fluctuation = getRandomInt(1, 4); // Change by 1 to 4 people\n      \n      currentCount += (change * fluctuation);\n\n      // Keep within bounds\n      if (currentCount > maxPeople) currentCount = maxPeople - 2;\n      if (currentCount < minPeople) currentCount = minPeople + 2;\n\n      // Update DOM and Storage\n      countSpan.innerText = currentCount;\n      localStorage.setItem('cartCount_simulation', currentCount);\n      \n    }, updateInterval);\n  });\n</script>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_type": "color_swatch",
+            "button_style": "circle",
+            "button_size": 24,
+            "size_title": "",
+            "size_chart_from_page": ""
           }
         },
         "buy_buttons": {
@@ -188,10 +199,10 @@
         }
       },
       "block_order": [
+        "badges",
         "title",
         "custom_liquid_F7Dp37",
         "loox_reviews_loox_rating_AjWEmf",
-        "badges",
         "price",
         "description",
         "text_Mhzeqg",
@@ -200,6 +211,7 @@
         "custom_liquid_Ch8apc",
         "custom_liquid_wgiXpb",
         "custom_liquid_VXFAaC",
+        "variant_picker",
         "buy_buttons",
         "icon_with_text",
         "pickup_availability",
@@ -1298,8 +1310,6 @@
         "loox_reviews_loox_dynamic_section_6Biawn": {
           "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
           "settings": {
-            "reviews_to_display": "",
-            "default_tab": "automatic",
             "only_photos": false,
             "aggregated": true,
             "limit": 4,
@@ -1548,8 +1558,6 @@
         "loox_reviews_loox_dynamic_section_C4y3hG": {
           "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
           "settings": {
-            "reviews_to_display": "",
-            "default_tab": "automatic",
             "only_photos": false,
             "aggregated": false,
             "limit": 20,
