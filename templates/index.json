@@ -152,6 +152,40 @@
         "custom_class": ""
       }
     },
+    "rich_text_pyVt9A": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_w8MgBk": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Specialty Collection",
+            "heading_size": "h4",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_yB8ei6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We deconstructed the 5-star experience—the weight of the cotton, the crispness of the weave, the stillness of white—and brought it home.</p>",
+            "text_size": "text-base"
+          }
+        }
+      },
+      "block_order": [
+        "heading_w8MgBk",
+        "text_yB8ei6"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
     "collection_accordion_CgnpAH": {
       "type": "collection-accordion",
       "blocks": {
@@ -800,6 +834,7 @@
   "order": [
     "slideshow_zKPFFV",
     "video_hero_U3g4ir",
+    "rich_text_pyVt9A",
     "collection_accordion_CgnpAH",
     "1763159253f4b40189",
     "image_with_text_overlay_qUEqmP",
