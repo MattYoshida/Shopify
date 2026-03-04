@@ -1,1 +1,1600 @@
-{"sections":{"breadcrumbs":{"type":"breadcrumbs","settings":{"text_alignment":"start"}},"main":{"type":"main-product","blocks":{"badges":{"type":"badges","settings":{"show_soldout_badge":false,"show_sale_badge":false,"sale_badge_type":"percentage"}},"title":{"type":"title","settings":{"heading_size":"h4"}},"custom_liquid_F7Dp37":{"type":"custom_liquid","settings":{"custom_liquid":""}},"loox_reviews_loox_rating_AjWEmf":{"type":"shopify:\/\/apps\/loox-reviews\/blocks\/loox-rating\/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e","settings":{"contentSize":15,"pattern":"","hideText":false,"alignment":"","layout":"","textColor":"","starColor":"","showAllReviews":false,"looxOpenFloatingWidget":false,"emptyRatingWidget":false}},"price":{"type":"price","settings":{}},"description":{"type":"description","settings":{}},"text_Mhzeqg":{"type":"text","settings":{"text":"","text_style":"body"}},"icon_with_text_P4FPxn":{"type":"icon-with-text","settings":{"layout":"horizontal","title_font":"body","title_size":"text-base","icon_1":"check-circle","heading_1":"Super-Plush 700 GSM","icon_2":"check-circle","heading_2":"100% Organic Turkish Cotton","icon_3":"check-circle","heading_3":"OEKO-TEX®"}},"vo_product_options_block_VaFqEQ":{"type":"shopify:\/\/apps\/vo-product-options\/blocks\/block\/430cbd7b-bd20-4c16-ba41-db6f4c645164","settings":{"font_color":""}},"custom_liquid_Ch8apc":{"type":"custom_liquid","settings":{"custom_liquid":"{% if product.metafields.custom.related_bundles.value %}\n  <div class=\"bundle-switcher\">\n    {% for bundle in product.metafields.custom.related_bundles.value %}\n      <a href=\"{{ bundle.url }}\"\n         class=\"bundle-option{% if bundle.handle == product.handle %} active{% endif %}{% unless bundle.available %} disabled{% endunless %}\">\n        {{ bundle.metafields.custom.title_product_count }}\n      <\/a>\n    {% endfor %}\n  <\/div>\n{% endif %}"}},"custom_liquid_wgiXpb":{"type":"custom_liquid","disabled":true,"settings":{"custom_liquid":"<div class=\"holiday-rush-banner\">\n  <svg class=\"banner-icon\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"none\">\n    <path d=\"M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z\"><\/path>\n  <\/svg>\n  <span class=\"banner-text\">LIMITED TIME OFFER<\/span>\n<\/div>\n\n<style>\n  .holiday-rush-banner {\n    display: flex;\n    align-items: flex-end; \/* Aligns content to the very bottom *\/\n    justify-content: flex-start;\n    padding: 10px 0 0 0; \/* 10px Top, 0px Bottom *\/\n    background-color: #ffffff;\n    border-radius: 4px;\n    width: 100%;\n    line-height: 1; \/* Removes invisible space below the text *\/\n  }\n\n  .banner-icon {\n    color: #4CAF50; \n    margin-right: 8px;\n    width: 18px; \n    height: 18px;\n    margin-bottom: 1px; \/* Slight tweak to align visually with text baseline *\/\n  }\n\n  .banner-text {\n    color: #D32F2F;\n    font-family: sans-serif; \n    font-weight: 700;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    line-height: 0.8; \/* Extremely tight line-height to remove font padding *\/\n  }\n<\/style>"}},"custom_liquid_VXFAaC":{"type":"custom_liquid","disabled":true,"settings":{"custom_liquid":"<style>\n  @import url('https:\/\/fonts.googleapis.com\/css2?family=Lato:wght@400;700&display=swap');\n\n  .cart-counter-widget {\n    display: flex;\n    align-items: center;\n    justify-content: center; \/* Centers the text *\/\n    padding: 10px;\n    margin-bottom: 15px;\n    background-color: #f4f4f4; \/* Light grey background *\/\n    border-radius: 4px;\n    font-size: 14px;\n    color: #000000; \/* Standard black text *\/\n    font-family: 'Lato', sans-serif; \/* Sets font to Lato *\/\n    width: 100%; \/* Spans full width of container *\/\n  }\n\n  .cart-counter-count {\n    font-weight: 700; \/* Bold the number *\/\n    color: inherit; \/* Matches the text color (not red) *\/\n  }\n<\/style>\n\n<div class=\"cart-counter-widget\" id=\"cartCounterWidget\" style=\"display:none;\">\n  <span>\n    <span class=\"cart-counter-count\" id=\"cartCounterNumber\">120<\/span> \n    people have this in their cart right now.\n  <\/span>\n<\/div>\n\n<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    \/\/ CONFIGURATION\n    var minPeople = 100; \/\/ Minimum number of people\n    var maxPeople = 140; \/\/ Maximum number of people\n    var updateInterval = 120000; \/\/ 2 minutes in milliseconds (120,000ms)\n    \n    var widget = document.getElementById('cartCounterWidget');\n    var countSpan = document.getElementById('cartCounterNumber');\n    \n    \/\/ Function to generate random integer between min and max\n    function getRandomInt(min, max) {\n      return Math.floor(Math.random() * (max - min + 1)) + min;\n    }\n\n    \/\/ Initialize logic\n    var currentCount = localStorage.getItem('cartCount_simulation');\n    \n    \/\/ If no stored count, generate a starting number\n    if (!currentCount) {\n      currentCount = getRandomInt(minPeople, maxPeople);\n    } else {\n      currentCount = parseInt(currentCount);\n    }\n\n    \/\/ Display the initial number and show widget\n    countSpan.innerText = currentCount;\n    widget.style.display = \"flex\";\n\n    \/\/ Update the count periodically\n    setInterval(function() {\n      \/\/ Decide whether to go up or down (50\/50 chance)\n      var change = Math.random() < 0.5 ? -1 : 1;\n      var fluctuation = getRandomInt(1, 4); \/\/ Change by 1 to 4 people\n      \n      currentCount += (change * fluctuation);\n\n      \/\/ Keep within bounds\n      if (currentCount > maxPeople) currentCount = maxPeople - 2;\n      if (currentCount < minPeople) currentCount = minPeople + 2;\n\n      \/\/ Update DOM and Storage\n      countSpan.innerText = currentCount;\n      localStorage.setItem('cartCount_simulation', currentCount);\n      \n    }, updateInterval);\n  });\n<\/script>"}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"button","swatch_type":"color_swatch","button_style":"circle","button_size":24,"size_title":"","size_chart_from_page":""}},"buy_buttons":{"type":"buy_buttons","settings":{"show_quantity_selector":true,"show_dynamic_checkout":false,"show_gift_card_recipient":true}},"icon_with_text":{"type":"icon-with-text","settings":{"layout":"horizontal","title_font":"body","title_size":"text-base","icon_1":"truck","heading_1":"Free Shipping on ALL orders","icon_2":"arrow-up-left","heading_2":"30 day returns","icon_3":"seal-check","heading_3":""}},"pickup_availability":{"type":"pickup_availability","settings":{}},"complementary":{"type":"complementary","settings":{"block_heading":"Pairs well with","make_collapsible_row":false,"icon":"tag","product_list_limit":4,"products_per_page":1,"image_ratio":"adapt","enable_quick_add":true}},"collapsible-row-1":{"type":"collapsible_tab","settings":{"heading":"Details","icon":"none","content":"<h6><strong>HOW IT FEELS.<\/strong><\/h6><h6>Exceptionally plush with a smooth, velvety hand-feel. <\/h6><h6><strong>WHY IT'S BETTER.<\/strong><\/h6><h6>Our towels dry quickly, resist pilling, maintain color richness, and are crafted to stay luxuriously soft for years — not months. <\/h6><h6><strong>OUR MATERIALS.<\/strong><\/h6><h6>Crafted from 700 GSM, 100% Long-Staple Turkish Cotton for unmatched softness, exceptional absorbency, and lasting strength. Certified by OEKO-TEX® to ensure your towels are safe for you, your skin, and the environment.<\/h6><ul><li><h6>100% Long-Staple Cotton<\/h6><\/li><li><h6>Premium 700 GSM Weight<\/h6><\/li><li><h6>Silky, spa-grade softness<\/h6><\/li><li><h6>Fast-drying & ultra-absorbent<\/h6><\/li><li><h6>Colorfast & fade-resistant<\/h6><\/li><li><h6>OEKO-TEX® Certified<\/h6><\/li><li><h6>Woven dobby border<\/h6><\/li><li><h6>Double-stitched edges for durability<\/h6><\/li><\/ul>","custom_liquid":"","page":"","default_open":false}},"collapsible-row-2":{"type":"collapsible_tab","settings":{"heading":"Dimensions","icon":"none","content":"","custom_liquid":"<style>\n  .custom-image-container {\n    display: block;\n    width: 100%;\n    margin: 10px 0; \/* Adds a little space above and below *\/\n  }\n\n  .custom-image-container img {\n    max-width: 100%; \/* Ensures it never goes wider than the screen *\/\n    height: auto;    \/* Keeps the image proportions correct *\/\n    display: block;\n    border-radius: 4px; \/* Slight rounded corners - remove if you want sharp corners *\/\n  }\n<\/style>\n\n<div class=\"custom-image-container\">\n  <img \n    src=https:\/\/cdn.shopify.com\/s\/files\/1\/0758\/3432\/7268\/files\/custom_seedream-4-5_1765359942006.jpg?v=1765359956\n  >\n<\/div>","page":"","default_open":false}},"collapsible-row-3":{"type":"collapsible_tab","settings":{"heading":"FAQ","icon":"none","content":"<p><strong>Q: Will these towels stay soft after washing?<\/strong><br\/><strong>A:<\/strong> Yes — and many say they get even softer. Just wash warm, tumble dry low, and skip fabric softener (it coats the fibers).<\/p><p>‎<\/p><p><strong>Q: Are they good for sensitive skin?<\/strong><br\/><strong>A:<\/strong> Absolutely. Our towels are made from hypoallergenic, OEKO-TEX® certified Turkish cotton — gentle, pure, and skin-safe.<\/p><p>‎<\/p><p><strong>Q: Do they dry quickly?<\/strong><br\/><strong>A:<\/strong> Yes. Despite their plush feel, the breathable cotton and zero-twist weave help them dry fast between uses.<\/p><p>‎<\/p><p><strong>Q: What if I don’t love them?<\/strong><br\/><strong>A:<\/strong> No worries — try them for 30 days, risk-free. If you’re not happy, we’ll refund you. No hassle, no questions.<\/p><p><\/p><p><a href=\"\/pages\/faq-1\" title=\"FAQ\">More Questions?<\/a><\/p>","custom_liquid":"","page":"","default_open":false}},"popup_8cnKBN":{"type":"popup","settings":{"text":"Care Guide","page":"care-guide"}}},"block_order":["badges","title","custom_liquid_F7Dp37","loox_reviews_loox_rating_AjWEmf","price","description","text_Mhzeqg","icon_with_text_P4FPxn","vo_product_options_block_VaFqEQ","custom_liquid_Ch8apc","custom_liquid_wgiXpb","custom_liquid_VXFAaC","variant_picker","buy_buttons","icon_with_text","pickup_availability","complementary","collapsible-row-1","collapsible-row-2","collapsible-row-3","popup_8cnKBN"],"custom_css":[".loox-rating {margin-top: -1rem;}",".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}"],"settings":{"color_scheme":"scheme-1","enable_sticky_info":true,"media_size":"medium","gallery_layout":"carousel","mobile_thumbnails":"show","enable_image_zoom":true,"enable_video_looping":true,"padding_top":0,"padding_bottom":100}},"1763155398ac3d24e5":{"type":"apps","settings":{"include_margins":true,"padding_top":0,"padding_bottom":0,"custom_class":""}},"testimonials_8JHr3L":{"type":"testimonials","blocks":{"testimonial_dhi3Xf":{"type":"testimonial","settings":{"show_image":true,"image":"shopify:\/\/shop_images\/custom_seedream-4-5_1765250219398.jpg","text":"<p>\"The bath towels are HUGE and have a nice weight to them, they feel so much more luxurious than others I've bought. It really feels like a spa towel at home.\"<\/p>","author":"Melissa H.","bio":"Verified Buyer","product":"","icon":"5-stars"}},"testimonial_D7Mq7i":{"type":"testimonial","settings":{"show_image":true,"image":"shopify:\/\/shop_images\/custom_seedream-4-5_1765246779738.jpg","text":"<p>\"Honestly the softest towels I've ever owned, and they're super absorbent. They actually dry you off instantly. I'm obsessed and will be buying more.\"<\/p>","author":"Alexandra M.","bio":"Verified Buyer","product":"","icon":"5-stars"}},"testimonial_33tAjm":{"type":"testimonial","settings":{"show_image":true,"image":"shopify:\/\/shop_images\/custom_seedream-4-5_1765251213819.jpg","text":"<p>\"The quality is incredible. Washed them several times and there's been almost NO lint, which is a first for me. They still look and feel brand new. Worth the money for sure.\"<\/p>","author":"Danielle S.","bio":"Verified Buyer","product":"","icon":"5-stars"}},"testimonial_dDRMwy":{"type":"testimonial","settings":{"show_image":true,"image":"shopify:\/\/shop_images\/custom_seedream-4-5_1765252855683.jpg","text":"<p>\"These towels are a lifesaver. They feel thick but they actually dry fast, so no more musty bathroom smell. Makes a huge difference. Highly recommend.\"<\/p>","author":"Elizabeth R.","bio":"Verified Buyer","product":"","icon":"5-stars"}}},"block_order":["testimonial_dhi3Xf","testimonial_D7Mq7i","testimonial_33tAjm","testimonial_dDRMwy"],"custom_css":[],"settings":{"color_scheme":"scheme-1","heading":"See what our customers are saying.","heading_size":"h2","heading_highlight_style":"none","subheading":"","description":"","text_size":"text-sm","card_color_scheme":"","card_layout":"1","card_text_size":"text-base","columns_desktop":4,"column_gap":"large","enable_slider":true,"columns_mobile":"1","swipe_on_mobile":true,"padding_top":100,"padding_bottom":64,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"176074050786ee145e":{"type":"_blocks","blocks":{"ai_gen_block_4727f34_ngPmi9":{"type":"ai_gen_block_4727f34","settings":{"section_background":"#ffffff","button_text":"More Reviews","show_icon":true,"icon_style":"arrow","icon_position":"right","icon_size":16,"button_style":"square","button_background":"#8a8a8a","button_text_color":"#ffffff","button_hover_background":"#8a8a8a","button_hover_text_color":"#ffffff","border_width":0,"border_color":"#000000","border_hover_color":"#8a8a8a","font_size":15,"font_weight":"500","text_transform":"uppercase","letter_spacing":0,"button_padding_vertical":14,"button_padding_horizontal":32,"padding_top":0,"padding_bottom":76,"alignment":"center","mobile_alignment":"center","target_selector":"","scroll_offset":80},"blocks":{}}},"block_order":["ai_gen_block_4727f34_ngPmi9"],"settings":{}},"17631640015662bdb7":{"type":"_blocks","blocks":{"ai_gen_block_612ea66_qD4dky":{"type":"ai_gen_block_612ea66","disabled":true,"settings":{"layout":"row-reverse","gap":40,"image_gap":20,"mobile_images_layout":"column","image_1":"shopify:\/\/shop_images\/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg","image_1_aspect_ratio":"1 \/ 1","image_2":"shopify:\/\/shop_images\/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg","image_2_aspect_ratio":"3 \/ 4","image_border_radius":0,"heading":"Where Exceptional Softness Begins.","text":"<p>We start with the finest 100% long-staple organic cotton. We protect its natural purity by refusing to use harmful pesticides, GMOs, or toxins like formaldehyde in any of our products. It’s a simple choice: a better cotton for you, and a better process for the planet.<\/p>","button_text":"Shop now","button_link":"","background_color":"#ffffff","heading_color":"#000000","text_color":"#000000","button_color":"#000000","button_text_color":"#ffffff","button_hover_color":"#333333","button_hover_text_color":"#ffffff","heading_size":28,"heading_size_mobile":24,"heading_spacing":16,"text_size":15,"text_size_mobile":14,"text_spacing":12,"button_text_size":16,"button_border_radius":0,"padding_top":40,"padding_bottom":40,"padding_horizontal":100,"padding_top_mobile":30,"padding_bottom_mobile":30,"padding_horizontal_mobile":30},"blocks":{}},"ai_gen_block_4000614_Ebnyjq":{"type":"ai_gen_block_4000614","disabled":true,"settings":{"layout":"image_right","show_two_images":true,"color_scheme":"scheme-3","background_color":"#f6f2ee","edge_spacing":"232","top_padding":"80","bottom_padding":"80","spacing":40,"image_spacing":20,"image_1":"shopify:\/\/shop_images\/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg","image_1_aspect_ratio":"portrait","image_2":"shopify:\/\/shop_images\/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg","image_2_aspect_ratio":"landscape","border_width":"0","border_color":"#000000","heading":"The World’s Purest Cotton.","heading_size":32,"heading_color":"#000000","heading_spacing":16,"text":"<p><br\/>We source only the top 1% of long-staple organic cotton. Unlike standard cotton, our fibers are smoother, stronger, and resistant to pilling. Cultivated without pesticides or harsh toxins, it is luxury in its purest form—safer for your skin and gentler on the planet.<br\/><br\/><\/p>","text_size":16,"text_color":"#000000","text_padding":20,"button_text":"Shop now","button_link":"","button_spacing":20,"button_bg_color":"#000000","button_text_color":"#ffffff","button_hover_bg_color":"#333333"},"blocks":{}},"ai_gen_block_5b7992f_EFUhJn":{"type":"ai_gen_block_5b7992f","disabled":true,"settings":{"layout":"image_first","image_count":"two","page_width":"1410","heading":"<p>The World’s Purest Cotton.<\/p>","text":"<p>We source only the top 1% of long-staple organic cotton. Unlike standard cotton, our fibers are smoother, stronger, and resistant to pilling. Cultivated without pesticides or harsh toxins, it is luxury in its purest form—safer for your skin and gentler on the planet.<br\/><\/p>","button_label":"Shop now","button_link":"","image_1":"shopify:\/\/shop_images\/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg","image_1_ratio":"portrait","image_2":"shopify:\/\/shop_images\/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg","image_2_ratio":"square","color_scheme":"scheme-3","container_color_scheme":"scheme-3","button_bg_color":"#000000","button_text_color":"#ffffff","button_hover_bg_color":"#333333","button_hover_text_color":"#ffffff","border_color":"#000000","padding_top":"60","padding_bottom":"60","spacing_edges":"20","border_width":"0","mobile_padding_top":"40","mobile_padding_bottom":"40","mobile_spacing_edges":"16"},"blocks":{}},"ai_gen_block_f522a99_mPftyV":{"type":"ai_gen_block_f522a99","disabled":true,"settings":{"layout":"text_first","show_second_image":true,"heading":"The World’s Purest Cotton.","text":"<p>We source only the top 1% of long-staple organic cotton. Unlike standard cotton, our fibers are smoother, stronger, and resistant to pilling. Cultivated without pesticides or harsh toxins, it is luxury in its purest form—safer for your skin and gentler on the planet.<br\/><\/p>","text_color":"#000000","image_1":"shopify:\/\/shop_images\/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg","image_1_aspect_ratio":"square","image_2":"shopify:\/\/shop_images\/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg","image_2_aspect_ratio":"portrait","enable_parallax":true,"border_width":"0","border_color":"#000000","page_width":"1488","spacing_edges":"40","padding_top":"60","padding_bottom":"60","spacing_edges_mobile":"20","padding_top_mobile":"40","padding_bottom_mobile":"24","color_scheme":"scheme-3","container_color_scheme":"scheme-3"},"blocks":{}},"ai_gen_block_94b2c13_UgfhEQ":{"type":"ai_gen_block_94b2c13","disabled":true,"settings":{"layout":"row","container_alignment":"left","content_vertical_alignment":"center","mobile_layout":"column","container_width":1600,"gap":100,"image_width":70,"image":"shopify:\/\/shop_images\/custom_nano-banana-v1_4874cf04-1099-4ca4-b46d-9409290c6701.png","image_aspect_ratio":"4 \/ 3","heading":"<strong>What Makes Our Yarn Quality Unmatched?<\/strong>","text":"<p>Our unmatched quality comes from a commitment to purity and process. We use only the finest organic materials, weaving them with care and finishing them without any harsh chemicals. Our Plush fabric achieves its signature, sumptuous hand-feel from a special tumbling process. This technique amplifies the fabric's natural softness, delivering an exceptionally fluffy finish you can feel.<\/p>","text_alignment":"left","content_padding":0,"show_heading_desktop":true,"show_heading_mobile":true,"show_text_desktop":true,"show_text_mobile":true,"heading_size":32,"heading_weight":"300","heading_color":"#000000","heading_spacing":16,"text_size":16,"text_weight":"400","text_color":"#000000","text_line_height":1.5,"button_label":"","button_link":"","button_spacing":20,"button_text_size":16,"button_text_weight":"500","button_padding_vertical":30,"button_padding_horizontal":60,"button_border_radius":0,"button_bg_color":"#000000","button_text_color":"#ffffff","button_bg_hover_color":"#333333","button_text_hover_color":"#ffffff","padding_top":50,"padding_bottom":50,"padding_horizontal":100,"background_color":"#ffffff"},"blocks":{}},"ai_gen_block_6bbf227_r7UnJN":{"type":"ai_gen_block_6bbf227","disabled":true,"settings":{"container_width":1670,"image_position":"row","vertical_alignment":"center","spacing":80,"spacing_mobile":20,"horizontal_padding":0,"horizontal_padding_mobile":20,"vertical_padding":50,"image":"shopify:\/\/shop_images\/custom_nano-banana-v1_4874cf04-1099-4ca4-b46d-9409290c6701.png","image_aspect_ratio":"adapt","image_width":50,"image_alignment":"center","heading":"<p>Our Unmatched Yarn Quality.<\/p>","text":"<p>We use only the finest organic materials, weaving them with care and finishing them without any harsh chemicals. Our Plush fabric achieves its signature, sumptuous hand-feel from a special tumbling process. This technique amplifies the fabric's natural softness, delivering an exceptionally fluffy finish you can feel.<\/p>","text_alignment":"left","text_vertical_alignment":"center","heading_size":32,"heading_size_mobile":24,"heading_color":"#000000","heading_spacing":20,"text_size":16,"text_size_mobile":14,"text_color":"#000000","hide_heading_mobile":false,"hide_text_mobile":false,"hide_heading_desktop":false,"hide_text_desktop":false},"blocks":{}},"ai_gen_block_4a091cb_h4FJNX":{"type":"ai_gen_block_4a091cb","disabled":true,"settings":{"container_width":1400,"layout":"image_first","vertical_alignment":"center","gap":40,"show_two_images":false,"image_gap":20,"image_1_aspect_ratio":"square","image_2_aspect_ratio":"landscape","heading":"Image with text","heading_size":36,"heading_color":"#000000","text":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>","text_size":16,"text_color":"#000000","text_alignment":"left","mobile_text_alignment":"left","button_label":"Learn more","button_link":"","button_text_size":16,"button_border_radius":0,"button_bg_color":"#000000","button_text_color":"#ffffff","button_hover_bg_color":"#333333","button_hover_text_color":"#ffffff"},"blocks":{}},"ai_gen_block_94b2c13_xjiEcE":{"type":"ai_gen_block_94b2c13","disabled":true,"settings":{"layout":"row","container_alignment":"left","content_vertical_alignment":"center","mobile_layout":"column","container_width":1600,"gap":100,"image_width":55,"image":"shopify:\/\/shop_images\/Untitled_design.png","image_aspect_ratio":"1 \/ 1","heading":"<strong>Velvety Plushness, Exceptional Absorbency.<\/strong>","text":"<p>Our Plush Bath fabric achieves its perfect balance of softness and absorbency from a special low-twist terry loop. This technique gives the towel a substantial, luxurious weight that's both velvety soft and highly functional. Finished with classic, universal styling, it’s designed to complement any aesthetic.<\/p>","text_alignment":"left","content_padding":0,"show_heading_desktop":true,"show_heading_mobile":true,"show_text_desktop":true,"show_text_mobile":true,"heading_size":32,"heading_weight":"300","heading_color":"#000000","heading_spacing":16,"text_size":16,"text_weight":"400","text_color":"#000000","text_line_height":1.5,"button_label":"","button_link":"","button_spacing":20,"button_text_size":16,"button_text_weight":"500","button_padding_vertical":12,"button_padding_horizontal":60,"button_border_radius":0,"button_bg_color":"#000000","button_text_color":"#ffffff","button_bg_hover_color":"#333333","button_text_hover_color":"#ffffff","padding_top":50,"padding_bottom":40,"padding_horizontal":100,"background_color":"#ffffff"},"blocks":{}}},"block_order":["ai_gen_block_612ea66_qD4dky","ai_gen_block_4000614_Ebnyjq","ai_gen_block_5b7992f_EFUhJn","ai_gen_block_f522a99_mPftyV","ai_gen_block_94b2c13_UgfhEQ","ai_gen_block_6bbf227_r7UnJN","ai_gen_block_4a091cb_h4FJNX","ai_gen_block_94b2c13_xjiEcE"],"settings":{}},"section_dual_image_with_text_gcnizy":{"type":"section-dual-image-with-text","blocks":{"heading_ypFprr":{"type":"heading","settings":{"heading":"The World’s Purest Cotton.","heading_size":"h2","heading_highlight_style":"none"}},"text_AQhCPq":{"type":"text","settings":{"text":"<p>We source only the top 1% of long-staple organic cotton. Unlike standard cotton, our fibers are smoother, stronger, and resistant to pilling. Cultivated without pesticides or harsh toxins, it is luxury in its purest form—safer for your skin and gentler on the planet.<\/p>","text_size":"text-base"}}},"block_order":["heading_ypFprr","text_AQhCPq"],"name":"Dual Image with Text","settings":{"section_color_scheme":"scheme-3","color_scheme":"scheme-3","image_1":"shopify:\/\/shop_images\/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg","image_2":"shopify:\/\/shop_images\/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg","image_gap":12,"mobile_image_gap":8,"image_aspect_ratio":"3\/4","mobile_image_aspect_ratio":"3\/4","image_height":"small","layout":"image_first","desktop_content_position":"center","desktop_content_alignment":"left","enable_parallax":true,"parallax_direction":"vertical","mobile_image_position":"top","mobile_content_alignment":"left","padding_top":50,"padding_bottom":50,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"image_with_text_wKUNjE":{"type":"image-with-text","blocks":{"heading_Jqxthh":{"type":"heading","settings":{"heading":"Exceptional Softness, By Design.","heading_size":"h2","heading_highlight_style":"none"}},"text_BJP4wF":{"type":"text","settings":{"text":"<p>True luxury isn’t just seen—it’s felt. We utilize a proprietary slow-tumbling process to unlock the natural volume of the fiber, creating a cloud-like texture that feels broken-in from the very first use. The result is a towel with a sumptuous hand-feel that only gets softer with time.<\/p>","text_size":"text-base"}}},"block_order":["heading_Jqxthh","text_BJP4wF"],"name":"t:sections.image-with-text.presets.name","settings":{"section_color_scheme":"scheme-3","color_scheme":"scheme-3","image":"shopify:\/\/shop_images\/custom_nano-banana-v1_4874cf04-1099-4ca4-b46d-9409290c6701.png","image_height":"adapt","layout":"text_first","desktop_content_position":"center","desktop_content_alignment":"left","enable_parallax":true,"parallax_direction":"vertical","mobile_content_alignment":"left","padding_top":50,"padding_bottom":50,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"image_with_text_68iWkz":{"type":"image-with-text","blocks":{"heading_khNTw9":{"type":"heading","settings":{"heading":"Plush, Absorbent, and Made to Last.","heading_size":"h2","heading_highlight_style":"none"}},"text_AiUE4J":{"type":"text","settings":{"text":"<p>Our Plush Bath fabric achieves its perfect balance of softness and absorbency from a special low-twist terry loop. This technique gives the towel a substantial, luxurious weight that's both velvety soft and highly functional. Finished with classic, universal styling, it’s designed to complement any aesthetic.<\/p>","text_size":"text-base"}}},"block_order":["heading_khNTw9","text_AiUE4J"],"name":"t:sections.image-with-text.presets.name","settings":{"section_color_scheme":"scheme-3","color_scheme":"scheme-3","image":"shopify:\/\/shop_images\/Home_Page_row35_2025-10-13T07-10-06_1.png","image_height":"small","layout":"image_first","desktop_content_position":"center","desktop_content_alignment":"left","enable_parallax":false,"parallax_direction":"vertical","mobile_content_alignment":"left","padding_top":50,"padding_bottom":100,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"rich_text_mFFb8L":{"type":"rich-text","name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"","content_alignment":"center","padding_top":50,"padding_bottom":38,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"rich_text_GF9at8":{"type":"rich-text","blocks":{"heading_WpAr36":{"type":"heading","settings":{"heading":"Where You Will Find Us","heading_size":"hd3","heading_highlight_style":"none"}},"text_kxKTYA":{"type":"text","settings":{"text":"<p>Experience the same uncompromising quality found in the world’s most exclusive suites.<\/p>","text_size":"text-lg"}}},"block_order":["heading_WpAr36","text_kxKTYA"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"","content_alignment":"center","padding_top":100,"padding_bottom":0,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"scrolling_promotion_MeVHcn":{"type":"scrolling-promotion","blocks":{"image_JNXfny":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/custom_nano-banana-pro_1766458991752.png","image_height":152,"image_rounded":true,"image_link":"","image_height_mobile":90}},"image_xYfM9m":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/custom_nano-banana-pro_1766459455673.png","image_height":152,"image_rounded":true,"image_link":"","image_height_mobile":90}},"image_EiAFiH":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/custom_nano-banana-pro_1766460043424.jpg","image_height":152,"image_rounded":false,"image_link":"","image_height_mobile":90}},"image_XtdYDj":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/custom_nano-banana-pro_1766459101117.png","image_height":152,"image_rounded":true,"image_link":"","image_height_mobile":90}}},"block_order":["image_JNXfny","image_xYfM9m","image_EiAFiH","image_XtdYDj"],"name":"t:sections.scrolling-promotion.presets.name","settings":{"color_scheme":"","vertical_alignment":"center","direction":"left","pause_on_hover":true,"speed":0.2,"h_spacing":96,"v_spacing":10,"padding_top":64,"padding_bottom":100,"show_divider":false,"divider_layout":"vertical","custom_class":""}},"rich_text_rdibKP":{"type":"rich-text","blocks":{"heading_hC9ghe":{"type":"heading","settings":{"heading":"How We Stack Up","heading_size":"h1","heading_highlight_style":"none"}}},"block_order":["heading_hC9ghe"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"","content_alignment":"center","padding_top":100,"padding_bottom":34,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"blocks_NeBTrG":{"type":"_blocks","blocks":{"ai_gen_block_1371d11_qdhpA9":{"type":"ai_gen_block_1371d11","settings":{"section_color_scheme":"scheme-1","container_color_scheme":"scheme-1","container_width":"888","image_1":"shopify:\/\/shop_images\/Gemini_Generated_Image_bkh8nibkh8nibkh8_1_b933bdba-e55c-4d39-9f88-758d0648fffb.png","image_1_ratio":"adapt","image_2":"shopify:\/\/shop_images\/custom_seedream-4-5_1765528572762.png","image_2_ratio":"3-4","image_max_width":45,"gap_desktop":80,"gap_mobile":0,"border_width":0,"border_color":"#000000"},"blocks":{}}},"block_order":["ai_gen_block_1371d11_qdhpA9"],"settings":{}},"rich_text_nUBTmx":{"type":"rich-text","name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"","content_alignment":"center","padding_top":0,"padding_bottom":34,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"image_with_text_zQ9iit":{"type":"image-with-text","blocks":{"subheading_yBQcFf":{"type":"subheading","settings":{"subheading":""}},"heading_9Y3zkK":{"type":"heading","settings":{"heading":"Bring the Spa Home.","heading_size":"h2","heading_highlight_style":"none"}},"text_UWkrNW":{"type":"text","disabled":true,"settings":{"text":"<p>Woven from the finest long-staple cotton, MIORA towels grow softer and more familiar with every wash. The simple luxury of treating yourself right — in the moments you touch most.<\/p>","text_size":"text-base"}}},"block_order":["subheading_yBQcFf","heading_9Y3zkK","text_UWkrNW"],"disabled":true,"custom_css":["@media (max-width: 767.98px) {.image-with-text .image-with-text__inner {padding-top: 4.8rem; }}","@media (min-width: 768px) {.image-with-text__wrapper {--gap-x: 3rem; }}","@media (min-width: 1280px) {.image-with-text__inner {--padding-x: 9rem; }}"],"settings":{"section_color_scheme":"scheme-1","color_scheme":"scheme-1","image":"shopify:\/\/shop_images\/Remove_the_AI_watermark_or_text-1.jpg","image_height":"adapt","layout":"image_first","desktop_content_position":"center","desktop_content_alignment":"left","enable_parallax":false,"parallax_direction":"vertical","mobile_content_alignment":"left","padding_top":100,"padding_bottom":0,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"1765313043e3b6b3dd":{"type":"_blocks","blocks":{"ai_gen_block_9e17234_xEx3YN":{"type":"ai_gen_block_9e17234","disabled":true,"settings":{"heading":"how we stack up","subheading":"","heading_alignment":"center","number_of_columns":2,"column_1_title":"THEM","column_2_title":"MIORA","column_3_title":"Deluxe","column_4_title":"Ultimate","highlight_column":"none","highlight_label":"POPULAR","feature_1":"Premium materials","feature_1_alignment":"left","feature_1_col1":"cross","feature_1_col2":"check","feature_1_col3":"check","feature_1_col4":"check","feature_2":"Handcrafted design","feature_2_alignment":"left","feature_2_col1":"cross","feature_2_col2":"check","feature_2_col3":"check","feature_2_col4":"check","feature_3":"Gift packaging","feature_3_alignment":"left","feature_3_col1":"cross","feature_3_col2":"check","feature_3_col3":"check","feature_3_col4":"check","feature_4":"Free shipping","feature_4_alignment":"left","feature_4_col1":"cross","feature_4_col2":"check","feature_4_col3":"check","feature_4_col4":"check","feature_5":"","feature_5_alignment":"left","feature_5_col1":"text","feature_5_col2":"text","feature_5_col3":"text","feature_5_col4":"text","feature_6":"","feature_6_alignment":"left","feature_6_col1":"check","feature_6_col2":"check","feature_6_col3":"check","feature_6_col4":"check","feature_7":"","feature_7_alignment":"left","feature_7_col1":"check","feature_7_col2":"check","feature_7_col3":"check","feature_7_col4":"check","feature_8":"","feature_8_alignment":"left","feature_8_col1":"check","feature_8_col2":"check","feature_8_col3":"check","feature_8_col4":"check","feature_9":"","feature_9_alignment":"left","feature_9_col1":"check","feature_9_col2":"check","feature_9_col3":"check","feature_9_col4":"check","feature_10":"","feature_10_alignment":"left","feature_10_col1":"check","feature_10_col2":"check","feature_10_col3":"check","feature_10_col4":"check","background_color":"#ffffff","heading_color":"#000000","text_color":"#000000","header_bg_color":"#000000","header_text_color":"#ffffff","border_color":"#ededed","row_hover_color":"#f6f2ee","checkmark_color":"#054e4a","cross_color":"#a42003","highlight_bg_color":"#f6f2ee","highlight_label_bg":"#000000","highlight_label_color":"#ffffff","heading_size":32,"subheading_size":16,"header_font_size":14,"body_font_size":15,"section_padding":0,"container_padding":80,"cell_padding":16,"icon_size":20},"blocks":{}},"ai_gen_block_d8252b2_FYrrKa":{"type":"ai_gen_block_d8252b2","disabled":true,"settings":{"title":"HOW WE STACK UP","title_alignment":"center","container_padding":100,"columns":2,"feature_column_title":"","column_1_title":"MIORA","column_2_title":"Them","column_3_title":"Enterprise","column_4_title":"Ultimate","feature_1_name":"Hand created design","feature_1_col1":"check","feature_1_col2":"cross","feature_1_col3":"check","feature_1_col4":"check","feature_2_name":"Premium materials","feature_2_col1":"check","feature_2_col2":"cross","feature_2_col3":"check","feature_2_col4":"check","feature_3_name":"Free shipping","feature_3_col1":"check","feature_3_col2":"cross","feature_3_col3":"check","feature_3_col4":"check","feature_4_name":"24\/7 Support","feature_4_col1":"check","feature_4_col2":"cross","feature_4_col3":"check","feature_4_col4":"check","feature_5_name":"Gift Packaging","feature_5_col1":"check","feature_5_col2":"cross","feature_5_col3":"check","feature_5_col4":"check","feature_6_name":"","feature_6_col1":"check","feature_6_col2":"check","feature_6_col3":"check","feature_6_col4":"check","feature_7_name":"","feature_7_col1":"check","feature_7_col2":"check","feature_7_col3":"check","feature_7_col4":"check","feature_8_name":"","feature_8_col1":"check","feature_8_col2":"check","feature_8_col3":"check","feature_8_col4":"check","feature_9_name":"","feature_9_col1":"check","feature_9_col2":"check","feature_9_col3":"check","feature_9_col4":"check","feature_10_name":"","feature_10_col1":"check","feature_10_col2":"check","feature_10_col3":"check","feature_10_col4":"check","feature_name_alignment":"center","feature_column_width":220,"background_color":"#ffffff","title_color":"#000000","header_bg_color":"#000000","header_text_color":"#ffffff","feature_column_bg":"#ffffff","row_even_bg":"#ffffff","row_odd_bg":"#f9f9f9","text_color":"#000000","border_color":"#ededed","check_color":"#054e4a","cross_color":"#a42003"},"blocks":{}}},"block_order":["ai_gen_block_9e17234_xEx3YN","ai_gen_block_d8252b2_FYrrKa"],"settings":{}},"rich_text_CfYHix":{"type":"rich-text","blocks":{"heading_yx4kfR":{"type":"heading","settings":{"heading":"Need More Answers?","heading_size":"h5","heading_highlight_style":"none"}},"text_kKUqEp":{"type":"text","settings":{"text":"<p>We’re here to help—reach us anytime via our <strong>Contact <\/strong>page or email us at support@miora.us<\/p>","text_size":"text-base"}}},"block_order":["heading_yx4kfR","text_kKUqEp"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"","content_alignment":"center","padding_top":50,"padding_bottom":16,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"blocks_7PtfHk":{"type":"_blocks","blocks":{"ai_gen_block_9b9725d_yWkifR":{"type":"ai_gen_block_9b9725d","settings":{"button_text":"Contact","collection":"","button_link":"shopify:\/\/pages\/contact","button_color":"#8a8a8a","button_hover_color":"#6a6a6a","button_text_color":"#ffffff","button_hover_text_color":"#ffffff","border_color":"#8a8a8a","border_hover_color":"#6a6a6a","focus_color":"#0b61cd","border_radius":0,"border_width":1,"font_size":13,"font_weight":"500","text_transform":"uppercase","letter_spacing":0,"button_padding_vertical":10,"button_padding_horizontal":20,"hover_lift":-1},"blocks":{}}},"block_order":["ai_gen_block_9b9725d_yWkifR"],"name":"Collection button","settings":{}},"1759781065582a4ce3":{"type":"apps","blocks":{"loox_reviews_loox_dynamic_section_6Biawn":{"type":"shopify:\/\/apps\/loox-reviews\/blocks\/loox-dynamic-section\/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e","settings":{"only_photos":false,"aggregated":true,"limit":4,"hide_thumbnails":false,"maxwidth":1080,"is_sample":false}}},"block_order":["loox_reviews_loox_dynamic_section_6Biawn"],"settings":{"include_margins":true,"padding_top":32,"padding_bottom":0,"custom_class":""}},"recently_viewed_products_6MpkrA":{"type":"recently-viewed-products","name":"t:sections.recently-viewed-products.name","settings":{"color_scheme":"scheme-1","heading":"<a href=\"\/collections\/towel-sets\" title=\"Towel Sets\">You May Also Like<\/a>","heading_size":"h4","heading_highlight_style":"none","subheading":"","description":"","limit":8,"columns":4,"column_gap":"medium","row_gap":"medium","enable_slider":true,"controls_position":"inside","pcard_image_ratio":"1\/1","columns_mobile":"1","swipe_on_mobile":true,"padding_top":88,"padding_bottom":88,"show_section_divider":true,"divider_width":"full","custom_class":""}},"image_with_text_MgddA8":{"type":"image-with-text","blocks":{"subheading_XLgqVJ":{"type":"subheading","settings":{"subheading":"Bring the Spa Home"}},"heading_J7mctK":{"type":"heading","settings":{"heading":"Crafted for Comfort, Designed for Calm.","heading_size":"h2","heading_highlight_style":"none"}},"text_A3Dahr":{"type":"text","settings":{"text":"<p>Every MIORA towel begins with long-staple cotton, woven for lasting softness and balance. Each thread, fold, and finish is guided by our belief that luxury should feel effortless — calm in every detail, beauty in every touch.<\/p><p><\/p>","text_size":"text-base"}},"button_iVbnNU":{"type":"button","settings":{"button_label":"Discover Our Craft","button_link":"shopify:\/\/pages\/our-story","button_style":"btn--secondary"}}},"block_order":["subheading_XLgqVJ","heading_J7mctK","text_A3Dahr","button_iVbnNU"],"custom_css":["@media (max-width: 767.98px) {.image-with-text .image-with-text__inner {padding-top: 4.8rem; }}"],"settings":{"section_color_scheme":"scheme-3","color_scheme":"scheme-1","image":"shopify:\/\/shop_images\/Product_Image_1_row4_2025-10-06T19-41-05_1.png","image_height":"adapt","layout":"text_first","desktop_content_position":"center","desktop_content_alignment":"left","enable_parallax":false,"parallax_direction":"vertical","mobile_content_alignment":"left","padding_top":100,"padding_bottom":88,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"image_with_text_overlay_NjBNje":{"type":"image-with-text-overlay","blocks":{"heading_zWnWFe":{"type":"heading","settings":{"heading":"Serenity in Every Detail","heading_size":"h4","heading_highlight_style":"none"}},"text_QnRp8y":{"type":"text","settings":{"text":"<p>Each MIORA towel is crafted to turn your daily ritual into a spa-like moment of calm.<\/p>","text_size":"text-base"}}},"block_order":["heading_zWnWFe","text_QnRp8y"],"disabled":true,"custom_css":[".image-with-text-ovelay__content-wrapper .rich-text {max-width: 578px;}"],"settings":{"container":"full","image":"shopify:\/\/shop_images\/Product_Image_2_row4_2025-10-06T20-05-06_1.png","desktop_height":"adapt","overlay_opacity":20,"enable_parallax":true,"parallax_direction":"zoom","color_scheme":"","content_position":"middle-center","content_alignment":"center","mobile_height":"medium","padding_top":0,"padding_bottom":0,"custom_class":""}},"multicolumn_kxgWLe":{"type":"multicolumn","blocks":{"column_FbVFwP":{"type":"column","settings":{"show_image":true,"image":"shopify:\/\/shop_images\/Generated_Image_October_13_2025_-_3_55PM.png","image_width":"large","title":"Free & fast delivery","heading_size":"h4","text":"<p>Enjoy free ground shipping on all orders<\/p>","text_size":"text-base","button_label":"","button_style":"btn--underline","button_link":"","mobile_layout":"inherit"}},"column_Ng4jJm":{"type":"column","settings":{"show_image":true,"image":"shopify:\/\/shop_images\/Generated_Image_October_13_2025_-_3_57PM.png","image_width":"large","title":"Dedicated Support","heading_size":"h4","text":"<p>Our team is available 24\/7 to assist with any questions you may have<\/p>","text_size":"text-base","button_label":"","button_style":"btn--underline","button_link":"","mobile_layout":"inherit"}},"column_a4zfr7":{"type":"column","settings":{"show_image":true,"image":"shopify:\/\/shop_images\/Generated_Image_October_13_2025_-_3_55PM_1.png","image_width":"large","title":"Simple Returns","heading_size":"h4","text":"<p>Exchange or return items within 30 days<\/p>","text_size":"text-base","button_label":"","button_style":"btn--underline","button_link":"","mobile_layout":"inherit"}},"column_pjEAC3":{"type":"column","settings":{"show_image":true,"image":"shopify:\/\/shop_images\/Generated_Image_October_13_2025_-_3_55PM_2.png","image_width":"large","title":"Flexible payments","heading_size":"h4","text":"<p>Variety of secure payment options for a seamless checkout<\/p>","text_size":"text-base","button_label":"","button_style":"btn--underline","button_link":"","mobile_layout":"inherit"}}},"block_order":["column_FbVFwP","column_Ng4jJm","column_a4zfr7","column_pjEAC3"],"settings":{"color_scheme":"scheme-1","heading":"","heading_size":"h1","heading_highlight_style":"none","subheading":"","description":"","text_size":"text-base","column_alignment":"center","columns_desktop":4,"column_gap":"extra-large","columns_mobile":"1","swipe_on_mobile":true,"padding_top":32,"padding_bottom":56,"show_section_divider":false,"divider_width":"fixed","custom_class":""}},"1765409056d2e7eb3c":{"type":"apps","blocks":{"loox_reviews_loox_dynamic_section_C4y3hG":{"type":"shopify:\/\/apps\/loox-reviews\/blocks\/loox-dynamic-section\/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e","settings":{"only_photos":false,"aggregated":false,"limit":20,"hide_thumbnails":false,"maxwidth":1080,"is_sample":false}}},"block_order":["loox_reviews_loox_dynamic_section_C4y3hG"],"settings":{"include_margins":true,"padding_top":0,"padding_bottom":0,"custom_class":""}}},"order":["breadcrumbs","main","1763155398ac3d24e5","testimonials_8JHr3L","176074050786ee145e","17631640015662bdb7","section_dual_image_with_text_gcnizy","image_with_text_wKUNjE","image_with_text_68iWkz","rich_text_mFFb8L","rich_text_GF9at8","scrolling_promotion_MeVHcn","rich_text_rdibKP","blocks_NeBTrG","rich_text_nUBTmx","image_with_text_zQ9iit","1765313043e3b6b3dd","rich_text_CfYHix","blocks_7PtfHk","1759781065582a4ce3","recently_viewed_products_6MpkrA","image_with_text_MgddA8","image_with_text_overlay_NjBNje","multicolumn_kxgWLe","1765409056d2e7eb3c"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "text_alignment": "start"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h4"
+          }
+        },
+        "custom_liquid_F7Dp37": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "loox_reviews_loox_rating_AjWEmf": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-rating/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "contentSize": 15,
+            "pattern": "",
+            "hideText": false,
+            "alignment": "",
+            "layout": "",
+            "textColor": "",
+            "starColor": "",
+            "showAllReviews": false,
+            "looxOpenFloatingWidget": false,
+            "emptyRatingWidget": false
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {
+            "show_soldout_badge": false,
+            "show_sale_badge": true,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "text_Mhzeqg": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "icon_with_text_P4FPxn": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "title_font": "body",
+            "title_size": "text-base",
+            "icon_1": "check-circle",
+            "heading_1": "Super-Plush 700 GSM",
+            "icon_2": "check-circle",
+            "heading_2": "100% Organic Turkish Cotton",
+            "icon_3": "check-circle",
+            "heading_3": "OEKO-TEX®"
+          }
+        },
+        "vo_product_options_block_VaFqEQ": {
+          "type": "shopify://apps/vo-product-options/blocks/block/430cbd7b-bd20-4c16-ba41-db6f4c645164",
+          "settings": {
+            "font_color": ""
+          }
+        },
+        "custom_liquid_Ch8apc": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% if product.metafields.custom.related_bundles.value %}\n  <div class=\"bundle-switcher\">\n    {% for bundle in product.metafields.custom.related_bundles.value %}\n      <a href=\"{{ bundle.url }}\"\n         class=\"bundle-option{% if bundle.handle == product.handle %} active{% endif %}{% unless bundle.available %} disabled{% endunless %}\">\n        {{ bundle.metafields.custom.title_product_count }}\n      </a>\n    {% endfor %}\n  </div>\n{% endif %}"
+          }
+        },
+        "custom_liquid_wgiXpb": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<div class=\"holiday-rush-banner\">\n  <svg class=\"banner-icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"none\">\n    <path d=\"M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z\"></path>\n  </svg>\n  <span class=\"banner-text\">LIMITED TIME OFFER</span>\n</div>\n\n<style>\n  .holiday-rush-banner {\n    display: flex;\n    align-items: flex-end; /* Aligns content to the very bottom */\n    justify-content: flex-start;\n    padding: 10px 0 0 0; /* 10px Top, 0px Bottom */\n    background-color: #ffffff;\n    border-radius: 4px;\n    width: 100%;\n    line-height: 1; /* Removes invisible space below the text */\n  }\n\n  .banner-icon {\n    color: #4CAF50; \n    margin-right: 8px;\n    width: 18px; \n    height: 18px;\n    margin-bottom: 1px; /* Slight tweak to align visually with text baseline */\n  }\n\n  .banner-text {\n    color: #D32F2F;\n    font-family: sans-serif; \n    font-weight: 700;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    line-height: 0.8; /* Extremely tight line-height to remove font padding */\n  }\n</style>"
+          }
+        },
+        "custom_liquid_VXFAaC": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<style>\n  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');\n\n  .cart-counter-widget {\n    display: flex;\n    align-items: center;\n    justify-content: center; /* Centers the text */\n    padding: 10px;\n    margin-bottom: 15px;\n    background-color: #f4f4f4; /* Light grey background */\n    border-radius: 4px;\n    font-size: 14px;\n    color: #000000; /* Standard black text */\n    font-family: 'Lato', sans-serif; /* Sets font to Lato */\n    width: 100%; /* Spans full width of container */\n  }\n\n  .cart-counter-count {\n    font-weight: 700; /* Bold the number */\n    color: inherit; /* Matches the text color (not red) */\n  }\n</style>\n\n<div class=\"cart-counter-widget\" id=\"cartCounterWidget\" style=\"display:none;\">\n  <span>\n    <span class=\"cart-counter-count\" id=\"cartCounterNumber\">120</span> \n    people have this in their cart right now.\n  </span>\n</div>\n\n<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    // CONFIGURATION\n    var minPeople = 100; // Minimum number of people\n    var maxPeople = 140; // Maximum number of people\n    var updateInterval = 120000; // 2 minutes in milliseconds (120,000ms)\n    \n    var widget = document.getElementById('cartCounterWidget');\n    var countSpan = document.getElementById('cartCounterNumber');\n    \n    // Function to generate random integer between min and max\n    function getRandomInt(min, max) {\n      return Math.floor(Math.random() * (max - min + 1)) + min;\n    }\n\n    // Initialize logic\n    var currentCount = localStorage.getItem('cartCount_simulation');\n    \n    // If no stored count, generate a starting number\n    if (!currentCount) {\n      currentCount = getRandomInt(minPeople, maxPeople);\n    } else {\n      currentCount = parseInt(currentCount);\n    }\n\n    // Display the initial number and show widget\n    countSpan.innerText = currentCount;\n    widget.style.display = \"flex\";\n\n    // Update the count periodically\n    setInterval(function() {\n      // Decide whether to go up or down (50/50 chance)\n      var change = Math.random() < 0.5 ? -1 : 1;\n      var fluctuation = getRandomInt(1, 4); // Change by 1 to 4 people\n      \n      currentCount += (change * fluctuation);\n\n      // Keep within bounds\n      if (currentCount > maxPeople) currentCount = maxPeople - 2;\n      if (currentCount < minPeople) currentCount = minPeople + 2;\n\n      // Update DOM and Storage\n      countSpan.innerText = currentCount;\n      localStorage.setItem('cartCount_simulation', currentCount);\n      \n    }, updateInterval);\n  });\n</script>"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "icon_with_text": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "title_font": "body",
+            "title_size": "text-base",
+            "icon_1": "truck",
+            "heading_1": "Free Shipping on ALL orders",
+            "icon_2": "arrow-up-left",
+            "heading_2": "30 day returns",
+            "icon_3": "seal-check",
+            "heading_3": ""
+          }
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Pairs well with",
+            "make_collapsible_row": false,
+            "icon": "tag",
+            "product_list_limit": 4,
+            "products_per_page": 1,
+            "image_ratio": "adapt",
+            "enable_quick_add": true
+          }
+        },
+        "collapsible-row-1": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Details",
+            "icon": "none",
+            "content": "<h6><strong>HOW IT FEELS.</strong></h6><h6>Exceptionally plush with a smooth, velvety hand-feel. </h6><h6><strong>WHY IT'S BETTER.</strong></h6><h6>Our towels dry quickly, resist pilling, maintain color richness, and are crafted to stay luxuriously soft for years — not months. </h6><h6><strong>OUR MATERIALS.</strong></h6><h6>Crafted from 700 GSM, 100% Long-Staple Turkish Cotton for unmatched softness, exceptional absorbency, and lasting strength. Certified by OEKO-TEX® to ensure your towels are safe for you, your skin, and the environment.</h6><ul><li><h6>100% Long-Staple Cotton</h6></li><li><h6>Premium 700 GSM Weight</h6></li><li><h6>Silky, spa-grade softness</h6></li><li><h6>Fast-drying & ultra-absorbent</h6></li><li><h6>Colorfast & fade-resistant</h6></li><li><h6>OEKO-TEX® Certified</h6></li><li><h6>Woven dobby border</h6></li><li><h6>Double-stitched edges for durability</h6></li></ul>",
+            "custom_liquid": "",
+            "page": "",
+            "default_open": false
+          }
+        },
+        "collapsible-row-2": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Dimensions",
+            "icon": "none",
+            "content": "",
+            "custom_liquid": "<style>\n  .custom-image-container {\n    display: block;\n    width: 100%;\n    margin: 10px 0; /* Adds a little space above and below */\n  }\n\n  .custom-image-container img {\n    max-width: 100%; /* Ensures it never goes wider than the screen */\n    height: auto;    /* Keeps the image proportions correct */\n    display: block;\n    border-radius: 4px; /* Slight rounded corners - remove if you want sharp corners */\n  }\n</style>\n\n<div class=\"custom-image-container\">\n  <img \n    src=https://cdn.shopify.com/s/files/1/0758/3432/7268/files/custom_seedream-4-5_1765359942006.jpg?v=1765359956\n  >\n</div>",
+            "page": "",
+            "default_open": false
+          }
+        },
+        "collapsible-row-3": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "FAQ",
+            "icon": "none",
+            "content": "<p><strong>Q: Will these towels stay soft after washing?</strong><br/><strong>A:</strong> Yes — and many say they get even softer. Just wash warm, tumble dry low, and skip fabric softener (it coats the fibers).</p><p>‎</p><p><strong>Q: Are they good for sensitive skin?</strong><br/><strong>A:</strong> Absolutely. Our towels are made from hypoallergenic, OEKO-TEX® certified Turkish cotton — gentle, pure, and skin-safe.</p><p>‎</p><p><strong>Q: Do they dry quickly?</strong><br/><strong>A:</strong> Yes. Despite their plush feel, the breathable cotton and zero-twist weave help them dry fast between uses.</p><p>‎</p><p><strong>Q: What if I don’t love them?</strong><br/><strong>A:</strong> No worries — try them for 30 days, risk-free. If you’re not happy, we’ll refund you. No hassle, no questions.</p><p></p><p><a href=\"/pages/faq-1\" title=\"FAQ\">More Questions?</a></p>",
+            "custom_liquid": "",
+            "page": "",
+            "default_open": false
+          }
+        },
+        "popup_8cnKBN": {
+          "type": "popup",
+          "settings": {
+            "text": "Care Guide",
+            "page": "care-guide"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "custom_liquid_F7Dp37",
+        "loox_reviews_loox_rating_AjWEmf",
+        "badges",
+        "price",
+        "description",
+        "text_Mhzeqg",
+        "icon_with_text_P4FPxn",
+        "vo_product_options_block_VaFqEQ",
+        "custom_liquid_Ch8apc",
+        "custom_liquid_wgiXpb",
+        "custom_liquid_VXFAaC",
+        "buy_buttons",
+        "icon_with_text",
+        "pickup_availability",
+        "complementary",
+        "collapsible-row-1",
+        "collapsible-row-2",
+        "collapsible-row-3",
+        "popup_8cnKBN"
+      ],
+      "custom_css": [
+        ".loox-rating {margin-top: -1rem;}",
+        ".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_sticky_info": true,
+        "media_size": "medium",
+        "gallery_layout": "carousel",
+        "mobile_thumbnails": "show",
+        "enable_image_zoom": true,
+        "enable_video_looping": true,
+        "padding_top": 0,
+        "padding_bottom": 100
+      }
+    },
+    "1763155398ac3d24e5": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "testimonials_8JHr3L": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_dhi3Xf": {
+          "type": "testimonial",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/custom_seedream-4-5_1765250219398.jpg",
+            "text": "<p>\"The bath towels are HUGE and have a nice weight to them, they feel so much more luxurious than others I've bought. It really feels like a spa towel at home.\"</p>",
+            "author": "Melissa H.",
+            "bio": "Verified Buyer",
+            "product": "",
+            "icon": "5-stars"
+          }
+        },
+        "testimonial_D7Mq7i": {
+          "type": "testimonial",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/custom_seedream-4-5_1765246779738.jpg",
+            "text": "<p>\"Honestly the softest towels I've ever owned, and they're super absorbent. They actually dry you off instantly. I'm obsessed and will be buying more.\"</p>",
+            "author": "Alexandra M.",
+            "bio": "Verified Buyer",
+            "product": "",
+            "icon": "5-stars"
+          }
+        },
+        "testimonial_33tAjm": {
+          "type": "testimonial",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/custom_seedream-4-5_1765251213819.jpg",
+            "text": "<p>\"The quality is incredible. Washed them several times and there's been almost NO lint, which is a first for me. They still look and feel brand new. Worth the money for sure.\"</p>",
+            "author": "Danielle S.",
+            "bio": "Verified Buyer",
+            "product": "",
+            "icon": "5-stars"
+          }
+        },
+        "testimonial_dDRMwy": {
+          "type": "testimonial",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/custom_seedream-4-5_1765252855683.jpg",
+            "text": "<p>\"These towels are a lifesaver. They feel thick but they actually dry fast, so no more musty bathroom smell. Makes a huge difference. Highly recommend.\"</p>",
+            "author": "Elizabeth R.",
+            "bio": "Verified Buyer",
+            "product": "",
+            "icon": "5-stars"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_dhi3Xf",
+        "testimonial_D7Mq7i",
+        "testimonial_33tAjm",
+        "testimonial_dDRMwy"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "See what our customers are saying.",
+        "heading_size": "h2",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "",
+        "text_size": "text-sm",
+        "card_color_scheme": "",
+        "card_layout": "1",
+        "card_text_size": "text-base",
+        "columns_desktop": 4,
+        "column_gap": "large",
+        "enable_slider": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 100,
+        "padding_bottom": 64,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "176074050786ee145e": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_4727f34_ngPmi9": {
+          "type": "ai_gen_block_4727f34",
+          "settings": {
+            "section_background": "#ffffff",
+            "button_text": "More Reviews",
+            "show_icon": true,
+            "icon_style": "arrow",
+            "icon_position": "right",
+            "icon_size": 16,
+            "button_style": "square",
+            "button_background": "#8a8a8a",
+            "button_text_color": "#ffffff",
+            "button_hover_background": "#8a8a8a",
+            "button_hover_text_color": "#ffffff",
+            "border_width": 0,
+            "border_color": "#000000",
+            "border_hover_color": "#8a8a8a",
+            "font_size": 15,
+            "font_weight": "500",
+            "text_transform": "uppercase",
+            "letter_spacing": 0,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 32,
+            "padding_top": 0,
+            "padding_bottom": 76,
+            "alignment": "center",
+            "mobile_alignment": "center",
+            "target_selector": "",
+            "scroll_offset": 80
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_4727f34_ngPmi9"
+      ],
+      "settings": {}
+    },
+    "17631640015662bdb7": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_612ea66_qD4dky": {
+          "type": "ai_gen_block_612ea66",
+          "disabled": true,
+          "settings": {
+            "layout": "row-reverse",
+            "gap": 40,
+            "image_gap": 20,
+            "mobile_images_layout": "column",
+            "image_1": "shopify://shop_images/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg",
+            "image_1_aspect_ratio": "1 / 1",
+            "image_2": "shopify://shop_images/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg",
+            "image_2_aspect_ratio": "3 / 4",
+            "image_border_radius": 0,
+            "heading": "Where Exceptional Softness Begins.",
+            "text": "<p>We start with the finest 100% long-staple organic cotton. We protect its natural purity by refusing to use harmful pesticides, GMOs, or toxins like formaldehyde in any of our products. It’s a simple choice: a better cotton for you, and a better process for the planet.</p>",
+            "button_text": "Shop now",
+            "button_link": "",
+            "background_color": "#ffffff",
+            "heading_color": "#000000",
+            "text_color": "#000000",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_color": "#333333",
+            "button_hover_text_color": "#ffffff",
+            "heading_size": 28,
+            "heading_size_mobile": 24,
+            "heading_spacing": 16,
+            "text_size": 15,
+            "text_size_mobile": 14,
+            "text_spacing": 12,
+            "button_text_size": 16,
+            "button_border_radius": 0,
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "padding_horizontal": 100,
+            "padding_top_mobile": 30,
+            "padding_bottom_mobile": 30,
+            "padding_horizontal_mobile": 30
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_4000614_Ebnyjq": {
+          "type": "ai_gen_block_4000614",
+          "disabled": true,
+          "settings": {
+            "layout": "image_right",
+            "show_two_images": true,
+            "color_scheme": "scheme-3",
+            "background_color": "#f6f2ee",
+            "edge_spacing": "232",
+            "top_padding": "80",
+            "bottom_padding": "80",
+            "spacing": 40,
+            "image_spacing": 20,
+            "image_1": "shopify://shop_images/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg",
+            "image_1_aspect_ratio": "portrait",
+            "image_2": "shopify://shop_images/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg",
+            "image_2_aspect_ratio": "landscape",
+            "border_width": "0",
+            "border_color": "#000000",
+            "heading": "The World’s Purest Cotton.",
+            "heading_size": 32,
+            "heading_color": "#000000",
+            "heading_spacing": 16,
+            "text": "<p><br/>We source only the top 1% of long-staple organic cotton. Unlike standard cotton, our fibers are smoother, stronger, and resistant to pilling. Cultivated without pesticides or harsh toxins, it is luxury in its purest form—safer for your skin and gentler on the planet.<br/><br/></p>",
+            "text_size": 16,
+            "text_color": "#000000",
+            "text_padding": 20,
+            "button_text": "Shop now",
+            "button_link": "",
+            "button_spacing": 20,
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_bg_color": "#333333"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_5b7992f_EFUhJn": {
+          "type": "ai_gen_block_5b7992f",
+          "disabled": true,
+          "settings": {
+            "layout": "image_first",
+            "image_count": "two",
+            "page_width": "1410",
+            "heading": "<p>The World’s Purest Cotton.</p>",
+            "text": "<p>We source only the top 1% of long-staple organic cotton. Unlike standard cotton, our fibers are smoother, stronger, and resistant to pilling. Cultivated without pesticides or harsh toxins, it is luxury in its purest form—safer for your skin and gentler on the planet.<br/></p>",
+            "button_label": "Shop now",
+            "button_link": "",
+            "image_1": "shopify://shop_images/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg",
+            "image_1_ratio": "portrait",
+            "image_2": "shopify://shop_images/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg",
+            "image_2_ratio": "square",
+            "color_scheme": "scheme-3",
+            "container_color_scheme": "scheme-3",
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_bg_color": "#333333",
+            "button_hover_text_color": "#ffffff",
+            "border_color": "#000000",
+            "padding_top": "60",
+            "padding_bottom": "60",
+            "spacing_edges": "20",
+            "border_width": "0",
+            "mobile_padding_top": "40",
+            "mobile_padding_bottom": "40",
+            "mobile_spacing_edges": "16"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_f522a99_mPftyV": {
+          "type": "ai_gen_block_f522a99",
+          "disabled": true,
+          "settings": {
+            "layout": "text_first",
+            "show_second_image": true,
+            "heading": "The World’s Purest Cotton.",
+            "text": "<p>We source only the top 1% of long-staple organic cotton. Unlike standard cotton, our fibers are smoother, stronger, and resistant to pilling. Cultivated without pesticides or harsh toxins, it is luxury in its purest form—safer for your skin and gentler on the planet.<br/></p>",
+            "text_color": "#000000",
+            "image_1": "shopify://shop_images/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg",
+            "image_1_aspect_ratio": "square",
+            "image_2": "shopify://shop_images/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg",
+            "image_2_aspect_ratio": "portrait",
+            "enable_parallax": true,
+            "border_width": "0",
+            "border_color": "#000000",
+            "page_width": "1488",
+            "spacing_edges": "40",
+            "padding_top": "60",
+            "padding_bottom": "60",
+            "spacing_edges_mobile": "20",
+            "padding_top_mobile": "40",
+            "padding_bottom_mobile": "24",
+            "color_scheme": "scheme-3",
+            "container_color_scheme": "scheme-3"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_94b2c13_UgfhEQ": {
+          "type": "ai_gen_block_94b2c13",
+          "disabled": true,
+          "settings": {
+            "layout": "row",
+            "container_alignment": "left",
+            "content_vertical_alignment": "center",
+            "mobile_layout": "column",
+            "container_width": 1600,
+            "gap": 100,
+            "image_width": 70,
+            "image": "shopify://shop_images/custom_nano-banana-v1_4874cf04-1099-4ca4-b46d-9409290c6701.png",
+            "image_aspect_ratio": "4 / 3",
+            "heading": "<strong>What Makes Our Yarn Quality Unmatched?</strong>",
+            "text": "<p>Our unmatched quality comes from a commitment to purity and process. We use only the finest organic materials, weaving them with care and finishing them without any harsh chemicals. Our Plush fabric achieves its signature, sumptuous hand-feel from a special tumbling process. This technique amplifies the fabric's natural softness, delivering an exceptionally fluffy finish you can feel.</p>",
+            "text_alignment": "left",
+            "content_padding": 0,
+            "show_heading_desktop": true,
+            "show_heading_mobile": true,
+            "show_text_desktop": true,
+            "show_text_mobile": true,
+            "heading_size": 32,
+            "heading_weight": "300",
+            "heading_color": "#000000",
+            "heading_spacing": 16,
+            "text_size": 16,
+            "text_weight": "400",
+            "text_color": "#000000",
+            "text_line_height": 1.5,
+            "button_label": "",
+            "button_link": "",
+            "button_spacing": 20,
+            "button_text_size": 16,
+            "button_text_weight": "500",
+            "button_padding_vertical": 30,
+            "button_padding_horizontal": 60,
+            "button_border_radius": 0,
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_bg_hover_color": "#333333",
+            "button_text_hover_color": "#ffffff",
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "padding_horizontal": 100,
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_6bbf227_r7UnJN": {
+          "type": "ai_gen_block_6bbf227",
+          "disabled": true,
+          "settings": {
+            "container_width": 1670,
+            "image_position": "row",
+            "vertical_alignment": "center",
+            "spacing": 80,
+            "spacing_mobile": 20,
+            "horizontal_padding": 0,
+            "horizontal_padding_mobile": 20,
+            "vertical_padding": 50,
+            "image": "shopify://shop_images/custom_nano-banana-v1_4874cf04-1099-4ca4-b46d-9409290c6701.png",
+            "image_aspect_ratio": "adapt",
+            "image_width": 50,
+            "image_alignment": "center",
+            "heading": "<p>Our Unmatched Yarn Quality.</p>",
+            "text": "<p>We use only the finest organic materials, weaving them with care and finishing them without any harsh chemicals. Our Plush fabric achieves its signature, sumptuous hand-feel from a special tumbling process. This technique amplifies the fabric's natural softness, delivering an exceptionally fluffy finish you can feel.</p>",
+            "text_alignment": "left",
+            "text_vertical_alignment": "center",
+            "heading_size": 32,
+            "heading_size_mobile": 24,
+            "heading_color": "#000000",
+            "heading_spacing": 20,
+            "text_size": 16,
+            "text_size_mobile": 14,
+            "text_color": "#000000",
+            "hide_heading_mobile": false,
+            "hide_text_mobile": false,
+            "hide_heading_desktop": false,
+            "hide_text_desktop": false
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_4a091cb_h4FJNX": {
+          "type": "ai_gen_block_4a091cb",
+          "disabled": true,
+          "settings": {
+            "container_width": 1400,
+            "layout": "image_first",
+            "vertical_alignment": "center",
+            "gap": 40,
+            "show_two_images": false,
+            "image_gap": 20,
+            "image_1_aspect_ratio": "square",
+            "image_2_aspect_ratio": "landscape",
+            "heading": "Image with text",
+            "heading_size": 36,
+            "heading_color": "#000000",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_size": 16,
+            "text_color": "#000000",
+            "text_alignment": "left",
+            "mobile_text_alignment": "left",
+            "button_label": "Learn more",
+            "button_link": "",
+            "button_text_size": 16,
+            "button_border_radius": 0,
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_bg_color": "#333333",
+            "button_hover_text_color": "#ffffff"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_94b2c13_xjiEcE": {
+          "type": "ai_gen_block_94b2c13",
+          "disabled": true,
+          "settings": {
+            "layout": "row",
+            "container_alignment": "left",
+            "content_vertical_alignment": "center",
+            "mobile_layout": "column",
+            "container_width": 1600,
+            "gap": 100,
+            "image_width": 55,
+            "image": "shopify://shop_images/Untitled_design.png",
+            "image_aspect_ratio": "1 / 1",
+            "heading": "<strong>Velvety Plushness, Exceptional Absorbency.</strong>",
+            "text": "<p>Our Plush Bath fabric achieves its perfect balance of softness and absorbency from a special low-twist terry loop. This technique gives the towel a substantial, luxurious weight that's both velvety soft and highly functional. Finished with classic, universal styling, it’s designed to complement any aesthetic.</p>",
+            "text_alignment": "left",
+            "content_padding": 0,
+            "show_heading_desktop": true,
+            "show_heading_mobile": true,
+            "show_text_desktop": true,
+            "show_text_mobile": true,
+            "heading_size": 32,
+            "heading_weight": "300",
+            "heading_color": "#000000",
+            "heading_spacing": 16,
+            "text_size": 16,
+            "text_weight": "400",
+            "text_color": "#000000",
+            "text_line_height": 1.5,
+            "button_label": "",
+            "button_link": "",
+            "button_spacing": 20,
+            "button_text_size": 16,
+            "button_text_weight": "500",
+            "button_padding_vertical": 12,
+            "button_padding_horizontal": 60,
+            "button_border_radius": 0,
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_bg_hover_color": "#333333",
+            "button_text_hover_color": "#ffffff",
+            "padding_top": 50,
+            "padding_bottom": 40,
+            "padding_horizontal": 100,
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_612ea66_qD4dky",
+        "ai_gen_block_4000614_Ebnyjq",
+        "ai_gen_block_5b7992f_EFUhJn",
+        "ai_gen_block_f522a99_mPftyV",
+        "ai_gen_block_94b2c13_UgfhEQ",
+        "ai_gen_block_6bbf227_r7UnJN",
+        "ai_gen_block_4a091cb_h4FJNX",
+        "ai_gen_block_94b2c13_xjiEcE"
+      ],
+      "settings": {}
+    },
+    "section_dual_image_with_text_gcnizy": {
+      "type": "section-dual-image-with-text",
+      "blocks": {
+        "heading_ypFprr": {
+          "type": "heading",
+          "settings": {
+            "heading": "The World’s Purest Cotton.",
+            "heading_size": "h2",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_AQhCPq": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We source only the top 1% of long-staple organic cotton. Unlike standard cotton, our fibers are smoother, stronger, and resistant to pilling. Cultivated without pesticides or harsh toxins, it is luxury in its purest form—safer for your skin and gentler on the planet.</p>",
+            "text_size": "text-base"
+          }
+        }
+      },
+      "block_order": [
+        "heading_ypFprr",
+        "text_AQhCPq"
+      ],
+      "name": "Dual Image with Text",
+      "settings": {
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "image_1": "shopify://shop_images/36efc295558e305c09d2b3accc0f4022_1763163427_baef5667-e420-4ea2-adf3-455968e18352.jpg",
+        "image_2": "shopify://shop_images/c6c473f2bd2b0c245c30326512f1ef64_1763163079.jpg",
+        "image_gap": 12,
+        "mobile_image_gap": 8,
+        "image_aspect_ratio": "3/4",
+        "mobile_image_aspect_ratio": "3/4",
+        "image_height": "small",
+        "layout": "image_first",
+        "desktop_content_position": "center",
+        "desktop_content_alignment": "left",
+        "enable_parallax": true,
+        "parallax_direction": "vertical",
+        "mobile_image_position": "top",
+        "mobile_content_alignment": "left",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "image_with_text_wKUNjE": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Jqxthh": {
+          "type": "heading",
+          "settings": {
+            "heading": "Exceptional Softness, By Design.",
+            "heading_size": "h2",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_BJP4wF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>True luxury isn’t just seen—it’s felt. We utilize a proprietary slow-tumbling process to unlock the natural volume of the fiber, creating a cloud-like texture that feels broken-in from the very first use. The result is a towel with a sumptuous hand-feel that only gets softer with time.</p>",
+            "text_size": "text-base"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Jqxthh",
+        "text_BJP4wF"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "image": "shopify://shop_images/custom_nano-banana-v1_4874cf04-1099-4ca4-b46d-9409290c6701.png",
+        "image_height": "adapt",
+        "layout": "text_first",
+        "desktop_content_position": "center",
+        "desktop_content_alignment": "left",
+        "enable_parallax": true,
+        "parallax_direction": "vertical",
+        "mobile_content_alignment": "left",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "image_with_text_68iWkz": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_khNTw9": {
+          "type": "heading",
+          "settings": {
+            "heading": "Plush, Absorbent, and Made to Last.",
+            "heading_size": "h2",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_AiUE4J": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our Plush Bath fabric achieves its perfect balance of softness and absorbency from a special low-twist terry loop. This technique gives the towel a substantial, luxurious weight that's both velvety soft and highly functional. Finished with classic, universal styling, it’s designed to complement any aesthetic.</p>",
+            "text_size": "text-base"
+          }
+        }
+      },
+      "block_order": [
+        "heading_khNTw9",
+        "text_AiUE4J"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "image": "shopify://shop_images/Home_Page_row35_2025-10-13T07-10-06_1.png",
+        "image_height": "small",
+        "layout": "image_first",
+        "desktop_content_position": "center",
+        "desktop_content_alignment": "left",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "mobile_content_alignment": "left",
+        "padding_top": 50,
+        "padding_bottom": 100,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "rich_text_mFFb8L": {
+      "type": "rich-text",
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 50,
+        "padding_bottom": 38,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "rich_text_GF9at8": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_WpAr36": {
+          "type": "heading",
+          "settings": {
+            "heading": "Where You Will Find Us",
+            "heading_size": "hd3",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_kxKTYA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Experience the same uncompromising quality found in the world’s most exclusive suites.</p>",
+            "text_size": "text-lg"
+          }
+        }
+      },
+      "block_order": [
+        "heading_WpAr36",
+        "text_kxKTYA"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 100,
+        "padding_bottom": 0,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "scrolling_promotion_MeVHcn": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "image_JNXfny": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766458991752.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_xYfM9m": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766459455673.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_EiAFiH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766460043424.jpg",
+            "image_height": 152,
+            "image_rounded": false,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_XtdYDj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766459101117.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        }
+      },
+      "block_order": [
+        "image_JNXfny",
+        "image_xYfM9m",
+        "image_EiAFiH",
+        "image_XtdYDj"
+      ],
+      "name": "t:sections.scrolling-promotion.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "vertical_alignment": "center",
+        "direction": "left",
+        "pause_on_hover": true,
+        "speed": 0.2,
+        "h_spacing": 96,
+        "v_spacing": 10,
+        "padding_top": 64,
+        "padding_bottom": 100,
+        "show_divider": false,
+        "divider_layout": "vertical",
+        "custom_class": ""
+      }
+    },
+    "rich_text_rdibKP": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_hC9ghe": {
+          "type": "heading",
+          "settings": {
+            "heading": "How We Stack Up",
+            "heading_size": "h1",
+            "heading_highlight_style": "none"
+          }
+        }
+      },
+      "block_order": [
+        "heading_hC9ghe"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 100,
+        "padding_bottom": 34,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "blocks_NeBTrG": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1371d11_qdhpA9": {
+          "type": "ai_gen_block_1371d11",
+          "settings": {
+            "section_color_scheme": "scheme-1",
+            "container_color_scheme": "scheme-1",
+            "container_width": "888",
+            "image_1": "shopify://shop_images/Gemini_Generated_Image_bkh8nibkh8nibkh8_1_b933bdba-e55c-4d39-9f88-758d0648fffb.png",
+            "image_1_ratio": "adapt",
+            "image_2": "shopify://shop_images/custom_seedream-4-5_1765528572762.png",
+            "image_2_ratio": "3-4",
+            "image_max_width": 45,
+            "gap_desktop": 80,
+            "gap_mobile": 0,
+            "border_width": 0,
+            "border_color": "#000000"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1371d11_qdhpA9"
+      ],
+      "settings": {}
+    },
+    "rich_text_nUBTmx": {
+      "type": "rich-text",
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 34,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "image_with_text_zQ9iit": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_yBQcFf": {
+          "type": "subheading",
+          "settings": {
+            "subheading": ""
+          }
+        },
+        "heading_9Y3zkK": {
+          "type": "heading",
+          "settings": {
+            "heading": "Bring the Spa Home.",
+            "heading_size": "h2",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_UWkrNW": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Woven from the finest long-staple cotton, MIORA towels grow softer and more familiar with every wash. The simple luxury of treating yourself right — in the moments you touch most.</p>",
+            "text_size": "text-base"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_yBQcFf",
+        "heading_9Y3zkK",
+        "text_UWkrNW"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 767.98px) {.image-with-text .image-with-text__inner {padding-top: 4.8rem; }}",
+        "@media (min-width: 768px) {.image-with-text__wrapper {--gap-x: 3rem; }}",
+        "@media (min-width: 1280px) {.image-with-text__inner {--padding-x: 9rem; }}"
+      ],
+      "settings": {
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "image": "shopify://shop_images/Remove_the_AI_watermark_or_text-1.jpg",
+        "image_height": "adapt",
+        "layout": "image_first",
+        "desktop_content_position": "center",
+        "desktop_content_alignment": "left",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "mobile_content_alignment": "left",
+        "padding_top": 100,
+        "padding_bottom": 0,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "1765313043e3b6b3dd": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_9e17234_xEx3YN": {
+          "type": "ai_gen_block_9e17234",
+          "disabled": true,
+          "settings": {
+            "heading": "how we stack up",
+            "subheading": "",
+            "heading_alignment": "center",
+            "number_of_columns": 2,
+            "column_1_title": "THEM",
+            "column_2_title": "MIORA",
+            "column_3_title": "Deluxe",
+            "column_4_title": "Ultimate",
+            "highlight_column": "none",
+            "highlight_label": "POPULAR",
+            "feature_1": "Premium materials",
+            "feature_1_alignment": "left",
+            "feature_1_col1": "cross",
+            "feature_1_col2": "check",
+            "feature_1_col3": "check",
+            "feature_1_col4": "check",
+            "feature_2": "Handcrafted design",
+            "feature_2_alignment": "left",
+            "feature_2_col1": "cross",
+            "feature_2_col2": "check",
+            "feature_2_col3": "check",
+            "feature_2_col4": "check",
+            "feature_3": "Gift packaging",
+            "feature_3_alignment": "left",
+            "feature_3_col1": "cross",
+            "feature_3_col2": "check",
+            "feature_3_col3": "check",
+            "feature_3_col4": "check",
+            "feature_4": "Free shipping",
+            "feature_4_alignment": "left",
+            "feature_4_col1": "cross",
+            "feature_4_col2": "check",
+            "feature_4_col3": "check",
+            "feature_4_col4": "check",
+            "feature_5": "",
+            "feature_5_alignment": "left",
+            "feature_5_col1": "text",
+            "feature_5_col2": "text",
+            "feature_5_col3": "text",
+            "feature_5_col4": "text",
+            "feature_6": "",
+            "feature_6_alignment": "left",
+            "feature_6_col1": "check",
+            "feature_6_col2": "check",
+            "feature_6_col3": "check",
+            "feature_6_col4": "check",
+            "feature_7": "",
+            "feature_7_alignment": "left",
+            "feature_7_col1": "check",
+            "feature_7_col2": "check",
+            "feature_7_col3": "check",
+            "feature_7_col4": "check",
+            "feature_8": "",
+            "feature_8_alignment": "left",
+            "feature_8_col1": "check",
+            "feature_8_col2": "check",
+            "feature_8_col3": "check",
+            "feature_8_col4": "check",
+            "feature_9": "",
+            "feature_9_alignment": "left",
+            "feature_9_col1": "check",
+            "feature_9_col2": "check",
+            "feature_9_col3": "check",
+            "feature_9_col4": "check",
+            "feature_10": "",
+            "feature_10_alignment": "left",
+            "feature_10_col1": "check",
+            "feature_10_col2": "check",
+            "feature_10_col3": "check",
+            "feature_10_col4": "check",
+            "background_color": "#ffffff",
+            "heading_color": "#000000",
+            "text_color": "#000000",
+            "header_bg_color": "#000000",
+            "header_text_color": "#ffffff",
+            "border_color": "#ededed",
+            "row_hover_color": "#f6f2ee",
+            "checkmark_color": "#054e4a",
+            "cross_color": "#a42003",
+            "highlight_bg_color": "#f6f2ee",
+            "highlight_label_bg": "#000000",
+            "highlight_label_color": "#ffffff",
+            "heading_size": 32,
+            "subheading_size": 16,
+            "header_font_size": 14,
+            "body_font_size": 15,
+            "section_padding": 0,
+            "container_padding": 80,
+            "cell_padding": 16,
+            "icon_size": 20
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_d8252b2_FYrrKa": {
+          "type": "ai_gen_block_d8252b2",
+          "disabled": true,
+          "settings": {
+            "title": "HOW WE STACK UP",
+            "title_alignment": "center",
+            "container_padding": 100,
+            "columns": 2,
+            "feature_column_title": "",
+            "column_1_title": "MIORA",
+            "column_2_title": "Them",
+            "column_3_title": "Enterprise",
+            "column_4_title": "Ultimate",
+            "feature_1_name": "Hand created design",
+            "feature_1_col1": "check",
+            "feature_1_col2": "cross",
+            "feature_1_col3": "check",
+            "feature_1_col4": "check",
+            "feature_2_name": "Premium materials",
+            "feature_2_col1": "check",
+            "feature_2_col2": "cross",
+            "feature_2_col3": "check",
+            "feature_2_col4": "check",
+            "feature_3_name": "Free shipping",
+            "feature_3_col1": "check",
+            "feature_3_col2": "cross",
+            "feature_3_col3": "check",
+            "feature_3_col4": "check",
+            "feature_4_name": "24/7 Support",
+            "feature_4_col1": "check",
+            "feature_4_col2": "cross",
+            "feature_4_col3": "check",
+            "feature_4_col4": "check",
+            "feature_5_name": "Gift Packaging",
+            "feature_5_col1": "check",
+            "feature_5_col2": "cross",
+            "feature_5_col3": "check",
+            "feature_5_col4": "check",
+            "feature_6_name": "",
+            "feature_6_col1": "check",
+            "feature_6_col2": "check",
+            "feature_6_col3": "check",
+            "feature_6_col4": "check",
+            "feature_7_name": "",
+            "feature_7_col1": "check",
+            "feature_7_col2": "check",
+            "feature_7_col3": "check",
+            "feature_7_col4": "check",
+            "feature_8_name": "",
+            "feature_8_col1": "check",
+            "feature_8_col2": "check",
+            "feature_8_col3": "check",
+            "feature_8_col4": "check",
+            "feature_9_name": "",
+            "feature_9_col1": "check",
+            "feature_9_col2": "check",
+            "feature_9_col3": "check",
+            "feature_9_col4": "check",
+            "feature_10_name": "",
+            "feature_10_col1": "check",
+            "feature_10_col2": "check",
+            "feature_10_col3": "check",
+            "feature_10_col4": "check",
+            "feature_name_alignment": "center",
+            "feature_column_width": 220,
+            "background_color": "#ffffff",
+            "title_color": "#000000",
+            "header_bg_color": "#000000",
+            "header_text_color": "#ffffff",
+            "feature_column_bg": "#ffffff",
+            "row_even_bg": "#ffffff",
+            "row_odd_bg": "#f9f9f9",
+            "text_color": "#000000",
+            "border_color": "#ededed",
+            "check_color": "#054e4a",
+            "cross_color": "#a42003"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_9e17234_xEx3YN",
+        "ai_gen_block_d8252b2_FYrrKa"
+      ],
+      "settings": {}
+    },
+    "rich_text_CfYHix": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_yx4kfR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Need More Answers?",
+            "heading_size": "h5",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_kKUqEp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We’re here to help—reach us anytime via our <strong>Contact </strong>page or email us at support@miora.us</p>",
+            "text_size": "text-base"
+          }
+        }
+      },
+      "block_order": [
+        "heading_yx4kfR",
+        "text_kKUqEp"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 50,
+        "padding_bottom": 16,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "blocks_7PtfHk": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_9b9725d_yWkifR": {
+          "type": "ai_gen_block_9b9725d",
+          "settings": {
+            "button_text": "Contact",
+            "collection": "",
+            "button_link": "shopify://pages/contact",
+            "button_color": "#8a8a8a",
+            "button_hover_color": "#6a6a6a",
+            "button_text_color": "#ffffff",
+            "button_hover_text_color": "#ffffff",
+            "border_color": "#8a8a8a",
+            "border_hover_color": "#6a6a6a",
+            "focus_color": "#0b61cd",
+            "border_radius": 0,
+            "border_width": 1,
+            "font_size": 13,
+            "font_weight": "500",
+            "text_transform": "uppercase",
+            "letter_spacing": 0,
+            "button_padding_vertical": 10,
+            "button_padding_horizontal": 20,
+            "hover_lift": -1
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_9b9725d_yWkifR"
+      ],
+      "name": "Collection button",
+      "settings": {}
+    },
+    "1759781065582a4ce3": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_dynamic_section_6Biawn": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": true,
+            "limit": 4,
+            "hide_thumbnails": false,
+            "maxwidth": 1080,
+            "is_sample": false
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_dynamic_section_6Biawn"
+      ],
+      "settings": {
+        "include_margins": true,
+        "padding_top": 32,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "recently_viewed_products_6MpkrA": {
+      "type": "recently-viewed-products",
+      "name": "t:sections.recently-viewed-products.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "<a href=\"/collections/towel-sets\" title=\"Towel Sets\">You May Also Like</a>",
+        "heading_size": "h4",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "",
+        "limit": 8,
+        "columns": 4,
+        "column_gap": "medium",
+        "row_gap": "medium",
+        "enable_slider": true,
+        "controls_position": "inside",
+        "pcard_image_ratio": "1/1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "show_section_divider": true,
+        "divider_width": "full",
+        "custom_class": ""
+      }
+    },
+    "image_with_text_MgddA8": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_XLgqVJ": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Bring the Spa Home"
+          }
+        },
+        "heading_J7mctK": {
+          "type": "heading",
+          "settings": {
+            "heading": "Crafted for Comfort, Designed for Calm.",
+            "heading_size": "h2",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_A3Dahr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every MIORA towel begins with long-staple cotton, woven for lasting softness and balance. Each thread, fold, and finish is guided by our belief that luxury should feel effortless — calm in every detail, beauty in every touch.</p><p></p>",
+            "text_size": "text-base"
+          }
+        },
+        "button_iVbnNU": {
+          "type": "button",
+          "settings": {
+            "button_label": "Discover Our Craft",
+            "button_link": "shopify://pages/our-story",
+            "button_style": "btn--secondary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_XLgqVJ",
+        "heading_J7mctK",
+        "text_A3Dahr",
+        "button_iVbnNU"
+      ],
+      "custom_css": [
+        "@media (max-width: 767.98px) {.image-with-text .image-with-text__inner {padding-top: 4.8rem; }}"
+      ],
+      "settings": {
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-1",
+        "image": "shopify://shop_images/Product_Image_1_row4_2025-10-06T19-41-05_1.png",
+        "image_height": "adapt",
+        "layout": "text_first",
+        "desktop_content_position": "center",
+        "desktop_content_alignment": "left",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "mobile_content_alignment": "left",
+        "padding_top": 100,
+        "padding_bottom": 88,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "image_with_text_overlay_NjBNje": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_zWnWFe": {
+          "type": "heading",
+          "settings": {
+            "heading": "Serenity in Every Detail",
+            "heading_size": "h4",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_QnRp8y": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Each MIORA towel is crafted to turn your daily ritual into a spa-like moment of calm.</p>",
+            "text_size": "text-base"
+          }
+        }
+      },
+      "block_order": [
+        "heading_zWnWFe",
+        "text_QnRp8y"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".image-with-text-ovelay__content-wrapper .rich-text {max-width: 578px;}"
+      ],
+      "settings": {
+        "container": "full",
+        "image": "shopify://shop_images/Product_Image_2_row4_2025-10-06T20-05-06_1.png",
+        "desktop_height": "adapt",
+        "overlay_opacity": 20,
+        "enable_parallax": true,
+        "parallax_direction": "zoom",
+        "color_scheme": "",
+        "content_position": "middle-center",
+        "content_alignment": "center",
+        "mobile_height": "medium",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "multicolumn_kxgWLe": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_FbVFwP": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Generated_Image_October_13_2025_-_3_55PM.png",
+            "image_width": "large",
+            "title": "Free & fast delivery",
+            "heading_size": "h4",
+            "text": "<p>Enjoy free ground shipping on all orders</p>",
+            "text_size": "text-base",
+            "button_label": "",
+            "button_style": "btn--underline",
+            "button_link": "",
+            "mobile_layout": "inherit"
+          }
+        },
+        "column_Ng4jJm": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Generated_Image_October_13_2025_-_3_57PM.png",
+            "image_width": "large",
+            "title": "Dedicated Support",
+            "heading_size": "h4",
+            "text": "<p>Our team is available 24/7 to assist with any questions you may have</p>",
+            "text_size": "text-base",
+            "button_label": "",
+            "button_style": "btn--underline",
+            "button_link": "",
+            "mobile_layout": "inherit"
+          }
+        },
+        "column_a4zfr7": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Generated_Image_October_13_2025_-_3_55PM_1.png",
+            "image_width": "large",
+            "title": "Simple Returns",
+            "heading_size": "h4",
+            "text": "<p>Exchange or return items within 30 days</p>",
+            "text_size": "text-base",
+            "button_label": "",
+            "button_style": "btn--underline",
+            "button_link": "",
+            "mobile_layout": "inherit"
+          }
+        },
+        "column_pjEAC3": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Generated_Image_October_13_2025_-_3_55PM_2.png",
+            "image_width": "large",
+            "title": "Flexible payments",
+            "heading_size": "h4",
+            "text": "<p>Variety of secure payment options for a seamless checkout</p>",
+            "text_size": "text-base",
+            "button_label": "",
+            "button_style": "btn--underline",
+            "button_link": "",
+            "mobile_layout": "inherit"
+          }
+        }
+      },
+      "block_order": [
+        "column_FbVFwP",
+        "column_Ng4jJm",
+        "column_a4zfr7",
+        "column_pjEAC3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "",
+        "heading_size": "h1",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "",
+        "text_size": "text-base",
+        "column_alignment": "center",
+        "columns_desktop": 4,
+        "column_gap": "extra-large",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 32,
+        "padding_bottom": 56,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "1765409056d2e7eb3c": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_dynamic_section_C4y3hG": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": false,
+            "limit": 20,
+            "hide_thumbnails": false,
+            "maxwidth": 1080,
+            "is_sample": false
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_dynamic_section_C4y3hG"
+      ],
+      "settings": {
+        "include_margins": true,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "main",
+    "1763155398ac3d24e5",
+    "testimonials_8JHr3L",
+    "176074050786ee145e",
+    "17631640015662bdb7",
+    "section_dual_image_with_text_gcnizy",
+    "image_with_text_wKUNjE",
+    "image_with_text_68iWkz",
+    "rich_text_mFFb8L",
+    "rich_text_GF9at8",
+    "scrolling_promotion_MeVHcn",
+    "rich_text_rdibKP",
+    "blocks_NeBTrG",
+    "rich_text_nUBTmx",
+    "image_with_text_zQ9iit",
+    "1765313043e3b6b3dd",
+    "rich_text_CfYHix",
+    "blocks_7PtfHk",
+    "1759781065582a4ce3",
+    "recently_viewed_products_6MpkrA",
+    "image_with_text_MgddA8",
+    "image_with_text_overlay_NjBNje",
+    "multicolumn_kxgWLe",
+    "1765409056d2e7eb3c"
+  ]
+}
