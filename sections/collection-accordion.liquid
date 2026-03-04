@@ -37,8 +37,17 @@
 
   @media screen and (max-width: 767px) {
     .collection-accordion__grid {
-      flex-direction: column;
-      height: auto;
+      flex-direction: row;
+      height: {{ section.settings.mobile_card_height }}px;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+    }
+    .collection-accordion__grid::-webkit-scrollbar {
+      display: none;
     }
   }
 
@@ -64,7 +73,14 @@
 
   @media screen and (max-width: 767px) {
     .collection-accordion__card {
-      height: {{ section.settings.mobile_card_height }}px;
+      flex: 0 0 100%;
+      height: 100%;
+      scroll-snap-align: start;
+    }
+    .collection-accordion__card-btn {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
   }
 
@@ -111,7 +127,7 @@
 
   .collection-accordion__card-subheading {
     display: block;
-    font-size: 0.75em;
+    font-size: {{ section.settings.subheading_size }}px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 6px;
@@ -120,7 +136,7 @@
 
   .collection-accordion__card-title {
     margin: 0 0 16px;
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-size: {{ section.settings.heading_size }}px;
     line-height: 1.2;
     color: #ffffff;
   }
@@ -174,6 +190,34 @@
   .collection-accordion__btn--filled:hover {
     background: transparent;
     color: #ffffff;
+  }
+
+  .collection-accordion__dots {
+    display: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    .collection-accordion__dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding-top: 14px;
+    }
+
+    .collection-accordion__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d0d0d0;
+      transition: background 0.3s ease;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+    }
+
+    .collection-accordion__dot.is-active {
+      background: #111111;
+    }
   }
 </style>
 
@@ -231,6 +275,11 @@
         </div>
       {%- endfor -%}
     </div>
+    <div class="collection-accordion__dots" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <button class="collection-accordion__dot{% if forloop.first %} is-active{% endif %}"></button>
+      {%- endfor -%}
+    </div>
   {%- else -%}
     {%- if request.design_mode -%}
       <div style="padding: 40px; text-align: center; background: #f4f4f4; color: #999;">
@@ -239,6 +288,31 @@
     {%- endif -%}
   {%- endif -%}
 </div>
+
+<script>
+  (function() {
+    var section = document.querySelector('#shopify-section-{{ section.id }}');
+    if (!section) return;
+    var grid = section.querySelector('.collection-accordion__grid');
+    var dots = section.querySelectorAll('.collection-accordion__dot');
+    if (!grid || !dots.length) return;
+
+    function updateDots() {
+      var index = Math.round(grid.scrollLeft / grid.offsetWidth);
+      dots.forEach(function(dot, i) {
+        dot.classList.toggle('is-active', i === index);
+      });
+    }
+
+    grid.addEventListener('scroll', updateDots, { passive: true });
+
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() {
+        grid.scrollTo({ left: grid.offsetWidth * i, behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -273,6 +347,26 @@
       "id": "text_color",
       "label": "Section heading color",
       "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Card heading size",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Card subheading size",
+      "default": 11
     },
     {
       "type": "range",
