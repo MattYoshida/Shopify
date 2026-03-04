@@ -251,58 +251,60 @@
         "image_opacity": 100,
         "overlay_opacity": 55,
         "padding_top": 36,
-        "padding_bottom": 52
+        "padding_bottom": 100
       }
     },
-    "1763159253f4b40189": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "image_with_text_overlay_qUEqmP": {
+    "image_with_text_overlay_9aQ6wx": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "subheading_KtP7jw": {
+        "subheading_yp9wKy": {
           "type": "subheading",
           "settings": {
-            "subheading": "Add a tagline"
+            "subheading": ""
           }
         },
-        "heading_LwVUtp": {
+        "heading_6de6rH": {
           "type": "heading",
           "settings": {
-            "heading": "Image with text overlay",
-            "heading_size": "hd1",
+            "heading": "700 GSM Long-staple Turkish cotton, tightly woven for comfort.",
+            "heading_size": "h4",
             "heading_highlight_style": "none"
           }
         },
-        "text_qQrM7A": {
+        "text_bDnVTU": {
           "type": "text",
           "settings": {
-            "text": "<p>Use this text to share information about your brand with your customers. <br>Describe a product, share announcements, or welcome customers to your store.</p>",
+            "text": "<p>Crafted for those who find beauty in simplicity.</p>",
             "text_size": "text-base"
           }
         }
       },
       "block_order": [
-        "subheading_KtP7jw",
-        "heading_LwVUtp",
-        "text_qQrM7A"
+        "subheading_yp9wKy",
+        "heading_6de6rH",
+        "text_bDnVTU"
       ],
       "name": "t:sections.image-with-text-overlay.name",
       "settings": {
         "container": "full",
-        "desktop_height": "extra-medium",
-        "overlay_opacity": 70,
+        "image": "shopify://shop_images/Remove_the_watermark_or_text_ove-2.jpg",
+        "desktop_height": "adapt",
+        "overlay_opacity": 15,
         "enable_parallax": true,
-        "parallax_direction": "vertical",
+        "parallax_direction": "zoom",
         "color_scheme": "",
-        "content_position": "middle-center",
+        "content_position": "middle-left",
         "content_alignment": "left",
-        "mobile_height": "auto",
+        "image_mobile": "shopify://shop_images/Remove_the_watermark_or_text_ove-2.jpg",
+        "mobile_height": "small",
         "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_bottom": 80,
         "custom_class": ""
       }
+    },
+    "1763159253f4b40189": {
+      "type": "_blocks",
+      "settings": {}
     },
     "featured_collection_nTAnFG": {
       "type": "featured-collection",
@@ -477,54 +479,6 @@
         "padding_bottom": 100,
         "show_section_divider": false,
         "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
-    "image_with_text_overlay_9aQ6wx": {
-      "type": "image-with-text-overlay",
-      "blocks": {
-        "subheading_yp9wKy": {
-          "type": "subheading",
-          "settings": {
-            "subheading": ""
-          }
-        },
-        "heading_6de6rH": {
-          "type": "heading",
-          "settings": {
-            "heading": "700 GSM Long-staple Turkish cotton, tightly woven for comfort.",
-            "heading_size": "h4",
-            "heading_highlight_style": "none"
-          }
-        },
-        "text_bDnVTU": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Crafted for those who find beauty in simplicity.</p>",
-            "text_size": "text-base"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_yp9wKy",
-        "heading_6de6rH",
-        "text_bDnVTU"
-      ],
-      "name": "t:sections.image-with-text-overlay.name",
-      "settings": {
-        "container": "full",
-        "image": "shopify://shop_images/Remove_the_watermark_or_text_ove-2.jpg",
-        "desktop_height": "adapt",
-        "overlay_opacity": 15,
-        "enable_parallax": true,
-        "parallax_direction": "zoom",
-        "color_scheme": "",
-        "content_position": "middle-left",
-        "content_alignment": "left",
-        "image_mobile": "shopify://shop_images/Remove_the_watermark_or_text_ove-2.jpg",
-        "mobile_height": "small",
-        "padding_top": 0,
-        "padding_bottom": 80,
         "custom_class": ""
       }
     },
@@ -836,13 +790,12 @@
     "video_hero_U3g4ir",
     "rich_text_pyVt9A",
     "collection_accordion_CgnpAH",
+    "image_with_text_overlay_9aQ6wx",
     "1763159253f4b40189",
-    "image_with_text_overlay_qUEqmP",
     "featured_collection_nTAnFG",
     "17597827292dff5f99",
     "image_with_text_PGrqhp",
     "image_with_text_rUWNME",
-    "image_with_text_overlay_9aQ6wx",
     "image_width_text_columns_LU3FNW",
     "image_gallery_kiHkXK",
     "1763157662d9ad1a3e",
