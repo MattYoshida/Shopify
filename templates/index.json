@@ -186,6 +186,40 @@
         "custom_class": ""
       }
     },
+    "featured_collection_nTAnFG": {
+      "type": "featured-collection",
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "",
+        "header_layout": "vertical",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "",
+        "text_size": "text-lg",
+        "show_collection_description": false,
+        "collection": "towel-sets",
+        "limit": 8,
+        "columns": 4,
+        "column_gap": "small",
+        "row_gap": "inherit",
+        "grid_layout": "standard",
+        "enable_slider": true,
+        "controls_position": "outside",
+        "pcard_image_ratio": "1/1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "show_all_button_on_top": false,
+        "button_label": "",
+        "button_style": "btn--primary",
+        "padding_top": 0,
+        "padding_bottom": 100,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
     "collection_accordion_CgnpAH": {
       "type": "collection-accordion",
       "blocks": {
@@ -240,6 +274,7 @@
         "card_9RqYtT",
         "card_XniPxk"
       ],
+      "disabled": true,
       "name": "Collection Accordion",
       "settings": {
         "subheading": "",
@@ -307,40 +342,6 @@
     "1763159253f4b40189": {
       "type": "_blocks",
       "settings": {}
-    },
-    "featured_collection_nTAnFG": {
-      "type": "featured-collection",
-      "custom_css": [],
-      "settings": {
-        "color_scheme": "",
-        "header_layout": "vertical",
-        "heading": "Bath Sets",
-        "heading_size": "h2",
-        "heading_highlight_style": "none",
-        "subheading": "",
-        "description": "",
-        "text_size": "text-lg",
-        "show_collection_description": false,
-        "collection": "towel-sets",
-        "limit": 8,
-        "columns": 4,
-        "column_gap": "small",
-        "row_gap": "inherit",
-        "grid_layout": "standard",
-        "enable_slider": true,
-        "controls_position": "outside",
-        "pcard_image_ratio": "1/1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "show_all_button_on_top": false,
-        "button_label": "",
-        "button_style": "btn--primary",
-        "padding_top": 100,
-        "padding_bottom": 100,
-        "show_section_divider": false,
-        "divider_width": "fixed",
-        "custom_class": ""
-      }
     },
     "17597827292dff5f99": {
       "type": "_blocks",
@@ -604,10 +605,10 @@
     "slideshow_zKPFFV",
     "video_hero_U3g4ir",
     "rich_text_pyVt9A",
+    "featured_collection_nTAnFG",
     "collection_accordion_CgnpAH",
     "image_with_text_overlay_9aQ6wx",
     "1763159253f4b40189",
-    "featured_collection_nTAnFG",
     "17597827292dff5f99",
     "image_with_text_PGrqhp",
     "1763157662d9ad1a3e",
