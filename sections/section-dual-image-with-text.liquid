@@ -90,7 +90,7 @@
   class="section section--padding image-with-text image-with-text--{{ section.settings.layout | replace: '_', '-' }} color-{{ section.settings.section_color_scheme }}{% if color_inherit %} color-inherit{% endif %}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class }}{% endif %}"
   style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
-  <div class="page-width">
+  <div class="{% unless section.settings.full_width %}page-width{% endunless %}">
     <div class="image-with-text__wrapper hero hero--{{ section.settings.image_height }} f-grid f-grid-1-cols md:f-grid-2-cols f-grid--gap-none blocks-radius">
       <parallax-element
         class="block overflow-hidden{% if color_inherit %} blocks-radius{% endif %}"
@@ -241,6 +241,13 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.container.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false,
+      "info": "Remove page-width constraint to fill the full browser width"
     },
     {
       "type": "header",
