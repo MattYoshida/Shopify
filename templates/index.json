@@ -557,67 +557,6 @@
         "custom_class": ""
       }
     },
-    "image_gallery_kiHkXK": {
-      "type": "image-gallery",
-      "blocks": {
-        "image_E73EnA": {
-          "type": "image",
-          "settings": {
-            "link": ""
-          }
-        },
-        "image_PiTeyP": {
-          "type": "image",
-          "settings": {
-            "link": ""
-          }
-        },
-        "image_cqMqka": {
-          "type": "image",
-          "settings": {
-            "link": ""
-          }
-        },
-        "image_QKA6Vz": {
-          "type": "image",
-          "settings": {
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_E73EnA",
-        "image_PiTeyP",
-        "image_cqMqka",
-        "image_QKA6Vz"
-      ],
-      "name": "t:sections.image-gallery.name",
-      "settings": {
-        "color_scheme": "",
-        "header_layout": "vertical",
-        "heading": "Image gallery",
-        "heading_size": "h1",
-        "heading_highlight_style": "none",
-        "subheading": "",
-        "description": "",
-        "text_size": "text-base",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "btn--primary",
-        "social_media": "none",
-        "columns": 4,
-        "column_gap": "medium",
-        "row_gap": "inherit",
-        "image_ratio": "1/1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 50,
-        "padding_bottom": 50,
-        "show_section_divider": false,
-        "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
     "1763157662d9ad1a3e": {
       "type": "_blocks",
       "blocks": {
@@ -797,7 +736,6 @@
     "image_with_text_PGrqhp",
     "image_with_text_rUWNME",
     "image_width_text_columns_LU3FNW",
-    "image_gallery_kiHkXK",
     "1763157662d9ad1a3e",
     "image_with_text_overlay_74yawg",
     "multicolumn_z9eVXp"
