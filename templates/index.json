@@ -152,116 +152,77 @@
         "custom_class": ""
       }
     },
-    "1763159253f4b40189": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "collection_list_9FTTFG": {
-      "type": "collection-list",
+    "collection_accordion_CgnpAH": {
+      "type": "collection-accordion",
       "blocks": {
-        "featured_collection_XdUp34": {
-          "type": "featured_collection",
+        "card_wz47PD": {
+          "type": "card",
           "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/custom_nano-banana-2_1772604317098.png",
+            "subheading": "",
+            "heading": "Resort Bedding",
+            "button_label": "Explore Bedding",
+            "button_link": "",
+            "button_style": "outline"
           }
         },
-        "featured_collection_wr44RT": {
-          "type": "featured_collection",
+        "card_kgTF4n": {
+          "type": "card",
           "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/custom_nano-banana-2_1772608289879.png",
+            "subheading": "",
+            "heading": "700 GSM Towels",
+            "button_label": "Shop Towels",
+            "button_link": "",
+            "button_style": "outline"
           }
         },
-        "featured_collection_QEkKxb": {
-          "type": "featured_collection",
+        "card_9RqYtT": {
+          "type": "card",
           "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/custom_nano-banana-2_1772605017711.png",
+            "subheading": "",
+            "heading": "Plush Robes",
+            "button_label": "Shop Apparel",
+            "button_link": "",
+            "button_style": "outline"
           }
         },
-        "featured_collection_f6PUhY": {
-          "type": "featured_collection",
+        "card_XniPxk": {
+          "type": "card",
           "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_zxktdy": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_xntdkH": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_Vxg8BJ": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_PMEWDt": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/custom_nano-banana-2_1772608594227.png",
+            "subheading": "",
+            "heading": "Spa Accessories",
+            "button_label": "View Accessories",
+            "button_link": "",
+            "button_style": "outline"
           }
         }
       },
       "block_order": [
-        "featured_collection_XdUp34",
-        "featured_collection_wr44RT",
-        "featured_collection_QEkKxb",
-        "featured_collection_f6PUhY",
-        "featured_collection_zxktdy",
-        "featured_collection_xntdkH",
-        "featured_collection_Vxg8BJ",
-        "featured_collection_PMEWDt"
+        "card_wz47PD",
+        "card_kgTF4n",
+        "card_9RqYtT",
+        "card_XniPxk"
       ],
-      "name": "t:sections.collection-list.name",
+      "name": "Collection Accordion",
       "settings": {
-        "color_scheme": "",
-        "layout": "standard",
         "subheading": "",
         "heading": "",
-        "heading_size": "h1",
-        "heading_highlight_style": "none",
-        "description": "",
-        "text_size": "text-base",
-        "card_color_inherited": false,
-        "show_product_count": true,
-        "show_icon": true,
-        "card_style": "",
-        "card_image_ratio": "adapt",
-        "content_alignment": "left",
-        "columns_desktop": 4,
-        "column_gap": "medium",
-        "row_gap": "medium",
-        "enable_slider": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 50,
-        "padding_bottom": 50,
-        "show_section_divider": false,
-        "divider_width": "fixed",
-        "custom_class": ""
+        "heading_alignment": "left",
+        "text_color": "#000000",
+        "max_height": 560,
+        "mobile_card_height": 300,
+        "image_opacity": 100,
+        "overlay_opacity": 55,
+        "padding_top": 36,
+        "padding_bottom": 52
       }
+    },
+    "1763159253f4b40189": {
+      "type": "_blocks",
+      "settings": {}
     },
     "image_with_text_overlay_qUEqmP": {
       "type": "image-with-text-overlay",
@@ -839,8 +800,8 @@
   "order": [
     "slideshow_zKPFFV",
     "video_hero_U3g4ir",
+    "collection_accordion_CgnpAH",
     "1763159253f4b40189",
-    "collection_list_9FTTFG",
     "image_with_text_overlay_qUEqmP",
     "featured_collection_nTAnFG",
     "17597827292dff5f99",
