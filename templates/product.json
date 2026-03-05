@@ -959,7 +959,7 @@
             "image_2_ratio": "3-4",
             "image_max_width": 65,
             "gap_desktop": 80,
-            "gap_mobile": 0,
+            "gap_mobile": 8,
             "border_width": 0,
             "border_color": "#000000"
           },
