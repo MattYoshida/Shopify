@@ -133,7 +133,7 @@
   }
 
   .ai-dual-image-carousel-item-{{ ai_gen_id }} {
-    flex: 0 0 100%;
+    flex: 0 0 72%;
     border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
   }
 
@@ -168,26 +168,29 @@
     object-fit: contain;
   }
 
-  .ai-dual-image-dots-{{ ai_gen_id }} {
-    display: flex;
+  .ai-dual-image-progress-{{ ai_gen_id }} {
+    display: none;
     justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
+    gap: 6px;
+    margin-top: 16px;
   }
 
-  .ai-dual-image-dot-{{ ai_gen_id }} {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #d3d3d3;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+  .ai-dual-image-progress-segment-{{ ai_gen_id }} {
+    width: 32px;
+    height: 4px;
+    background-color: #d0d0d0;
+    border-radius: 4px;
     transition: background-color 0.3s ease;
   }
 
-  .ai-dual-image-dot-{{ ai_gen_id }}.active {
-    background-color: #000000;
+  .ai-dual-image-progress-segment-{{ ai_gen_id }}.active {
+    background-color: #1a1a1a;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-dual-image-progress-{{ ai_gen_id }} {
+      display: flex;
+    }
   }
 
   .ai-dual-image-placeholder-{{ ai_gen_id }} {
@@ -314,18 +317,11 @@
         </div>
       </div>
 
-      <div class="ai-dual-image-dots-{{ ai_gen_id }}">
-        <button
-          class="ai-dual-image-dot-{{ ai_gen_id }} active"
-          data-index="0"
-          aria-label="View image 1"
-        ></button>
-        <button
-          class="ai-dual-image-dot-{{ ai_gen_id }}"
-          data-index="1"
-          aria-label="View image 2"
-        ></button>
-      </div>
+    </div>
+
+    <div class="ai-dual-image-progress-{{ ai_gen_id }}" aria-hidden="true">
+      <div class="ai-dual-image-progress-segment-{{ ai_gen_id }} active"></div>
+      <div class="ai-dual-image-progress-segment-{{ ai_gen_id }}"></div>
     </div>
   </div>
 </dual-image-carousel-{{ ai_gen_id }}>
@@ -337,12 +333,14 @@
         super();
         this.currentIndex = 0;
         this.startX = 0;
+        this.startY = 0;
         this.isDragging = false;
+        this.isHorizontal = null;
       }
 
       connectedCallback() {
         this.carousel = this.querySelector('.ai-dual-image-carousel-{{ ai_gen_id }}');
-        this.dots = this.querySelectorAll('.ai-dual-image-dot-{{ ai_gen_id }}');
+        this.segments = this.querySelectorAll('.ai-dual-image-progress-segment-{{ ai_gen_id }}');
         this.items = this.querySelectorAll('.ai-dual-image-carousel-item-{{ ai_gen_id }}');
 
         if (!this.carousel || this.items.length === 0) return;
@@ -351,53 +349,52 @@
       }
 
       setupEventListeners() {
-        this.dots.forEach((dot) => {
-          dot.addEventListener('click', (e) => {
-            const index = parseInt(e.target.dataset.index);
-            this.goToSlide(index);
-          });
-        });
-
         this.carousel.addEventListener('touchstart', (e) => {
           this.startX = e.touches[0].clientX;
+          this.startY = e.touches[0].clientY;
           this.isDragging = true;
-        });
+          this.isHorizontal = null;
+        }, { passive: true });
 
         this.carousel.addEventListener('touchmove', (e) => {
           if (!this.isDragging) return;
-          e.preventDefault();
-        });
+          const dx = Math.abs(e.touches[0].clientX - this.startX);
+          const dy = Math.abs(e.touches[0].clientY - this.startY);
+          if (this.isHorizontal === null && (dx > 5 || dy > 5)) {
+            this.isHorizontal = dx > dy;
+          }
+          if (this.isHorizontal) e.preventDefault();
+        }, { passive: false });
 
         this.carousel.addEventListener('touchend', (e) => {
-          if (!this.isDragging) return;
+          if (!this.isDragging || !this.isHorizontal) { this.isDragging = false; return; }
           this.isDragging = false;
 
-          const endX = e.changedTouches[0].clientX;
-          const diff = this.startX - endX;
-
-          if (Math.abs(diff) > 50) {
+          const diff = this.startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) {
             if (diff > 0 && this.currentIndex < this.items.length - 1) {
               this.goToSlide(this.currentIndex + 1);
             } else if (diff < 0 && this.currentIndex > 0) {
               this.goToSlide(this.currentIndex - 1);
             }
           }
-        });
+        }, { passive: true });
       }
 
       goToSlide(index) {
         this.currentIndex = index;
+        const containerWidth = this.carousel.parentElement.offsetWidth;
         const itemWidth = this.items[0].offsetWidth;
         const gap = {{ block.settings.gap_mobile }};
-        const offset = -(itemWidth + gap) * index;
+        const totalWidth = this.items.length * itemWidth + (this.items.length - 1) * gap;
+        // Cap offset so last item never goes past right-aligned position
+        const maxOffset = totalWidth - containerWidth;
+        const rawOffset = (itemWidth + gap) * index;
+        const offset = -Math.min(rawOffset, maxOffset);
         this.carousel.style.transform = `translateX(${offset}px)`;
 
-        this.dots.forEach((dot, i) => {
-          if (i === index) {
-            dot.classList.add('active');
-          } else {
-            dot.classList.remove('active');
-          }
+        this.segments.forEach((seg, i) => {
+          seg.classList.toggle('active', i === index);
         });
       }
     }
@@ -588,10 +585,10 @@
       "id": "gap_mobile",
       "min": 0,
       "max": 50,
-      "step": 5,
+      "step": 2,
       "unit": "px",
       "label": "Gap between images (mobile)",
-      "default": 0
+      "default": 16
     },
     {
       "type": "header",
