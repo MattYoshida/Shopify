@@ -1240,7 +1240,7 @@
           "type": "text",
           "settings": {
             "text": "<p>We’re here to help—Visit our FAQ or reach us anytime via our Contact<strong> </strong>page</p>",
-            "text_size": "text-base"
+            "text_size": "text-sm"
           }
         }
       },
@@ -1265,9 +1265,9 @@
         "ai_gen_block_9b9725d_yWkifR": {
           "type": "ai_gen_block_9b9725d",
           "settings": {
-            "button_text": "Contact",
+            "button_text": "FAQ",
             "collection": "",
-            "button_link": "shopify://pages/contact",
+            "button_link": "shopify://pages/faq-1",
             "button_color": "#8a8a8a",
             "button_hover_color": "#6a6a6a",
             "button_text_color": "#ffffff",
