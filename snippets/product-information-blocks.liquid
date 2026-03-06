@@ -50,7 +50,8 @@
               {%- render 'price',
                 product: product,
                 use_variant: true,
-                show_sale_badge: false,
+                show_sale_badge: block.settings.show_sale_badge_inline,
+                sale_badge_type: 'percentage',
                 price_class: 'f-price--large'
               -%}
             </div>
