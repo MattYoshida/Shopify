@@ -45,17 +45,11 @@
             "emptyRatingWidget": false
           }
         },
-        "badges": {
-          "type": "badges",
-          "settings": {
-            "show_soldout_badge": false,
-            "show_sale_badge": true,
-            "sale_badge_type": "percentage"
-          }
-        },
         "price": {
           "type": "price",
-          "settings": {}
+          "settings": {
+            "show_sale_badge_inline": true
+          }
         },
         "description": {
           "type": "description",
@@ -191,7 +185,6 @@
         "title",
         "custom_liquid_F7Dp37",
         "loox_reviews_loox_rating_AjWEmf",
-        "badges",
         "price",
         "description",
         "text_Mhzeqg",
