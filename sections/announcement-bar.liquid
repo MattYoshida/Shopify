@@ -21,7 +21,7 @@
                 <div class="announcement-bar__content rte text-center">
               {%- endif -%}
               {%- if block.settings.text != blank -%}
-                <p class="announcement-bar__text">{{ block.settings.text }}</p>
+                <p class="announcement-bar__text"{% if block.settings.underline_text %} style="text-decoration:underline;"{% endif %}>{{ block.settings.text }}</p>
               {%- endif -%}
               {%- if block.settings.link != blank -%}
                 </a>
@@ -168,6 +168,12 @@
           "type": "url",
           "id": "link",
           "label": "t:sections.all.link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "underline_text",
+          "label": "Underline text",
+          "default": false
         }
       ]
     },
