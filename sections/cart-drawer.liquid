@@ -207,8 +207,10 @@
                             </div>
                           {%- endif -%}
                           <div class="cart-item__prices">
-                            <div class="price font-body-bolder{% if item.original_price != item.final_price %} price--on-sale{% endif %}">
+                            <div class="price font-body-bolder{% if item.original_price != item.final_price or item.variant.compare_at_price > item.variant.price %} price--on-sale{% endif %}">
                               {%- liquid
+                                assign compare_price = item.variant.compare_at_price
+                                assign current_price = item.final_price
                                 assign money_price = item.original_price | money
                                 if settings.currency_code_enabled
                                   assign money_price = item.original_price | money_with_currency
@@ -219,14 +221,27 @@
                                 <s class="price__sale font-body text-sm text-subtext">{{ money_price }}</s>
                                 <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
                                 <span class="price__regular">
-                                  {%- liquid 
+                                  {%- liquid
                                     if settings.currency_code_enabled
                                       echo item.final_price | money_with_currency
                                     else
                                       echo item.final_price | money
-                                    endif  
+                                    endif
                                   -%}
                                 </span>
+                                {%- assign savings_percent = item.original_price | minus: item.final_price | times: 100 | divided_by: item.original_price -%}
+                                <span class="f-badge f-badge--sale" style="margin-top:2px;">Save {{ savings_percent }}%</span>
+                              {%- elsif compare_price > current_price -%}
+                                <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                                {%- if settings.currency_code_enabled -%}
+                                  <s class="price__sale font-body text-sm text-subtext">{{ compare_price | money_with_currency }}</s>
+                                {%- else -%}
+                                  <s class="price__sale font-body text-sm text-subtext">{{ compare_price | money }}</s>
+                                {%- endif -%}
+                                <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                                <span class="price__regular">{{ money_price }}</span>
+                                {%- assign savings_percent = compare_price | minus: current_price | times: 100 | divided_by: compare_price -%}
+                                <span class="f-badge f-badge--sale" style="margin-top:2px;">Save {{ savings_percent }}%</span>
                               {%- else -%}
                                 {{- money_price -}}
                               {%- endif -%}
@@ -810,6 +825,27 @@
                     {%- endif -%}
                   </ul>
                 {%- endif -%}
+                {%- liquid
+                  assign total_savings = 0
+                  for item in cart.items
+                    if item.variant.compare_at_price > item.variant.price
+                      assign compare_savings = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity
+                      assign total_savings = total_savings | plus: compare_savings
+                    endif
+                    for allocation in item.line_level_discount_allocations
+                      assign total_savings = total_savings | plus: allocation.amount
+                    endfor
+                  endfor
+                  for discount in cart.cart_level_discount_applications
+                    assign total_savings = total_savings | plus: discount.total_allocated_amount
+                  endfor
+                -%}
+                {%- if total_savings > 0 -%}
+                  <div class="flex justify-between items-center" style="color:#2a7a2a; font-weight: var(--font-body-weight-bold);">
+                    <span>You're saving</span>
+                    <span>{{ total_savings | money_with_currency }}</span>
+                  </div>
+                {%- endif -%}
                 <div class="totals flex justify-between items-center">
                   <span class="totals__subtotal h4">
                     {{- 'sections.cart.estimated_total' | t -}}
@@ -819,17 +855,7 @@
                   </span>
                 </div>
                 <div class="tax-note">
-                  {%- liquid
-                    if cart.taxes_included and shop.shipping_policy.body != blank
-                      echo 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url
-                    elsif cart.taxes_included
-                      echo 'sections.cart.taxes_included_but_shipping_at_checkout' | t
-                    elsif shop.shipping_policy.body != blank
-                      echo 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url
-                    else
-                      echo 'sections.cart.taxes_and_shipping_at_checkout' | t
-                    endif
-                  -%}
+                  Free Shipping on ALL orders
                 </div>
               </div>
               <form
