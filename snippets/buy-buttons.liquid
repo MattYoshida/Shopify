@@ -21,7 +21,7 @@
       assign show_dynamic_checkout = true
     endif
     assign show_mobile_dynamic_checkout = false
-    if gift_card_recipient_feature_active == false and product.quantity_price_breaks_configured? != true
+    if block.settings.show_mobile_dynamic_checkout and gift_card_recipient_feature_active == false and product.quantity_price_breaks_configured? != true
       assign show_mobile_dynamic_checkout = true
     endif
   -%}
@@ -366,6 +366,26 @@
           <div class="mobile-dynamic-checkout">
             {{- form | payment_button -}}
           </div>
+          <style>
+            @media (max-width: 767.98px) {
+              {%- unless block.settings.mobile_show_shop_pay -%}
+              .mobile-dynamic-checkout [aria-label*="Shop Pay"],
+              .mobile-dynamic-checkout [aria-label*="shop pay"] { display: none !important; }
+              {%- endunless -%}
+              {%- unless block.settings.mobile_show_paypal -%}
+              .mobile-dynamic-checkout [aria-label*="PayPal"],
+              .mobile-dynamic-checkout [aria-label*="paypal"] { display: none !important; }
+              {%- endunless -%}
+              {%- unless block.settings.mobile_show_apple_pay -%}
+              .mobile-dynamic-checkout [aria-label*="Apple Pay"],
+              .mobile-dynamic-checkout [aria-label*="apple pay"] { display: none !important; }
+              {%- endunless -%}
+              {%- unless block.settings.mobile_show_google_pay -%}
+              .mobile-dynamic-checkout [aria-label*="Google Pay"],
+              .mobile-dynamic-checkout [aria-label*="google pay"] { display: none !important; }
+              {%- endunless -%}
+            }
+          </style>
         {%- endif -%}
       </div>
       <div class="product-form__error-message blocks-radius-md alert alert--error" role="alert" hidden></div>
