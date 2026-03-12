@@ -76,16 +76,10 @@
             "heading_3": "OEKO-TEX®"
           }
         },
-        "vo_product_options_block_VaFqEQ": {
-          "type": "shopify://apps/vo-product-options/blocks/block/430cbd7b-bd20-4c16-ba41-db6f4c645164",
-          "settings": {
-            "font_color": ""
-          }
-        },
         "custom_liquid_Ch8apc": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% if product.metafields.custom.related_bundles.value %}\n  <div class=\"bundle-switcher\">\n    {% for bundle in product.metafields.custom.related_bundles.value %}\n      <a href=\"{{ bundle.url }}\"\n         class=\"bundle-option{% if bundle.handle == product.handle %} active{% endif %}{% unless bundle.available %} disabled{% endunless %}\">\n        {{ bundle.metafields.custom.title_product_count }}\n      </a>\n    {% endfor %}\n  </div>\n{% endif %}"
+            "custom_liquid": "{% if product.metafields.custom.related_bundles.value %}\n  <div class=\"bundle-switcher\" id=\"bundle-switcher\">\n    <span class=\"bundle-switcher__label\">Shop the full collection</span>\n    {% for bundle in product.metafields.custom.related_bundles.value %}\n      <a href=\"{{ bundle.url }}\"\n         class=\"bundle-option{% if bundle.handle == product.handle %} active{% endif %}{% unless bundle.available %} disabled{% endunless %}\"\n         data-handle=\"{{ bundle.handle }}\">\n        {{ bundle.metafields.custom.title_product_count }}\n      </a>\n    {% endfor %}\n  </div>\n  <script>\n    (function() {\n      function initBundleSwitcher() {\n        var switcher = document.getElementById('bundle-switcher');\n        if (!switcher) return;\n        switcher.addEventListener('click', function(e) {\n          var link = e.target.closest('.bundle-option');\n          if (!link || link.classList.contains('active') || link.classList.contains('disabled')) return;\n          e.preventDefault();\n          var url = link.getAttribute('href');\n          var mainSection = document.querySelector('[id$=\"__main\"]') || document.querySelector('[id=\"shopify-section-main\"]');\n          if (!mainSection) { window.location.href = url; return; }\n          var sectionId = mainSection.id.replace('shopify-section-', '');\n          mainSection.classList.add('bundle-switching');\n          fetch(url + '?sections=' + encodeURIComponent(sectionId))\n            .then(function(r) { return r.json(); })\n            .then(function(data) {\n              var html = data[sectionId];\n              if (!html) { window.location.href = url; return; }\n              var parser = new DOMParser();\n              var doc = parser.parseFromString(html, 'text/html');\n              var newSection = doc.querySelector('[id$=\"__main\"]') || doc.querySelector('[id=\"shopify-section-main\"]');\n              if (!newSection) { window.location.href = url; return; }\n              mainSection.innerHTML = newSection.innerHTML;\n              history.pushState({}, '', url);\n              document.dispatchEvent(new CustomEvent('shopify:section:load', { detail: { sectionId: sectionId } }));\n              mainSection.classList.remove('bundle-switching');\n            })\n            .catch(function() { window.location.href = url; });\n        });\n      }\n      if (document.readyState === 'loading') {\n        document.addEventListener('DOMContentLoaded', initBundleSwitcher);\n      } else {\n        initBundleSwitcher();\n      }\n    })();\n  </script>\n{% endif %}"
           }
         },
         "custom_liquid_wgiXpb": {
@@ -189,7 +183,6 @@
         "description",
         "text_Mhzeqg",
         "icon_with_text_P4FPxn",
-        "vo_product_options_block_VaFqEQ",
         "custom_liquid_Ch8apc",
         "custom_liquid_wgiXpb",
         "custom_liquid_VXFAaC",

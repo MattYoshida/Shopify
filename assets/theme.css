@@ -6715,48 +6715,68 @@ body:not(.header-pinned) .header-scrolled .header {
 
 .bundle-switcher {
   position: relative;
-  z-index: 5; /* Keeps links clickable above overlays */
+  z-index: 5;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin: 22px 0;
 }
 
-.bundle-title {
+.bundle-switcher__label {
   flex-basis: 100%;
-  font-family: var(--font-heading-family, "Poppins", sans-serif);
+  font-family: var(--font-body-family, "Poppins", sans-serif);
+  font-size: 11px;
   font-weight: 600;
-  font-size: 15px;
-  margin-bottom: 6px;
-  color: var(--color-heading, #111);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 4px;
 }
 
 .bundle-option {
   position: relative;
-  z-index: 5; /* Ensures each button is clickable */
+  z-index: 5;
   cursor: pointer;
-  display: inline-block;
-  padding: 6px 12px;
-  border: 1px solid #d6d6d6;
-  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 4px;
   text-decoration: none;
   font-size: 12px;
   font-family: var(--font-body-family, "Poppins", sans-serif);
-  color: #222;
-  background-color: #fff;
-  transition: all 0.25s ease;
+  color: #444;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
 }
 
-/* Hover and active states */
+.bundle-option::after {
+  content: '→';
+  font-size: 11px;
+  opacity: 0.4;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
 .bundle-option:hover {
-  border-color: #111;
-  background-color: #f8f8f8;
+  border-color: #999;
+  background-color: #f2f2f2;
+  color: #111;
+}
+
+.bundle-option:hover::after {
+  opacity: 0.8;
+  transform: translateX(2px);
 }
 
 .bundle-option.active {
   background-color: #2C3E50;
   color: #fff;
   border-color: #2C3E50;
+}
+
+.bundle-option.active::after {
+  content: '';
 }
 
 .bundle-option.disabled {
@@ -6767,6 +6787,13 @@ body:not(.header-pinned) .header-scrolled .header {
 /* Guarantee clickability (override Modiva containers) */
 .bundle-switcher * {
   pointer-events: auto !important;
+}
+
+/* Bundle switching loading state */
+.bundle-switching {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
 #product-form-installment-template--19888122790116__main {
 
