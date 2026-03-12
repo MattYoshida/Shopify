@@ -611,3 +611,9 @@
     color: Window;
   }
 }
+
+/* Dynamic checkout buttons: mobile only */
+.mobile-dynamic-checkout { display: none; }
+@media (max-width: 767.98px) {
+  .mobile-dynamic-checkout { display: block; margin-top: 0.8rem; }
+}
