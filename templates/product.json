@@ -62,20 +62,6 @@
             "text_style": "body"
           }
         },
-        "icon_with_text_P4FPxn": {
-          "type": "icon-with-text",
-          "settings": {
-            "layout": "horizontal",
-            "title_font": "body",
-            "title_size": "text-base",
-            "icon_1": "check-circle",
-            "heading_1": "Super-Plush 700 GSM",
-            "icon_2": "check-circle",
-            "heading_2": "100% Organic Turkish Cotton",
-            "icon_3": "check-circle",
-            "heading_3": "OEKO-TEX®"
-          }
-        },
         "custom_liquid_Ch8apc": {
           "type": "custom_liquid",
           "settings": {
@@ -116,6 +102,20 @@
             "heading_2": "30 day returns",
             "icon_3": "seal-check",
             "heading_3": ""
+          }
+        },
+        "icon_with_text_P4FPxn": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "title_font": "body",
+            "title_size": "text-base",
+            "icon_1": "check-circle",
+            "heading_1": "Super-Plush 700 GSM",
+            "icon_2": "check-circle",
+            "heading_2": "100% Organic Turkish Cotton",
+            "icon_3": "check-circle",
+            "heading_3": "OEKO-TEX®"
           }
         },
         "pickup_availability": {
@@ -182,12 +182,12 @@
         "price",
         "description",
         "text_Mhzeqg",
-        "icon_with_text_P4FPxn",
         "custom_liquid_Ch8apc",
         "custom_liquid_wgiXpb",
         "custom_liquid_VXFAaC",
         "buy_buttons",
         "icon_with_text",
+        "icon_with_text_P4FPxn",
         "pickup_availability",
         "complementary",
         "collapsible-row-1",
