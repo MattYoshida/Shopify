@@ -132,5 +132,15 @@
     {% if settings.pcard_show_quickview_button or settings.pcard_choose_options_actions == 'open_popup' %}
       <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
     {% endif %}
+  <script>
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href="#popup"]');
+      if (link) {
+        e.preventDefault();
+        window._klOnsite = window._klOnsite || [];
+        window._klOnsite.push(['openForm', 'VDdPwG']);
+      }
+    });
+  </script>
   </body>
 </html>
