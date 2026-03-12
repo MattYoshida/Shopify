@@ -18,14 +18,16 @@
           "type": "announcement_bar",
           "settings": {
             "text": "<a href=\"/collections/towel-sets\" title=\"Towel Sets\"><strong>SAVE ON SPRING SALE!</strong></a>",
-            "link": ""
+            "link": "",
+            "underline_text": false
           }
         },
         "announcement_bar_FCCaeU": {
           "type": "announcement_bar",
           "settings": {
             "text": "NEW CUSTOMERS $10 OFF!",
-            "link": ""
+            "link": "#popup",
+            "underline_text": true
           }
         }
       },
