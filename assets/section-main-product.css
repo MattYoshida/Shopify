@@ -616,4 +616,12 @@
 .mobile-dynamic-checkout { display: none; }
 @media (max-width: 767.98px) {
   .mobile-dynamic-checkout { display: block; margin-top: 0.8rem; }
+  .mobile-dynamic-checkout .shopify-payment-button__button {
+    min-height: 3.6rem !important;
+    font-size: 1.2rem !important;
+  }
+  .mobile-dynamic-checkout .shopify-payment-button__more-options {
+    font-size: 1.1rem !important;
+    margin-top: 0.4rem !important;
+  }
 }
