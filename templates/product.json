@@ -202,7 +202,7 @@
       ],
       "custom_css": [
         ".loox-rating {margin-top: -1rem;}",
-        ".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}"
+        ".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}",
       ],
       "settings": {
         "color_scheme": "scheme-1",
@@ -295,106 +295,6 @@
         "padding_bottom": 64,
         "show_section_divider": false,
         "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
-    "rich_text_GF9at8": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_WpAr36": {
-          "type": "heading",
-          "settings": {
-            "heading": "Where You Will Find Us",
-            "heading_size": "hd3",
-            "heading_highlight_style": "none"
-          }
-        },
-        "text_kxKTYA": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Experience the same uncompromising quality found in the world’s most exclusive suites.</p>",
-            "text_size": "text-lg"
-          }
-        }
-      },
-      "block_order": [
-        "heading_WpAr36",
-        "text_kxKTYA"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "content_alignment": "center",
-        "padding_top": 100,
-        "padding_bottom": 0,
-        "show_section_divider": false,
-        "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
-    "scrolling_promotion_MeVHcn": {
-      "type": "scrolling-promotion",
-      "blocks": {
-        "image_JNXfny": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/custom_nano-banana-pro_1766458991752.png",
-            "image_height": 152,
-            "image_rounded": true,
-            "image_link": "",
-            "image_height_mobile": 90
-          }
-        },
-        "image_xYfM9m": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/custom_nano-banana-pro_1766459455673.png",
-            "image_height": 152,
-            "image_rounded": true,
-            "image_link": "",
-            "image_height_mobile": 90
-          }
-        },
-        "image_EiAFiH": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/custom_nano-banana-pro_1766460043424.jpg",
-            "image_height": 152,
-            "image_rounded": false,
-            "image_link": "",
-            "image_height_mobile": 90
-          }
-        },
-        "image_XtdYDj": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/custom_nano-banana-pro_1766459101117.png",
-            "image_height": 152,
-            "image_rounded": true,
-            "image_link": "",
-            "image_height_mobile": 90
-          }
-        }
-      },
-      "block_order": [
-        "image_JNXfny",
-        "image_xYfM9m",
-        "image_EiAFiH",
-        "image_XtdYDj"
-      ],
-      "name": "t:sections.scrolling-promotion.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "vertical_alignment": "center",
-        "direction": "left",
-        "pause_on_hover": true,
-        "speed": 0.2,
-        "h_spacing": 96,
-        "v_spacing": 10,
-        "padding_top": 64,
-        "padding_bottom": 100,
-        "show_divider": false,
-        "divider_layout": "vertical",
         "custom_class": ""
       }
     },
@@ -532,6 +432,106 @@
         "custom_class": ""
       }
     },
+    "rich_text_GF9at8": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_WpAr36": {
+          "type": "heading",
+          "settings": {
+            "heading": "Where You Will Find Us",
+            "heading_size": "hd3",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_kxKTYA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Experience the same uncompromising quality found in the world’s most exclusive suites.</p>",
+            "text_size": "text-lg"
+          }
+        }
+      },
+      "block_order": [
+        "heading_WpAr36",
+        "text_kxKTYA"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 100,
+        "padding_bottom": 0,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
+    "scrolling_promotion_MeVHcn": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "image_JNXfny": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766458991752.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_xYfM9m": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766459455673.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_EiAFiH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766460043424.jpg",
+            "image_height": 152,
+            "image_rounded": false,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_XtdYDj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766459101117.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        }
+      },
+      "block_order": [
+        "image_JNXfny",
+        "image_xYfM9m",
+        "image_EiAFiH",
+        "image_XtdYDj"
+      ],
+      "name": "t:sections.scrolling-promotion.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "vertical_alignment": "center",
+        "direction": "left",
+        "pause_on_hover": true,
+        "speed": 0.2,
+        "h_spacing": 96,
+        "v_spacing": 10,
+        "padding_top": 64,
+        "padding_bottom": 100,
+        "show_divider": false,
+        "divider_layout": "vertical",
+        "custom_class": ""
+      }
+    },
     "rich_text_rdibKP": {
       "type": "rich-text",
       "blocks": {
@@ -568,10 +568,10 @@
             "container_color_scheme": "scheme-1",
             "container_width": "888",
             "image_1": "shopify://shop_images/Gemini_Generated_Image_bkh8nibkh8nibkh8_1_b933bdba-e55c-4d39-9f88-758d0648fffb.png",
-            "image_1_ratio": "3-4",
+            "image_1_ratio": "adapt",
             "image_2": "shopify://shop_images/custom_seedream-4-5_1765528572762.png",
             "image_2_ratio": "3-4",
-            "image_max_width": 50,
+            "image_max_width": 65,
             "gap_desktop": 80,
             "gap_mobile": 8,
             "border_width": 0,
@@ -602,20 +602,11 @@
             "text": "<p>We’re here to help—Visit our FAQ or reach us anytime via our Contact<strong> </strong>page</p>",
             "text_size": "text-sm"
           }
-        },
-        "button_PticGP": {
-          "type": "button",
-          "settings": {
-            "button_label": "FAQ",
-            "button_link": "shopify://pages/faq-1",
-            "button_style": "btn--primary"
-          }
         }
       },
       "block_order": [
         "heading_yx4kfR",
-        "text_kKUqEp",
-        "button_PticGP"
+        "text_kKUqEp"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -630,6 +621,36 @@
     },
     "blocks_7PtfHk": {
       "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_9b9725d_yWkifR": {
+          "type": "ai_gen_block_9b9725d",
+          "settings": {
+            "button_text": "FAQ",
+            "collection": "",
+            "button_link": "shopify://pages/faq-1",
+            "button_color": "#8a8a8a",
+            "button_hover_color": "#6a6a6a",
+            "button_text_color": "#ffffff",
+            "button_hover_text_color": "#ffffff",
+            "border_color": "#8a8a8a",
+            "border_hover_color": "#6a6a6a",
+            "focus_color": "#0b61cd",
+            "border_radius": 0,
+            "border_width": 1,
+            "font_size": 13,
+            "font_weight": "500",
+            "text_transform": "uppercase",
+            "letter_spacing": 0,
+            "button_padding_vertical": 10,
+            "button_padding_horizontal": 20,
+            "hover_lift": -1
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_9b9725d_yWkifR"
+      ],
       "name": "Collection button",
       "settings": {}
     },
@@ -845,11 +866,11 @@
     "breadcrumbs",
     "main",
     "testimonials_8JHr3L",
-    "rich_text_GF9at8",
-    "scrolling_promotion_MeVHcn",
     "section_dual_image_with_text_gcnizy",
     "image_with_text_wKUNjE",
     "image_with_text_68iWkz",
+    "rich_text_GF9at8",
+    "scrolling_promotion_MeVHcn",
     "rich_text_rdibKP",
     "blocks_NeBTrG",
     "rich_text_CfYHix",
