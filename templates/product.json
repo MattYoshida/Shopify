@@ -202,7 +202,7 @@
       ],
       "custom_css": [
         ".loox-rating {margin-top: -1rem;}",
-        ".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}",
+        ".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}"
       ],
       "settings": {
         "color_scheme": "scheme-1",
@@ -571,7 +571,7 @@
             "image_1_ratio": "adapt",
             "image_2": "shopify://shop_images/custom_seedream-4-5_1765528572762.png",
             "image_2_ratio": "3-4",
-            "image_max_width": 65,
+            "image_max_width": 50,
             "gap_desktop": 80,
             "gap_mobile": 8,
             "border_width": 0,
