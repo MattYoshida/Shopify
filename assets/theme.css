@@ -6862,3 +6862,6 @@ display: none;
 #loox [class*="card"], #loox [class*="Card"], #loox [class*="review-item"] {
   border-radius: 5px !important;
 }
+html {
+  scroll-behavior: smooth;
+}
