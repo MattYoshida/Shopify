@@ -368,21 +368,34 @@
           </div>
           <style>
             @media (max-width: 767.98px) {
+              .mobile-dynamic-checkout [data-shopify="payment-button"] {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 8px !important;
+              }
+              .mobile-dynamic-checkout [data-shopify="payment-button"] > div {
+                flex: 1 1 0 !important;
+                min-width: 0 !important;
+              }
+              .mobile-dynamic-checkout .shopify-payment-button__more-options {
+                display: none !important;
+              }
               {%- unless block.settings.mobile_show_shop_pay -%}
               .mobile-dynamic-checkout [aria-label*="Shop Pay"],
-              .mobile-dynamic-checkout [aria-label*="shop pay"] { display: none !important; }
+              .mobile-dynamic-checkout [aria-label*="shop pay"] { display: none !important; flex: none !important; }
               {%- endunless -%}
               {%- unless block.settings.mobile_show_paypal -%}
               .mobile-dynamic-checkout [aria-label*="PayPal"],
-              .mobile-dynamic-checkout [aria-label*="paypal"] { display: none !important; }
+              .mobile-dynamic-checkout [aria-label*="paypal"] { display: none !important; flex: none !important; }
               {%- endunless -%}
               {%- unless block.settings.mobile_show_apple_pay -%}
               .mobile-dynamic-checkout [aria-label*="Apple Pay"],
-              .mobile-dynamic-checkout [aria-label*="apple pay"] { display: none !important; }
+              .mobile-dynamic-checkout [aria-label*="apple pay"] { display: none !important; flex: none !important; }
               {%- endunless -%}
               {%- unless block.settings.mobile_show_google_pay -%}
               .mobile-dynamic-checkout [aria-label*="Google Pay"],
-              .mobile-dynamic-checkout [aria-label*="google pay"] { display: none !important; }
+              .mobile-dynamic-checkout [aria-label*="google pay"] { display: none !important; flex: none !important; }
               {%- endunless -%}
             }
           </style>
