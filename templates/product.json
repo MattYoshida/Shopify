@@ -602,11 +602,20 @@
             "text": "<p>We’re here to help—Visit our FAQ or reach us anytime via our Contact<strong> </strong>page</p>",
             "text_size": "text-sm"
           }
+        },
+        "button_PticGP": {
+          "type": "button",
+          "settings": {
+            "button_label": "FAQ",
+            "button_link": "shopify://pages/faq-1",
+            "button_style": "btn--primary"
+          }
         }
       },
       "block_order": [
         "heading_yx4kfR",
-        "text_kKUqEp"
+        "text_kKUqEp",
+        "button_PticGP"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
