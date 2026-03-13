@@ -602,11 +602,20 @@
             "text": "<p>We’re here to help—Visit our FAQ or reach us anytime via our Contact<strong> </strong>page</p>",
             "text_size": "text-sm"
           }
+        },
+        "button_QGG8AF": {
+          "type": "button",
+          "settings": {
+            "button_label": "FAQ",
+            "button_link": "shopify://pages/faq-1",
+            "button_style": "btn--primary"
+          }
         }
       },
       "block_order": [
         "heading_yx4kfR",
-        "text_kKUqEp"
+        "text_kKUqEp",
+        "button_QGG8AF"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -621,36 +630,6 @@
     },
     "blocks_7PtfHk": {
       "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_9b9725d_yWkifR": {
-          "type": "ai_gen_block_9b9725d",
-          "settings": {
-            "button_text": "FAQ",
-            "collection": "",
-            "button_link": "shopify://pages/faq-1",
-            "button_color": "#8a8a8a",
-            "button_hover_color": "#6a6a6a",
-            "button_text_color": "#ffffff",
-            "button_hover_text_color": "#ffffff",
-            "border_color": "#8a8a8a",
-            "border_hover_color": "#6a6a6a",
-            "focus_color": "#0b61cd",
-            "border_radius": 0,
-            "border_width": 1,
-            "font_size": 13,
-            "font_weight": "500",
-            "text_transform": "uppercase",
-            "letter_spacing": 0,
-            "button_padding_vertical": 10,
-            "button_padding_horizontal": 20,
-            "hover_lift": -1
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_9b9725d_yWkifR"
-      ],
       "name": "Collection button",
       "settings": {}
     },
