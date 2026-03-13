@@ -298,6 +298,40 @@
         "custom_class": ""
       }
     },
+    "rich_text_GF9at8": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_WpAr36": {
+          "type": "heading",
+          "settings": {
+            "heading": "Where You Will Find Us",
+            "heading_size": "hd3",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_kxKTYA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Experience the same uncompromising quality found in the world’s most exclusive suites.</p>",
+            "text_size": "text-lg"
+          }
+        }
+      },
+      "block_order": [
+        "heading_WpAr36",
+        "text_kxKTYA"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 100,
+        "padding_bottom": 0,
+        "show_section_divider": false,
+        "divider_width": "fixed",
+        "custom_class": ""
+      }
+    },
     "section_dual_image_with_text_gcnizy": {
       "type": "section-dual-image-with-text",
       "blocks": {
@@ -427,40 +461,6 @@
         "mobile_content_alignment": "left",
         "padding_top": 50,
         "padding_bottom": 100,
-        "show_section_divider": false,
-        "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
-    "rich_text_GF9at8": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_WpAr36": {
-          "type": "heading",
-          "settings": {
-            "heading": "Where You Will Find Us",
-            "heading_size": "hd3",
-            "heading_highlight_style": "none"
-          }
-        },
-        "text_kxKTYA": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Experience the same uncompromising quality found in the world’s most exclusive suites.</p>",
-            "text_size": "text-lg"
-          }
-        }
-      },
-      "block_order": [
-        "heading_WpAr36",
-        "text_kxKTYA"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "content_alignment": "center",
-        "padding_top": 100,
-        "padding_bottom": 0,
         "show_section_divider": false,
         "divider_width": "fixed",
         "custom_class": ""
@@ -845,10 +845,10 @@
     "breadcrumbs",
     "main",
     "testimonials_8JHr3L",
+    "rich_text_GF9at8",
     "section_dual_image_with_text_gcnizy",
     "image_with_text_wKUNjE",
     "image_with_text_68iWkz",
-    "rich_text_GF9at8",
     "scrolling_promotion_MeVHcn",
     "rich_text_rdibKP",
     "blocks_NeBTrG",
