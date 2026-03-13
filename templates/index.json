@@ -427,8 +427,8 @@
         "enable_parallax": false,
         "parallax_direction": "vertical",
         "mobile_content_alignment": "left",
-        "padding_top": 100,
-        "padding_bottom": 100,
+        "padding_top": 96,
+        "padding_bottom": 96,
         "show_section_divider": false,
         "divider_width": "fixed",
         "custom_class": ""
@@ -593,8 +593,8 @@
         "column_gap": "extra-large",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 66,
-        "padding_bottom": 96,
+        "padding_top": 64,
+        "padding_bottom": 80,
         "show_section_divider": false,
         "divider_width": "fixed",
         "custom_class": ""
