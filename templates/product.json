@@ -291,7 +291,7 @@
         "enable_slider": true,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 96,
+        "padding_top": 80,
         "padding_bottom": 64,
         "show_section_divider": false,
         "divider_width": "fixed",
@@ -304,7 +304,7 @@
         "button_cbNKrf": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
+            "button_label": "More Reviews",
             "button_link": "",
             "button_style": "btn--primary"
           }
