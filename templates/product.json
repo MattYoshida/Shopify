@@ -425,8 +425,8 @@
         "enable_parallax": false,
         "parallax_direction": "vertical",
         "mobile_content_alignment": "left",
-        "padding_top": 50,
-        "padding_bottom": 100,
+        "padding_top": 48,
+        "padding_bottom": 96,
         "show_section_divider": false,
         "divider_width": "fixed",
         "custom_class": ""
@@ -459,7 +459,7 @@
       "settings": {
         "color_scheme": "",
         "content_alignment": "center",
-        "padding_top": 100,
+        "padding_top": 96,
         "padding_bottom": 0,
         "show_section_divider": false,
         "divider_width": "fixed",
@@ -526,7 +526,7 @@
         "h_spacing": 96,
         "v_spacing": 10,
         "padding_top": 64,
-        "padding_bottom": 100,
+        "padding_bottom": 96,
         "show_divider": false,
         "divider_layout": "vertical",
         "custom_class": ""
