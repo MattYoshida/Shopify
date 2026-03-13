@@ -298,33 +298,6 @@
         "custom_class": ""
       }
     },
-    "1759781065582a4ce3": {
-      "type": "apps",
-      "blocks": {
-        "loox_reviews_loox_dynamic_section_6Biawn": {
-          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
-          "settings": {
-            "reviews_to_display": "",
-            "default_tab": "automatic",
-            "only_photos": false,
-            "aggregated": true,
-            "limit": 4,
-            "hide_thumbnails": false,
-            "maxwidth": 1080,
-            "is_sample": false
-          }
-        }
-      },
-      "block_order": [
-        "loox_reviews_loox_dynamic_section_6Biawn"
-      ],
-      "settings": {
-        "include_margins": true,
-        "padding_top": 32,
-        "padding_bottom": 0,
-        "custom_class": ""
-      }
-    },
     "section_dual_image_with_text_gcnizy": {
       "type": "section-dual-image-with-text",
       "blocks": {
@@ -660,6 +633,33 @@
       "name": "Collection button",
       "settings": {}
     },
+    "1759781065582a4ce3": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_dynamic_section_6Biawn": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": true,
+            "limit": 4,
+            "hide_thumbnails": false,
+            "maxwidth": 1080,
+            "is_sample": false
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_dynamic_section_6Biawn"
+      ],
+      "settings": {
+        "include_margins": true,
+        "padding_top": 32,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
     "recently_viewed_products_6MpkrA": {
       "type": "recently-viewed-products",
       "name": "t:sections.recently-viewed-products.name",
@@ -845,7 +845,6 @@
     "breadcrumbs",
     "main",
     "testimonials_8JHr3L",
-    "1759781065582a4ce3",
     "section_dual_image_with_text_gcnizy",
     "image_with_text_wKUNjE",
     "image_with_text_68iWkz",
@@ -855,6 +854,7 @@
     "blocks_NeBTrG",
     "rich_text_CfYHix",
     "blocks_7PtfHk",
+    "1759781065582a4ce3",
     "recently_viewed_products_6MpkrA",
     "image_with_text_MgddA8",
     "multicolumn_kxgWLe"
