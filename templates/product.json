@@ -332,6 +332,72 @@
         "custom_class": ""
       }
     },
+    "scrolling_promotion_MeVHcn": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "image_JNXfny": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766458991752.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_xYfM9m": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766459455673.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_EiAFiH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766460043424.jpg",
+            "image_height": 152,
+            "image_rounded": false,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        },
+        "image_XtdYDj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_nano-banana-pro_1766459101117.png",
+            "image_height": 152,
+            "image_rounded": true,
+            "image_link": "",
+            "image_height_mobile": 90
+          }
+        }
+      },
+      "block_order": [
+        "image_JNXfny",
+        "image_xYfM9m",
+        "image_EiAFiH",
+        "image_XtdYDj"
+      ],
+      "name": "t:sections.scrolling-promotion.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "vertical_alignment": "center",
+        "direction": "left",
+        "pause_on_hover": true,
+        "speed": 0.2,
+        "h_spacing": 96,
+        "v_spacing": 10,
+        "padding_top": 64,
+        "padding_bottom": 100,
+        "show_divider": false,
+        "divider_layout": "vertical",
+        "custom_class": ""
+      }
+    },
     "section_dual_image_with_text_gcnizy": {
       "type": "section-dual-image-with-text",
       "blocks": {
@@ -463,72 +529,6 @@
         "padding_bottom": 100,
         "show_section_divider": false,
         "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
-    "scrolling_promotion_MeVHcn": {
-      "type": "scrolling-promotion",
-      "blocks": {
-        "image_JNXfny": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/custom_nano-banana-pro_1766458991752.png",
-            "image_height": 152,
-            "image_rounded": true,
-            "image_link": "",
-            "image_height_mobile": 90
-          }
-        },
-        "image_xYfM9m": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/custom_nano-banana-pro_1766459455673.png",
-            "image_height": 152,
-            "image_rounded": true,
-            "image_link": "",
-            "image_height_mobile": 90
-          }
-        },
-        "image_EiAFiH": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/custom_nano-banana-pro_1766460043424.jpg",
-            "image_height": 152,
-            "image_rounded": false,
-            "image_link": "",
-            "image_height_mobile": 90
-          }
-        },
-        "image_XtdYDj": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/custom_nano-banana-pro_1766459101117.png",
-            "image_height": 152,
-            "image_rounded": true,
-            "image_link": "",
-            "image_height_mobile": 90
-          }
-        }
-      },
-      "block_order": [
-        "image_JNXfny",
-        "image_xYfM9m",
-        "image_EiAFiH",
-        "image_XtdYDj"
-      ],
-      "name": "t:sections.scrolling-promotion.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "vertical_alignment": "center",
-        "direction": "left",
-        "pause_on_hover": true,
-        "speed": 0.2,
-        "h_spacing": 96,
-        "v_spacing": 10,
-        "padding_top": 64,
-        "padding_bottom": 100,
-        "show_divider": false,
-        "divider_layout": "vertical",
         "custom_class": ""
       }
     },
@@ -846,10 +846,10 @@
     "main",
     "testimonials_8JHr3L",
     "rich_text_GF9at8",
+    "scrolling_promotion_MeVHcn",
     "section_dual_image_with_text_gcnizy",
     "image_with_text_wKUNjE",
     "image_with_text_68iWkz",
-    "scrolling_promotion_MeVHcn",
     "rich_text_rdibKP",
     "blocks_NeBTrG",
     "rich_text_CfYHix",
