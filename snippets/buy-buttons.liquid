@@ -362,6 +362,25 @@
             endif
           endif
         -%}
+        {%- if show_dynamic_checkout -%}
+          <style>
+            @media (max-width: 767.98px) {
+              .product-form__buttons [data-shopify="payment-button"] {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 8px !important;
+              }
+              .product-form__buttons [data-shopify="payment-button"] > div {
+                flex: 1 1 0 !important;
+                min-width: 0 !important;
+              }
+              .product-form__buttons .shopify-payment-button__more-options {
+                display: none !important;
+              }
+            }
+          </style>
+        {%- endif -%}
         {%- if show_mobile_dynamic_checkout and show_dynamic_checkout == false -%}
           <div class="mobile-dynamic-checkout">
             {{- form | payment_button -}}
