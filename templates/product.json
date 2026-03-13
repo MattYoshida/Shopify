@@ -551,8 +551,8 @@
       "settings": {
         "color_scheme": "",
         "content_alignment": "center",
-        "padding_top": 100,
-        "padding_bottom": 34,
+        "padding_top": 96,
+        "padding_bottom": 32,
         "show_section_divider": false,
         "divider_width": "fixed",
         "custom_class": ""
@@ -621,7 +621,7 @@
       "settings": {
         "color_scheme": "",
         "content_alignment": "center",
-        "padding_top": 50,
+        "padding_top": 48,
         "padding_bottom": 16,
         "show_section_divider": false,
         "divider_width": "fixed",
@@ -739,7 +739,7 @@
         "enable_parallax": false,
         "parallax_direction": "vertical",
         "mobile_content_alignment": "left",
-        "padding_top": 100,
+        "padding_top": 96,
         "padding_bottom": 88,
         "show_section_divider": false,
         "divider_width": "fixed",
