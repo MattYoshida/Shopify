@@ -859,7 +859,7 @@
         "column_gap": "extra-large",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 32,
+        "padding_top": 56,
         "padding_bottom": 56,
         "show_section_divider": false,
         "divider_width": "fixed",
