@@ -200,7 +200,9 @@
         "popup_8cnKBN"
       ],
       "custom_css": [
-        ".loox-rating {margin-top: -2rem; margin-bottom: 0.5rem;}",
+        ".product__block--title {margin-bottom: 0;}",
+        ".product__block--title + .product__block {margin-top: 0;}",
+        ".loox-rating {margin-top: 0; margin-bottom: 0.5rem;}",
         ".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}"
       ],
       "settings": {
