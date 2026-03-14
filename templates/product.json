@@ -21,13 +21,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "heading_size": "h4"
-          }
-        },
-        "custom_liquid_F7Dp37": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": ""
+            "heading_size": "h3"
           }
         },
         "loox_reviews_loox_rating_AjWEmf": {
