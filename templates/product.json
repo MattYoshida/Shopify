@@ -182,7 +182,6 @@
       },
       "block_order": [
         "title",
-        "custom_liquid_F7Dp37",
         "loox_reviews_loox_rating_AjWEmf",
         "price",
         "description",
@@ -201,7 +200,7 @@
         "popup_8cnKBN"
       ],
       "custom_css": [
-        ".loox-rating {margin-top: -1rem;}",
+        ".loox-rating {margin-top: -1.5rem; margin-bottom: -0.5rem;}",
         ".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}"
       ],
       "settings": {
@@ -859,7 +858,7 @@
         "column_gap": "extra-large",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 56,
+        "padding_top": 32,
         "padding_bottom": 56,
         "show_section_divider": false,
         "divider_width": "fixed",
