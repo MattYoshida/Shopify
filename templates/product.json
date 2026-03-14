@@ -778,10 +778,10 @@
         "column_FbVFwP": {
           "type": "column",
           "settings": {
-            "show_image": true,
-            "image": "shopify://shop_images/Generated_Image_October_13_2025_-_3_55PM.png",
+            "icon": "truck",
+            "show_image": false,
             "image_width": "large",
-            "title": "Free & fast delivery",
+            "title": "Free & Fast Delivery",
             "heading_size": "h4",
             "text": "<p>Free shipping on every order, always.</p>",
             "text_size": "text-base",
@@ -794,8 +794,8 @@
         "column_Ng4jJm": {
           "type": "column",
           "settings": {
-            "show_image": true,
-            "image": "shopify://shop_images/Generated_Image_October_13_2025_-_3_57PM.png",
+            "icon": "seal-check",
+            "show_image": false,
             "image_width": "large",
             "title": "Dedicated Support",
             "heading_size": "h4",
@@ -810,12 +810,12 @@
         "column_a4zfr7": {
           "type": "column",
           "settings": {
-            "show_image": true,
-            "image": "shopify://shop_images/Generated_Image_October_13_2025_-_3_55PM_1.png",
+            "icon": "arrow-up-left",
+            "show_image": false,
             "image_width": "large",
             "title": "Simple Returns",
             "heading_size": "h4",
-            "text": "<p>30-day risk-free returns. No questions asked.<br/><br/></p>",
+            "text": "<p>30-day risk-free returns. No questions asked.</p>",
             "text_size": "text-base",
             "button_label": "",
             "button_style": "btn--underline",
@@ -826,12 +826,12 @@
         "column_pjEAC3": {
           "type": "column",
           "settings": {
-            "show_image": true,
-            "image": "shopify://shop_images/Generated_Image_October_13_2025_-_3_55PM_2.png",
+            "icon": "currency-circle-dollar",
+            "show_image": false,
             "image_width": "large",
-            "title": "Flexible payments",
+            "title": "Flexible Payments",
             "heading_size": "h4",
-            "text": "<p>Shop Pay, Apple Pay, Google Pay, and more.<br/><br/></p>",
+            "text": "<p>Shop Pay, Apple Pay, Google Pay, and more.</p>",
             "text_size": "text-base",
             "button_label": "",
             "button_style": "btn--underline",
