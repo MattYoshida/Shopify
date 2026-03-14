@@ -79,7 +79,13 @@
         {%- for block in section.blocks -%}
           <div class="f-column multicolumn-slide" {{ block.shopify_attributes }}>
             <div class="multicolumn-card multicolumn-card-mobile-{{ block.settings.mobile_layout }} multicolumn-card--image-{{ block.settings.image_width }} text-{{ section.settings.column_alignment }}">
-              {%- if block.settings.show_image -%}
+              {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+                <div class="multicolumn-card__image">
+                  <div class="flex shrink-0 rounded btn btn--secondary" style="display:inline-flex;padding:12px;margin-bottom:8px;">
+                    {% render 'icons', icon: block.settings.icon, size: 'medium' %}
+                  </div>
+                </div>
+              {%- elsif block.settings.show_image -%}
                 <div class="multicolumn-card__image media-wrapper{% if block.settings.image_width == 'full' %} hover-wrapper blocks-radius{% endif %}">
                   <motion-element data-motion="zoom-out-sm" class="block w-full h-full">
                     {%- if block.settings.image != blank -%}
@@ -586,6 +592,29 @@
       "type": "column",
       "name": "t:sections.multicolumn.blocks.column.name",
       "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "arrow-up-left", "label": "Returns" },
+            { "value": "currency-circle-dollar", "label": "Dollar" },
+            { "value": "package", "label": "Package" },
+            { "value": "seal-check", "label": "Seal Check" },
+            { "value": "check-circle", "label": "Check Circle" },
+            { "value": "check", "label": "Check" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star-four", "label": "Star" },
+            { "value": "recycle", "label": "Recycle" },
+            { "value": "gear", "label": "Gear" },
+            { "value": "certificate", "label": "Certificate" }
+          ]
+        },
         {
           "type": "checkbox",
           "id": "show_image",
