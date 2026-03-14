@@ -201,7 +201,7 @@
       ],
       "custom_css": [
         ".product__block--title {margin-bottom: 0;}",
-        ".product__block--title + .product__block {margin-top: 0;}",
+        ".product__block--title + .product__block {margin-top: -1rem;}",
         ".loox-rating {margin-top: 0; margin-bottom: 0.5rem;}",
         ".complementary-products__container .product-card__wrapper .btn--secondary {background-color: transparent;}"
       ],
