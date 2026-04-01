@@ -293,32 +293,6 @@
         "custom_class": ""
       }
     },
-    "rich_text_X8QrYT": {
-      "type": "rich-text",
-      "blocks": {
-        "button_cbNKrf": {
-          "type": "button",
-          "settings": {
-            "button_label": "More Reviews",
-            "button_link": "#shopify-section-1759781065582a4ce3",
-            "button_style": "btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "button_cbNKrf"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "content_alignment": "center",
-        "padding_top": 0,
-        "padding_bottom": 96,
-        "show_section_divider": false,
-        "divider_width": "fixed",
-        "custom_class": ""
-      }
-    },
     "section_dual_image_with_text_gcnizy": {
       "type": "section-dual-image-with-text",
       "blocks": {
@@ -866,7 +840,6 @@
     "breadcrumbs",
     "main",
     "testimonials_8JHr3L",
-    "rich_text_X8QrYT",
     "section_dual_image_with_text_gcnizy",
     "image_with_text_wKUNjE",
     "image_with_text_68iWkz",
