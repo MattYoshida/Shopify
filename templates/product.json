@@ -82,11 +82,11 @@
             "show_quantity_selector": true,
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": true,
-            "show_mobile_dynamic_checkout": true,
-            "mobile_show_shop_pay": true,
-            "mobile_show_paypal": true,
-            "mobile_show_apple_pay": true,
-            "mobile_show_google_pay": true
+            "show_mobile_dynamic_checkout": false,
+            "mobile_show_shop_pay": false,
+            "mobile_show_paypal": false,
+            "mobile_show_apple_pay": false,
+            "mobile_show_google_pay": false
           }
         },
         "icon_with_text": {
