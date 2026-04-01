@@ -6845,46 +6845,31 @@ body:not(.header-pinned) .header-scrolled .header {
   }
 }
 
-/* 2. Description: collapse on mobile with toggle */
+/* 2. Description: "What's Included?" acts as collapsible toggle on mobile */
 @media (max-width: 767px) {
-  .product__block--description {
-    position: relative;
-  }
-  .product__block--description.is-collapsed {
-    max-height: 4.8em;
-    overflow: hidden;
-    line-height: 1.6;
-  }
-  .product__block--description.is-collapsed::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3em;
-    background: linear-gradient(transparent, rgb(var(--color-background)));
-    pointer-events: none;
-  }
-  .description-toggle {
-    display: block;
-    margin-top: 4px;
-    padding: 6px 0;
-    font-size: 13px;
-    font-weight: 600;
-    color: #2C3E50;
+  .desc-collapse-trigger {
     cursor: pointer;
-    border: none;
-    background: none;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    margin-top: 4px;
+    border-top: 1px solid rgb(var(--color-border));
   }
-  .description-toggle:hover {
-    color: #1a2a38;
+  .desc-collapse-trigger::after {
+    content: '+';
+    font-size: 18px;
+    font-weight: 400;
+    color: #666;
+    flex-shrink: 0;
+    margin-left: 8px;
+    transition: transform 0.2s ease;
   }
-}
-@media (min-width: 768px) {
-  .description-toggle {
-    display: none;
+  .desc-collapse-trigger.is-open::after {
+    content: '−';
+  }
+  .desc-collapse-content {
+    padding-bottom: 4px;
   }
 }
 
