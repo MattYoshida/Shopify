@@ -34,7 +34,7 @@
             "block_width": 41,
             "heading": "Join the Club",
             "heading_size": "h2",
-            "newsletter_description": "<p>Join the MIORA community for an instant <strong>$10 off your first order.</strong> Plus, you'll be automatically entered into our monthly drawing for a <strong>$100 MIORA gift card.</strong></p>",
+            "newsletter_description": "<p>Join the MIORA community for an instant <strong>$10 off your first order.</strong> </p>",
             "newsletter_term": "",
             "newsletter_text_alignment": "left",
             "form_width": 465,
@@ -62,28 +62,13 @@
             "open_default": false,
             "show_divider": true
           }
-        },
-        "image_text_F3FNhx": {
-          "type": "image_text",
-          "settings": {
-            "block_width": 25,
-            "heading": "About Us",
-            "heading_size": "h4",
-            "image_width": 150,
-            "text": "<p>\"Each towel is crafted from the purest materials—an authentic, enduring piece made to transform your daily routine.\"</p><p></p><h3></h3>",
-            "button_label": "LEARN MORE",
-            "button_link": "shopify://pages/our-story",
-            "open_default": false,
-            "show_divider": true
-          }
         }
       },
       "block_order": [
         "image_text_WmttJi",
         "newsletter_3qCrWc",
         "menu_DEKGYP",
-        "menu_4eCrBB",
-        "image_text_F3FNhx"
+        "menu_4eCrBB"
       ],
       "custom_css": [],
       "settings": {
