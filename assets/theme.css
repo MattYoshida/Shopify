@@ -6795,6 +6795,118 @@ body:not(.header-pinned) .header-scrolled .header {
   pointer-events: none;
   transition: opacity 0.2s ease;
 }
+
+/* ==============================
+   MOBILE PRODUCT PAGE OPTIMIZATION
+   ============================== */
+
+/* 1. Bundle switcher: show select on mobile, pills on desktop */
+.bundle-switcher__select {
+  display: none;
+}
+@media (max-width: 767px) {
+  .bundle-switcher .bundle-option {
+    display: none;
+  }
+  .bundle-switcher__select {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+  .bundle-switcher__select select {
+    width: 100%;
+    padding: 10px 36px 10px 14px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: var(--font-body-family, "Poppins", sans-serif);
+    color: #333;
+    background-color: #fafafa;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  .bundle-switcher__select::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #666;
+    pointer-events: none;
+  }
+  .bundle-switcher {
+    margin: 12px 0;
+  }
+}
+
+/* 2. Description: collapse on mobile with toggle */
+@media (max-width: 767px) {
+  .product__block--description {
+    position: relative;
+  }
+  .product__block--description.is-collapsed {
+    max-height: 4.8em;
+    overflow: hidden;
+    line-height: 1.6;
+  }
+  .product__block--description.is-collapsed::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3em;
+    background: linear-gradient(transparent, rgb(var(--color-background)));
+    pointer-events: none;
+  }
+  .description-toggle {
+    display: block;
+    margin-top: 4px;
+    padding: 6px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2C3E50;
+    cursor: pointer;
+    border: none;
+    background: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .description-toggle:hover {
+    color: #1a2a38;
+  }
+}
+@media (min-width: 768px) {
+  .description-toggle {
+    display: none;
+  }
+}
+
+/* 3. Trust badges: compact single row on mobile */
+@media (max-width: 767px) {
+  .product__block--icon-with-text .icon-with-text {
+    gap: 0.4rem 1.2rem;
+    --icon-size: 1.6rem;
+    --icon-spacing: 0.4rem;
+  }
+  .product__block--icon-with-text .icon-with-text .inline-richtext {
+    font-size: 12px;
+  }
+}
+
+/* 4. Product features (second icon-with-text): hide on mobile */
+@media (max-width: 767px) {
+  .product__block--icon-with-text + .product__block--icon-with-text {
+    display: none;
+  }
+}
+
 #product-form-installment-template--19888122790116__main {
 
 display: none;
